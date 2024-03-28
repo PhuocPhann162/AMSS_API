@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using AMSS.Utility;
+using BCrypt.Net;
+using AMSS.Services.IService;
 
 namespace AMSS.Controllers
 {
@@ -21,22 +23,74 @@ namespace AMSS.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
+        private readonly IJwtTokenGenerator _jwtTokenGenerator;
         private APIResponse _response;
 
 
         public AuthController(ApplicationDbContext db, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager,
-            IMapper mapper, IUserRepository userRepository)
+            IMapper mapper, IUserRepository userRepository, IJwtTokenGenerator jwtTokenGenerator)
         {
             _db = db;
             _userManager = userManager;
             _roleManager = roleManager;
             _mapper = mapper;
             _userRepository = userRepository;
+            _jwtTokenGenerator = jwtTokenGenerator;
             _response = new();
         }
-        public Task<LoginResponseDto> Login(LoginRequestDto loginRequestDto)
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequestDto loginRequestDto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var user = await _userRepository.GetAsync(u => u.Email == loginRequestDto.Email);
+                if(user == null)
+                {
+                    _response.IsSuccess = false;
+                    _response.StatusCode = HttpStatusCode.Unauthorized;
+                    _response.ErrorMessages.Add("Username does not exist");
+                    return Unauthorized(_response);
+                }
+                var isValid = BCrypt.Net.BCrypt.Verify(loginRequestDto.Password, user.Password);
+                if(!isValid)
+                {
+                    _response.IsSuccess = false;
+                    _response.StatusCode = HttpStatusCode.Unauthorized;
+                    _response.ErrorMessages.Add("Password does not exist");
+                    return Unauthorized(_response);
+                }
+
+                // if user was found, generate JWT Token
+                var roles = await _userManager.GetRolesAsync(user);
+                var accessToken = _jwtTokenGenerator.GenerateToken(user, roles);
+                var refreshToken = _jwtTokenGenerator.GenerateRefreshToken();
+
+                UserDto userDto = new()
+                {
+                    Id = user.Id,
+                    FullName = user.FullName,
+                    UserName = user.Email,
+                    PhoneNumber = user.PhoneNumber,
+                };
+
+                LoginResponseDto loginResponseDto = new()
+                {
+                    User = userDto,
+                    Token =
+                    {
+                        AccessToken = accessToken, 
+                        RefreshToken = refreshToken,
+                    }
+                };
+            }
+            catch(Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.StatusCode = HttpStatusCode.BadRequest;
+                _response.ErrorMessages.Add(ex.Message);
+            }
+            return BadRequest(_response);
         }
 
         [HttpPost("register")]

@@ -11,6 +11,7 @@
           "AutoMapper": "12.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
           "Azure.Storage.Blobs": "12.19.1",
+          "BCrypt.Net-Next": "4.0.3",
           "EfCore.SchemaCompare": "8.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.0",
@@ -104,6 +105,14 @@
           "lib/net6.0/Azure.Storage.Common.dll": {
             "assemblyVersion": "12.18.1.0",
             "fileVersion": "12.1800.123.56305"
+          }
+        }
+      },
+      "BCrypt.Net-Next/4.0.3": {
+        "runtime": {
+          "lib/net6.0/BCrypt.Net-Next.dll": {
+            "assemblyVersion": "4.0.3.0",
+            "fileVersion": "4.0.3.0"
           }
         }
       },
@@ -1461,6 +1470,13 @@
       "sha512": "sha512-ohCslqP9yDKIn+DVjBEOBuieB1QwsUCz+BwHYNaJ3lcIsTSiI4Evnq81HcKe8CqM8qvdModbipVQKpnxpbdWqA==",
       "path": "azure.storage.common/12.18.1",
       "hashPath": "azure.storage.common.12.18.1.nupkg.sha512"
+    },
+    "BCrypt.Net-Next/4.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-W+U9WvmZQgi5cX6FS5GDtDoPzUCV4LkBLkywq/kRZhuDwcbavOzcDAr3LXJFqHUi952Yj3LEYoWW0jbEUQChsA==",
+      "path": "bcrypt.net-next/4.0.3",
+      "hashPath": "bcrypt.net-next.4.0.3.nupkg.sha512"
     },
     "EfCore.SchemaCompare/8.0.0": {
       "type": "package",

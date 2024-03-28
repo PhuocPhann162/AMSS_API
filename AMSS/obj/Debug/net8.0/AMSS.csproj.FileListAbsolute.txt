@@ -194,3 +194,4 @@ C:\Users\Asus\source\repos\ASPNET\AMSS\AMSS\obj\Debug\net8.0\refint\AMSS.dll
 C:\Users\Asus\source\repos\ASPNET\AMSS\AMSS\obj\Debug\net8.0\AMSS.pdb
 C:\Users\Asus\source\repos\ASPNET\AMSS\AMSS\obj\Debug\net8.0\AMSS.genruntimeconfig.cache
 C:\Users\Asus\source\repos\ASPNET\AMSS\AMSS\obj\Debug\net8.0\ref\AMSS.dll
+C:\Users\Asus\source\repos\ASPNET\AMSS\AMSS\bin\Debug\net8.0\BCrypt.Net-Next.dll

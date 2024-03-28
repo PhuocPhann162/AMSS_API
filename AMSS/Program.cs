@@ -1,6 +1,10 @@
 using AMSS.Data;
+using AMSS.Models;
+using AMSS.Repositories;
 using AMSS.Repositories.IRepository;
 using AMSS.Repository.IRepository;
+using AMSS.Services;
+using AMSS.Services.IService;
 using AMSS.Utility;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -23,8 +27,11 @@ builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 // Config scoped of Dependence Injection
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 
 // Add JWT Configs
+builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("ApiSettings:JwtOptions"));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
