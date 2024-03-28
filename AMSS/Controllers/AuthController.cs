@@ -4,17 +4,19 @@ using AMSS.Models.Dto.User;
 using AMSS.Models;
 using AMSS.Repository.IRepository;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
-using AMSS.Utility;
-using BCrypt.Net;
+using Microsoft.Net.Http.Headers;
 using AMSS.Services.IService;
+using AMSS.Enums;
+using Microsoft.OpenApi.Extensions;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace AMSS.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/auth")]
     [ApiController]
     public class AuthController : ControllerBase
     {
@@ -28,14 +30,14 @@ namespace AMSS.Controllers
 
 
         public AuthController(ApplicationDbContext db, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager,
-            IMapper mapper, IUserRepository userRepository, IJwtTokenGenerator jwtTokenGenerator)
+            IMapper mapper, IUserRepository userRepository, IJwtTokenGenerator jwtTokenService)
         {
             _db = db;
             _userManager = userManager;
             _roleManager = roleManager;
             _mapper = mapper;
             _userRepository = userRepository;
-            _jwtTokenGenerator = jwtTokenGenerator;
+            _jwtTokenGenerator = jwtTokenService;
             _response = new();
         }
 
@@ -45,7 +47,7 @@ namespace AMSS.Controllers
             try
             {
                 var user = await _userRepository.GetAsync(u => u.Email == loginRequestDto.Email);
-                if(user == null)
+                if (user == null)
                 {
                     _response.IsSuccess = false;
                     _response.StatusCode = HttpStatusCode.Unauthorized;
@@ -53,7 +55,7 @@ namespace AMSS.Controllers
                     return Unauthorized(_response);
                 }
                 var isValid = BCrypt.Net.BCrypt.Verify(loginRequestDto.Password, user.Password);
-                if(!isValid)
+                if (!isValid)
                 {
                     _response.IsSuccess = false;
                     _response.StatusCode = HttpStatusCode.Unauthorized;
@@ -66,25 +68,28 @@ namespace AMSS.Controllers
                 var accessToken = _jwtTokenGenerator.GenerateToken(user, roles);
                 var refreshToken = _jwtTokenGenerator.GenerateRefreshToken();
 
-                UserDto userDto = new()
+                var token = new TokenDto()
                 {
-                    Id = user.Id,
-                    FullName = user.FullName,
-                    UserName = user.Email,
-                    PhoneNumber = user.PhoneNumber,
+                    AccessToken = accessToken,
+                    RefreshToken = refreshToken
                 };
+
+                _userRepository.UpdateRefreshToken(user.Id, refreshToken);
+
+                var userDto = _mapper.Map<UserDto>(user);
+                userDto.Role = Enum.Parse<Role>(roles.FirstOrDefault());
 
                 LoginResponseDto loginResponseDto = new()
                 {
                     User = userDto,
-                    Token =
-                    {
-                        AccessToken = accessToken, 
-                        RefreshToken = refreshToken,
-                    }
+                    Token = token,
                 };
+                _response.SuccessMessage = "Login to account successfully";
+                _response.Result = loginResponseDto;
+                _response.StatusCode = HttpStatusCode.OK;
+                return Ok(_response);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _response.IsSuccess = false;
                 _response.StatusCode = HttpStatusCode.BadRequest;
@@ -130,32 +135,37 @@ namespace AMSS.Controllers
             try
             {
                 var result = await _userManager.CreateAsync(newUser);
+                string userRole = registrationDto.Role.GetDisplayName();
                 if (result.Succeeded)
                 {
-                    if (!_roleManager.RoleExistsAsync(registrationDto.Role).GetAwaiter().GetResult())
+                    if (!_roleManager.RoleExistsAsync(userRole).GetAwaiter().GetResult())
                     {
-                        await _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin));
-                        await _roleManager.CreateAsync(new IdentityRole(SD.Role_Farmer));
-                        await _roleManager.CreateAsync(new IdentityRole(SD.Role_Owner));
+                        await _roleManager.CreateAsync(new IdentityRole(userRole));
                     }
-                    if(!String.IsNullOrEmpty(registrationDto.Role))
-                    {
-                        if (registrationDto.Role.ToLower() == SD.Role_Admin)
-                        {
-                            await _userManager.AddToRoleAsync(newUser, SD.Role_Admin);
-                        }
-                        else if (registrationDto.Role.ToLower() == SD.Role_Owner)
-                        {
-                            await _userManager.AddToRoleAsync(newUser, SD.Role_Owner);
-                        }
-                    }
-                    else
-                    {
-                        await _userManager.AddToRoleAsync(newUser, SD.Role_Farmer);
-                    }
+                    //if(!String.IsNullOrEmpty(userRole))
+                    //{
+                    //    if (userRole.ToLower() == Role.ADMIN.ToString())
+                    //    {
+                    //        await _userManager.AddToRoleAsync(newUser, Role.ADMIN.ToString());
+                    //    }
+                    //    else if (userRole.ToLower() == Role.OWNER.ToString())
+                    //    {
+                    //        await _userManager.AddToRoleAsync(newUser, Role.OWNER.ToString());
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    await _userManager.AddToRoleAsync(newUser, Role.FARMER.ToString());
+                    //}
+                    await _userManager.AddToRoleAsync(newUser, userRole);
+                }
+                else
+                {
+                    throw new Exception(result.Errors.FirstOrDefault().Description);
                 }
                 _response.StatusCode = HttpStatusCode.OK;
-                _response.Result = "Registration new account successfully";
+                _response.SuccessMessage = "Registration new account successfully";
+                _response.Result = true;
                 return Ok(_response);
             }
             catch (Exception ex)
@@ -165,6 +175,70 @@ namespace AMSS.Controllers
                 _response.ErrorMessages.Add(ex.Message);
             }
             return BadRequest(_response);
+        }
+
+        [Authorize]
+        [HttpPost("refreshToken")]
+        public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenRequestDto tokenRequestDto)
+        {
+            try
+            {
+                var accessToken = Request.Headers[HeaderNames.Authorization].ToString().Replace("Bearer ", "");
+
+                if (!String.IsNullOrEmpty(tokenRequestDto.RefreshToken))
+                {
+                    _response.IsSuccess = false;
+                    _response.ErrorMessages.Add("Unaccepted token");
+                    return BadRequest(_response);
+                }
+
+                if(!String.IsNullOrEmpty(accessToken))
+                {
+                    _response.IsSuccess = false;
+                    _response.ErrorMessages.Add("Unauthorized");
+                }
+
+                var principal = _jwtTokenGenerator.GetPrincipalFromExpiredToken(accessToken);
+                if(principal == null)
+                {
+                    _response.IsSuccess = false;
+                    _response.StatusCode = HttpStatusCode.Unauthorized;
+                    _response.ErrorMessages.Add("Unauthorized");
+                    return Unauthorized(_response);
+                }
+                var userEmail = principal.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
+                var user = await _userRepository.GetAsync(u => u.Email == userEmail);
+                if(user.RefreshToken != tokenRequestDto.RefreshToken || !_jwtTokenGenerator.ValidateTokenExpire(tokenRequestDto.RefreshToken))
+                {
+                    _response.IsSuccess = false;
+                    _response.StatusCode = HttpStatusCode.Unauthorized;
+                    _response.ErrorMessages.Add("Unauthorized");
+                    return Unauthorized(_response);
+                }
+
+                var roles = await _userManager.GetRolesAsync(user);
+                var newAccessToken = _jwtTokenGenerator.GenerateToken(user, roles);
+                if(String.IsNullOrEmpty(newAccessToken))
+                {
+                    _response.IsSuccess = false;
+                    _response.StatusCode = HttpStatusCode.Unauthorized;
+                    _response.ErrorMessages.Add("Unauthorized");
+                    return Unauthorized(_response);
+                }
+
+                var tempRoles = await _userManager.GetRolesAsync(user);
+                _response.StatusCode = HttpStatusCode.OK;
+                _response.Result = newAccessToken;
+                _response.SuccessMessage = "Refresh token successfully";
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.StatusCode = HttpStatusCode.BadRequest;
+                _response.ErrorMessages.Add(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, _response);
+            }
+            return Ok(_response);
         }
     }
 }

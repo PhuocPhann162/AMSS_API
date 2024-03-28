@@ -19,7 +19,7 @@ namespace AMSS.Services
         public string GenerateToken(ApplicationUser user, IEnumerable<string> roles)
         {
             var tokenHanler = new JwtSecurityTokenHandler();
-
+           
             var key = Encoding.ASCII.GetBytes(_jwtOptions.Secret);
 
             var claimList = new List<Claim>

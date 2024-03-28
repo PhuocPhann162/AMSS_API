@@ -2,8 +2,8 @@
 {
     public class SD
     {
-        public const string Role_Admin = "admin";
-        public const string Role_Farmer = "farmer";
-        public const string Role_Owner = "owner";
+        //public const string Role_Admin = "admin";
+        //public const string Role_Farmer = "farmer";
+        //public const string Role_Owner = "owner";
     }
 }

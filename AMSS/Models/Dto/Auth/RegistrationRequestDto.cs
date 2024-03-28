@@ -22,7 +22,8 @@ namespace AMSS.Models.Dto.Auth
         [MinLength(8)]
         [MaxLength(32)]
         public string Password { get; set; }
-        public string Role { get; set; }
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+        public Role Role { get; set; }
 
 
         

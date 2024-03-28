@@ -1,6 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using AMSS.Enums;
 using System.ComponentModel.DataAnnotations;
-using AMSS.Enums;
 using System.Text.Json.Serialization;
 
 namespace AMSS.Models.Dto.User
@@ -25,6 +24,7 @@ namespace AMSS.Models.Dto.User
         [StringLength(500)]
         public string? Avatar { get; set; }
 
-        public string Role { get; set; }
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+        public Role Role { get; set; }
     }
 }
