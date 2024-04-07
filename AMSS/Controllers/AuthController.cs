@@ -25,7 +25,7 @@ namespace AMSS.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
-        private readonly IJwtTokenGenerator _jwtTokenGenerator;
+        private readonly IJwtTokenGenerator _jwtTokenService;
         private APIResponse _response;
 
 
@@ -37,7 +37,7 @@ namespace AMSS.Controllers
             _roleManager = roleManager;
             _mapper = mapper;
             _userRepository = userRepository;
-            _jwtTokenGenerator = jwtTokenService;
+            _jwtTokenService = jwtTokenService;
             _response = new();
         }
 
@@ -46,7 +46,7 @@ namespace AMSS.Controllers
         {
             try
             {
-                var user = await _userRepository.GetAsync(u => u.Email == loginRequestDto.Email);
+                ApplicationUser user = await _userRepository.GetAsync(u => u.UserName.ToLower() == loginRequestDto.UserName.ToLower());
                 if (user == null)
                 {
                     _response.IsSuccess = false;
@@ -59,14 +59,14 @@ namespace AMSS.Controllers
                 {
                     _response.IsSuccess = false;
                     _response.StatusCode = HttpStatusCode.Unauthorized;
-                    _response.ErrorMessages.Add("Password does not exist");
+                    _response.ErrorMessages.Add("Password was incorrect");
                     return Unauthorized(_response);
                 }
 
                 // if user was found, generate JWT Token
                 var roles = await _userManager.GetRolesAsync(user);
-                var accessToken = _jwtTokenGenerator.GenerateToken(user, roles);
-                var refreshToken = _jwtTokenGenerator.GenerateRefreshToken();
+                var accessToken = _jwtTokenService.GenerateToken(user, roles);
+                var refreshToken = _jwtTokenService.GenerateRefreshToken();
 
                 var token = new TokenDto()
                 {
@@ -74,7 +74,7 @@ namespace AMSS.Controllers
                     RefreshToken = refreshToken
                 };
 
-                _userRepository.UpdateRefreshToken(user.Id, refreshToken);
+                await _userRepository.UpdateRefreshToken(user.Id, refreshToken);
 
                 var userDto = _mapper.Map<UserDto>(user);
                 userDto.Role = Enum.Parse<Role>(roles.FirstOrDefault());
@@ -84,7 +84,7 @@ namespace AMSS.Controllers
                     User = userDto,
                     Token = token,
                 };
-                _response.SuccessMessage = "Login to account successfully";
+                _response.SuccessMessage = "Welcome " + userDto.FullName;
                 _response.Result = loginResponseDto;
                 _response.StatusCode = HttpStatusCode.OK;
                 return Ok(_response);
@@ -198,7 +198,7 @@ namespace AMSS.Controllers
                     _response.ErrorMessages.Add("Unauthorized");
                 }
 
-                var principal = _jwtTokenGenerator.GetPrincipalFromExpiredToken(accessToken);
+                var principal = _jwtTokenService.GetPrincipalFromExpiredToken(accessToken);
                 if(principal == null)
                 {
                     _response.IsSuccess = false;
@@ -208,7 +208,7 @@ namespace AMSS.Controllers
                 }
                 var userEmail = principal.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
                 var user = await _userRepository.GetAsync(u => u.Email == userEmail);
-                if(user.RefreshToken != tokenRequestDto.RefreshToken || !_jwtTokenGenerator.ValidateTokenExpire(tokenRequestDto.RefreshToken))
+                if(user.RefreshToken != tokenRequestDto.RefreshToken || !_jwtTokenService.ValidateTokenExpire(tokenRequestDto.RefreshToken))
                 {
                     _response.IsSuccess = false;
                     _response.StatusCode = HttpStatusCode.Unauthorized;
@@ -217,7 +217,7 @@ namespace AMSS.Controllers
                 }
 
                 var roles = await _userManager.GetRolesAsync(user);
-                var newAccessToken = _jwtTokenGenerator.GenerateToken(user, roles);
+                var newAccessToken = _jwtTokenService.GenerateToken(user, roles);
                 if(String.IsNullOrEmpty(newAccessToken))
                 {
                     _response.IsSuccess = false;

@@ -29,7 +29,8 @@ namespace AMSS.Models
         public bool IsActive { get; set; } = true;
 
         [NotMapped]
-        public string Role { get; set; }
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+        public Role? Role { get; set; }
 
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }

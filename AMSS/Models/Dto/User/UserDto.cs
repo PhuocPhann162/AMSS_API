@@ -21,10 +21,17 @@ namespace AMSS.Models.Dto.User
 
         public string? Country { get; set; }
 
+        public bool IsActive { get; set; }
+
+        public string RefreshToken { get; set; }
+
         [StringLength(500)]
         public string? Avatar { get; set; }
 
         [JsonConverter(typeof(JsonStringEnumConverter))]
-        public Role Role { get; set; }
+        public Role? Role { get; set; }
+
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set;}
     }
 }

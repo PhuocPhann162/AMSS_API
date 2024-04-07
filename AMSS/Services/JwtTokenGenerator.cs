@@ -24,9 +24,9 @@ namespace AMSS.Services
 
             var claimList = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                new Claim(JwtRegisteredClaimNames.Sub, user.Id),
-                new Claim(JwtRegisteredClaimNames.Name, user.Email),
+                new Claim("id", user.Id),
+                new Claim("fullName", user.FullName),
+                new Claim(JwtRegisteredClaimNames.Email, user.UserName),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             };
 
@@ -54,7 +54,7 @@ namespace AMSS.Services
             {
                 Audience = _jwtOptions.Audience,
                 Issuer = _jwtOptions.Issuer,
-                Expires = DateTime.UtcNow.AddHours(8),
+                Expires = DateTime.UtcNow.AddHours(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
