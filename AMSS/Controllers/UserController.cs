@@ -64,6 +64,7 @@ namespace AMSS.Controllers
 
 
         [HttpPost("lockUnlock/{id}")]
+        [Authorize(Roles = nameof(Role.ADMIN))]
         public async Task<ActionResult<APIResponse>> LockUnlock(string? id)
         {
             try
@@ -79,7 +80,8 @@ namespace AMSS.Controllers
                 if (!userFromDb.IsActive)
                 {
                     // user is currently locked and we need to unlock them 
-                    userFromDb.LockoutEnd = DateTime.Now;
+                    userFromDb.IsActive = true;
+                    userFromDb.UpdatedAt = DateTime.UtcNow;
                     await _userRepository.Update(userFromDb);
                     await _userRepository.SaveAsync();
                     _response.StatusCode = HttpStatusCode.OK;
@@ -87,7 +89,8 @@ namespace AMSS.Controllers
                 }
                 else
                 {
-                    userFromDb.LockoutEnd = DateTime.Now.AddYears(1000);
+                    userFromDb.IsActive = false;
+                    userFromDb.UpdatedAt = DateTime.UtcNow;
                     await _userRepository.Update(userFromDb);
                     await _userRepository.SaveAsync();
                     _response.StatusCode = HttpStatusCode.OK;
@@ -105,7 +108,8 @@ namespace AMSS.Controllers
             return BadRequest(_response);
         }
 
-        [HttpPut("updateRole/{userId}")]
+        [HttpPost("updateRole/{userId}")]
+        [Authorize(Roles = nameof(Role.ADMIN))]
         public async Task<ActionResult<APIResponse>> RoleManagement(string userId, [FromForm] string role)
         {
             try
@@ -122,6 +126,7 @@ namespace AMSS.Controllers
                     }
                     _userManager.AddToRoleAsync(applicationUser, role).GetAwaiter().GetResult();
                 }
+                applicationUser.UpdatedAt = DateTime.UtcNow;
                 _response.SuccessMessage = "Update this user's permission successfully";
                 _response.Result = true;
                 _response.StatusCode = HttpStatusCode.OK;

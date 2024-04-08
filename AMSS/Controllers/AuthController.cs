@@ -54,6 +54,13 @@ namespace AMSS.Controllers
                     _response.ErrorMessages.Add("Username does not exist");
                     return Unauthorized(_response);
                 }
+                if(!user.IsActive)
+                {
+                    _response.IsSuccess = false;
+                    _response.StatusCode = HttpStatusCode.Unauthorized;
+                    _response.ErrorMessages.Add("This account has been locked");
+                    return Unauthorized(_response);
+                }
                 var isValid = BCrypt.Net.BCrypt.Verify(loginRequestDto.Password, user.Password);
                 if (!isValid)
                 {
@@ -62,6 +69,7 @@ namespace AMSS.Controllers
                     _response.ErrorMessages.Add("Password was incorrect");
                     return Unauthorized(_response);
                 }
+
 
                 // if user was found, generate JWT Token
                 var roles = await _userManager.GetRolesAsync(user);
@@ -84,7 +92,7 @@ namespace AMSS.Controllers
                     User = userDto,
                     Token = token,
                 };
-                _response.SuccessMessage = "Welcome " + userDto.FullName;
+                _response.SuccessMessage = "Welcome " + userDto.FullName + "! Have a nice day🌟";
                 _response.Result = loginResponseDto;
                 _response.StatusCode = HttpStatusCode.OK;
                 return Ok(_response);
