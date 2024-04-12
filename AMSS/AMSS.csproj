@@ -9,6 +9,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="AutoMapper" Version="12.0.1" />
+		<PackageReference Include="Azure.Storage.Blobs" Version="12.19.1" />
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
 		<PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
 		<PackageReference Include="Azure.Storage.Blobs" Version="12.19.1" />
@@ -28,6 +29,11 @@
 		</PackageReference>
 		<PackageReference Include="Stripe.net" Version="43.5.0-beta.1" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Models\Dto\Farm\" />
+	  <Folder Include="Models\Dto\Field\" />
 	</ItemGroup>
 
 </Project>

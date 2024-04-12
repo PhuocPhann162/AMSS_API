@@ -58,8 +58,8 @@ namespace AMSS.Controllers
                 _response.IsSuccess = false;
                 _response.StatusCode = HttpStatusCode.BadRequest;
                 _response.ErrorMessages.Add(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, _response);
             }
-            return BadRequest(_response);
         }
 
 
@@ -81,7 +81,7 @@ namespace AMSS.Controllers
                 {
                     // user is currently locked and we need to unlock them 
                     userFromDb.IsActive = true;
-                    userFromDb.UpdatedAt = DateTime.UtcNow;
+                    userFromDb.UpdatedAt = DateTime.Now;
                     await _userRepository.Update(userFromDb);
                     await _userRepository.SaveAsync();
                     _response.StatusCode = HttpStatusCode.OK;
@@ -90,7 +90,7 @@ namespace AMSS.Controllers
                 else
                 {
                     userFromDb.IsActive = false;
-                    userFromDb.UpdatedAt = DateTime.UtcNow;
+                    userFromDb.UpdatedAt = DateTime.Now;
                     await _userRepository.Update(userFromDb);
                     await _userRepository.SaveAsync();
                     _response.StatusCode = HttpStatusCode.OK;
@@ -104,8 +104,8 @@ namespace AMSS.Controllers
                 _response.IsSuccess = false;
                 _response.StatusCode = HttpStatusCode.BadRequest;
                 _response.ErrorMessages.Add("Something wrong when lock/unlock user");
+                return StatusCode(StatusCodes.Status500InternalServerError, _response);
             }
-            return BadRequest(_response);
         }
 
         [HttpPost("updateRole/{userId}")]
@@ -126,7 +126,7 @@ namespace AMSS.Controllers
                     }
                     _userManager.AddToRoleAsync(applicationUser, role).GetAwaiter().GetResult();
                 }
-                applicationUser.UpdatedAt = DateTime.UtcNow;
+                applicationUser.UpdatedAt = DateTime.Now;
                 _response.SuccessMessage = "Update this user's permission successfully";
                 _response.Result = true;
                 _response.StatusCode = HttpStatusCode.OK;
@@ -137,8 +137,8 @@ namespace AMSS.Controllers
                 _response.IsSuccess = false;
                 _response.StatusCode = HttpStatusCode.BadRequest;
                 _response.ErrorMessages.Add("Something wrong when update user role");
+                return StatusCode(StatusCodes.Status500InternalServerError, _response);
             }
-            return BadRequest(_response);
         }
     }
 }

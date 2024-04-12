@@ -37,7 +37,7 @@ namespace AMSS.Services
                 Audience = _jwtOptions.Audience,
                 Issuer = _jwtOptions.Issuer,
                 Subject = new ClaimsIdentity(claimList),
-                Expires = DateTime.UtcNow.AddHours(1),
+                Expires = DateTime.Now.AddHours(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHanler.CreateToken(tokenDescriptor);
@@ -54,7 +54,7 @@ namespace AMSS.Services
             {
                 Audience = _jwtOptions.Audience,
                 Issuer = _jwtOptions.Issuer,
-                Expires = DateTime.UtcNow.AddHours(7),
+                Expires = DateTime.Now.AddHours(8),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
@@ -77,10 +77,13 @@ namespace AMSS.Services
             var tokenHandler = new JwtSecurityTokenHandler();
 
             var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken securityToken);
-            if (securityToken is not JwtSecurityToken jwtSecurityToken ||
-                !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256Signature,
-                    StringComparison.InvariantCultureIgnoreCase))
-                throw new SecurityTokenException("Invalid token");
+            //if (securityToken is not JwtSecurityToken jwtSecurityToken ||
+            //    !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256Signature,
+            //        StringComparison.InvariantCultureIgnoreCase))
+            //{
+            //    throw new SecurityTokenException("Invalid token");
+            //}
+                
 
             return principal;
         }

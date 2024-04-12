@@ -102,8 +102,8 @@ namespace AMSS.Controllers
                 _response.IsSuccess = false;
                 _response.StatusCode = HttpStatusCode.BadRequest;
                 _response.ErrorMessages.Add(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, _response);
             }
-            return BadRequest(_response);
         }
 
         [HttpPost("register")]
@@ -181,8 +181,8 @@ namespace AMSS.Controllers
                 _response.IsSuccess = false;
                 _response.StatusCode = HttpStatusCode.BadRequest;
                 _response.ErrorMessages.Add(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, _response);
             }
-            return BadRequest(_response);
         }
 
         [Authorize]
@@ -193,17 +193,18 @@ namespace AMSS.Controllers
             {
                 var accessToken = Request.Headers[HeaderNames.Authorization].ToString().Replace("Bearer ", "");
 
-                if (!String.IsNullOrEmpty(tokenRequestDto.RefreshToken))
+                if (String.IsNullOrEmpty(tokenRequestDto.RefreshToken))
                 {
                     _response.IsSuccess = false;
                     _response.ErrorMessages.Add("Unaccepted token");
                     return BadRequest(_response);
                 }
 
-                if(!String.IsNullOrEmpty(accessToken))
+                if(String.IsNullOrEmpty(accessToken))
                 {
                     _response.IsSuccess = false;
                     _response.ErrorMessages.Add("Unauthorized");
+                    return BadRequest(_response);
                 }
 
                 var principal = _jwtTokenService.GetPrincipalFromExpiredToken(accessToken);
@@ -216,6 +217,8 @@ namespace AMSS.Controllers
                 }
                 var userEmail = principal.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
                 var user = await _userRepository.GetAsync(u => u.Email == userEmail);
+                bool temp1 = user.RefreshToken != tokenRequestDto.RefreshToken;
+                bool temp2 = !_jwtTokenService.ValidateTokenExpire(tokenRequestDto.RefreshToken);
                 if(user.RefreshToken != tokenRequestDto.RefreshToken || !_jwtTokenService.ValidateTokenExpire(tokenRequestDto.RefreshToken))
                 {
                     _response.IsSuccess = false;

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AMSS.Models
@@ -15,22 +16,27 @@ namespace AMSS.Models
         public string Name { get; set; }
 
         [Required]
-        public string CropTypeId { get; set; }
+        public int CropTypeId { get; set; }
         [ForeignKey("CropTypeId")]
         public CropType CropType { get; set; }
 
-        public double PlantedArea { get; set; }
+        public int Quantity { get; set; }
+
+        public double CultivatedArea { get; set; }
 
         public DateTime PlantedDate { get; set; }
 
         public DateTime ExpectedDate { get; set; }
 
         public int FieldId { get; set; }
-
-        public string PlantedLocation { get; set; }
+        
 
         public DateTime CreatedAt { get; set; }
 
         public DateTime UpdatedAt { get; set; }
+
+        [NotMapped]
+        [ForeignKey("FieldId")]
+        public Field Field { get; set; }
     }
 }
