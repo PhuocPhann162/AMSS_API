@@ -24,7 +24,7 @@ namespace AMSS.Controllers
             _response = new();
         }
 
-        [HttpGet]
+        [HttpGet("getAll")]
         public async Task<ActionResult<APIResponse>> GetAllFields()
         {
             try
@@ -93,6 +93,7 @@ namespace AMSS.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    
                     var newField = _mapper.Map<Field>(createFieldDto);
                     newField.CreatedAt = DateTime.Now;
                     newField.UpdatedAt = DateTime.Now;
@@ -101,7 +102,8 @@ namespace AMSS.Controllers
                     await _fieldRepository.SaveAsync();
                     _response.Result = newField;
                     _response.StatusCode = HttpStatusCode.Created;
-                    return CreatedAtRoute("getCropById", new { id = newField.Id }, _response);
+                    _response.SuccessMessage = "Field created successfully";
+                    return Ok(_response);
                 }
                 else
                 {

@@ -1,6 +1,7 @@
 using AMSS.Data;
 using AMSS.Models;
 using AMSS.Repositories;
+using AMSS.Repositories.IRepository;
 using AMSS.Repository.IRepository;
 using AMSS.Services;
 using AMSS.Services.IService;
@@ -62,6 +63,10 @@ builder.Services.AddAuthentication(u =>
 // Config Scope of Dependence Injection
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+builder.Services.AddScoped<ILocationRepository, LocationRepository>();
+builder.Services.AddScoped<IFarmRepository, FarmRepository>();
+builder.Services.AddScoped<IFieldRepository, FieldRepository>();
+builder.Services.AddScoped<ICropRepository, CropRepository>();
 
 // CORS config
 builder.Services.AddCors();

@@ -1,5 +1,4 @@
 ﻿using AMSS.Models;
-using AMSS.Models.Dto.User;
 using AMSS.Repositories.IRepository;
 
 namespace AMSS.Repository.IRepository

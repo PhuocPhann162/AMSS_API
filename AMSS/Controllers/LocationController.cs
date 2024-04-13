@@ -88,8 +88,8 @@ namespace AMSS.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = nameof(Role.ADMIN))]
-        public async Task<ActionResult<APIResponse>> CreateFarm(CreateLocationDto createLocationDto)
+        //[Authorize(Roles = nameof(Role.ADMIN))]
+        public async Task<ActionResult<APIResponse>> CreateLocation(CreateLocationDto createLocationDto)
         {
             try
             {
@@ -103,7 +103,8 @@ namespace AMSS.Controllers
                     await _locationRepository.SaveAsync();
                     _response.Result = newLocation;
                     _response.StatusCode = HttpStatusCode.Created;
-                    return CreatedAtRoute("getLocationById", new { id = newLocation.Id }, _response);
+                    _response.SuccessMessage = "Location created successfully";
+                    return Ok(_response);
                 }
                 else
                 {
@@ -124,7 +125,7 @@ namespace AMSS.Controllers
 
         [HttpPut("{id:int}")]
         [Authorize(Roles = nameof(Role.ADMIN))]
-        public async Task<ActionResult<APIResponse>> UpdateMenuItem(int id, [FromForm] LocationDto updateLocationDto)
+        public async Task<ActionResult<APIResponse>> UpdateLocation(int id, [FromForm] LocationDto updateLocationDto)
         {
             try
             {
@@ -176,7 +177,7 @@ namespace AMSS.Controllers
 
         [HttpDelete("{id:int}")]
         [Authorize(Roles = nameof(Role.ADMIN))]
-        public async Task<ActionResult<APIResponse>> DeleteMenuItem(int id)
+        public async Task<ActionResult<APIResponse>> DeleteLocation(int id)
         {
             try
             {

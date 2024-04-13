@@ -7,7 +7,7 @@ namespace AMSS.Models
         [Key]
         public int Id { get; set; }
         [Required]
-        [StringLength(500)]
+        [MaxLength(500)]
         public string Address { get; set; }
         public float? Lat { get; set; }
         public float? Lng { get; set; }

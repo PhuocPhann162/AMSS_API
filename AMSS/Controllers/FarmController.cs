@@ -104,7 +104,8 @@ namespace AMSS.Controllers
                     await _farmRepository.SaveAsync();
                     _response.Result = newFarm;
                     _response.StatusCode = HttpStatusCode.Created;
-                    return CreatedAtRoute("getFarmById", new { id = newFarm.Id }, _response);
+                    _response.SuccessMessage = "Farm created successfully";
+                    return Ok(_response);
                 }
                 else
                 {

@@ -91,7 +91,7 @@ namespace AMSS.Controllers
 
         [HttpPost]
         [Authorize(Roles = nameof(Role.ADMIN))]
-        public async Task<ActionResult<APIResponse>> CreateMenuItem([FromForm] CreateCropDto createCropDto)
+        public async Task<ActionResult<APIResponse>> CreateCrop([FromForm] CreateCropDto createCropDto)
         {
             try
             {
@@ -116,7 +116,8 @@ namespace AMSS.Controllers
                     await _cropRepository.SaveAsync();
                     _response.Result = newCrop;
                     _response.StatusCode = HttpStatusCode.Created;
-                    return CreatedAtRoute("getCropById", new { id = newCrop.Id }, _response);
+                    _response.SuccessMessage = "Crop created successfully";
+                    return Ok(_response);
                 }
                 else
                 {
@@ -137,7 +138,7 @@ namespace AMSS.Controllers
 
         [HttpPut("{id:int}")]
         [Authorize(Roles = nameof(Role.ADMIN))]
-        public async Task<ActionResult<APIResponse>> UpdateMenuItem(int id, [FromForm] UpdateCropDto updateCropDto)
+        public async Task<ActionResult<APIResponse>> UpdateCrop(int id, [FromForm] UpdateCropDto updateCropDto)
         {
             try
             {
@@ -195,7 +196,7 @@ namespace AMSS.Controllers
 
         [HttpDelete("{id:int}")]
         [Authorize(Roles = nameof(Role.ADMIN))]
-        public async Task<ActionResult<APIResponse>> DeleteMenuItem(int id)
+        public async Task<ActionResult<APIResponse>> DeleteCrop(int id)
         {
             try
             {
