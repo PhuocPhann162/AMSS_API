@@ -17,8 +17,7 @@ namespace AMSS.Models
 
         [Required]
         public int CropTypeId { get; set; }
-        [ForeignKey("CropTypeId")]
-        public CropType CropType { get; set; }
+        
 
         public int Quantity { get; set; }
 
@@ -38,5 +37,9 @@ namespace AMSS.Models
         [NotMapped]
         [ForeignKey("FieldId")]
         public Field Field { get; set; }
+
+        [NotMapped]
+        [ForeignKey("CropTypeId")]
+        public CropType CropType { get; set; }
     }
 }

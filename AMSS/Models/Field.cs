@@ -18,7 +18,9 @@ namespace AMSS.Models
 
         [NotMapped]
         [ForeignKey("LocationId")]
-        public Farm Location { get; set; }
+        public Location Location { get; set; }
+
+        [NotMapped]
         [ForeignKey("FarmId")]
         public Farm Farm { get; set; }
     }

@@ -1,11 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AMSS.Models
+namespace AMSS.Models.Dto.Location
 {
-    public class Location
+    public class CreateLocationDto
     {
-        [Key]
-        public int Id { get; set; }
         [Required]
         [StringLength(500)]
         public string Address { get; set; }

@@ -4,18 +4,18 @@ using AMSS.Repositories.IRepository;
 
 namespace AMSS.Repositories
 {
-    public class FarmRepository : Repository<Farm>, IFarmRepository
+    public class LocationRepository : Repository<Location>, ILocationRepository
     {
         private readonly ApplicationDbContext _db;
-        public FarmRepository(ApplicationDbContext db) : base(db)
+        public LocationRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
         }
 
-        public async Task<Farm> Update(Farm farm)
+        public async Task<Location> Update(Location location)
         {
-            farm.UpdatedAt = DateTime.Now;
-            _db.Farms.Update(farm);
+            location.UpdatedAt = DateTime.Now;
+            _db.Locations.Update(location);
             await _db.SaveChangesAsync();
             return null;
         }

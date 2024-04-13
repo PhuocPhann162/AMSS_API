@@ -31,9 +31,4 @@
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Models\Dto\Farm\" />
-	  <Folder Include="Models\Dto\Field\" />
-	</ItemGroup>
-
 </Project>
