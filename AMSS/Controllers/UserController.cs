@@ -26,18 +26,18 @@ namespace AMSS.Controllers
             _userManager = userManager;
             _roleManager = roleManager;
         }
-        
+
+        [Authorize]
         [HttpGet("getAll")]
         [Authorize(Roles = nameof(Role.ADMIN))]
-        public async Task<ActionResult<APIResponse>> GetAllUsers([FromQuery] string searchString, int pageSize = 0, int pageNumber = 1)
+        public async Task<ActionResult<APIResponse>> GetAllUsers(string? searchString, int pageNumber = 1, int pageSize = 5)
         {
             try
             {
-                List<ApplicationUser> lstUsers = await _userRepository.GetAllAsync(pageNumber: pageSize, pageSize: pageNumber);
+                List<ApplicationUser> lstUsers = await _userRepository.GetAllAsync();
 
                 if (lstUsers == null)
                 {
-                    _response.Result = new List<ApplicationUser>();
                     _response.IsSuccess = false;
                     _response.StatusCode = HttpStatusCode.BadRequest;
                     _response.ErrorMessages.Add("Something wrong when get all users");
@@ -51,7 +51,7 @@ namespace AMSS.Controllers
 
                 if (!string.IsNullOrEmpty(searchString))
                 {
-                    lstUsers = lstUsers.Where(u => u.FullName.ToLower().Contains(searchString) || u.PhoneNumber.Contains(searchString)).ToList();
+                    lstUsers = lstUsers.Where(u => u.FullName.ToLower().Contains(searchString.ToLower()) || u.PhoneNumber.Contains(searchString) || u.Role.ToString().ToLower().Contains(searchString.ToLower())).ToList();
                 }
 
                 Pagination pagination = new()
@@ -61,8 +61,7 @@ namespace AMSS.Controllers
                     TotalRecords = lstUsers.Count(),
                 };
                 Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagination));
-
-                _response.Result = lstUsers;
+                _response.Result = lstUsers.Skip((pageNumber - 1) * pageSize).Take(pageSize);
                 _response.StatusCode = HttpStatusCode.OK;
                 return Ok(_response);
             }

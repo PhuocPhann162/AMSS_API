@@ -10,6 +10,7 @@ using Azure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using System.Text.Json;
 
 namespace AMSS.Controllers
 {
@@ -28,13 +29,27 @@ namespace AMSS.Controllers
         }
 
         [HttpGet("getAll")]
-        public async Task<ActionResult<APIResponse>> GetAllFarms()
+        public async Task<ActionResult<APIResponse>> GetAllFarms(string? searchString, int pageNumber = 1, int pageSize = 5)
         {
             try
             {
-                List<Farm> lstFarms = await _farmRepository.GetAllAsync(includeProperties: "Location");
+                List<Farm> lstFarms = await _farmRepository.GetAllAsync(includeProperties: "Location", pageNumber: pageNumber, pageSize: pageSize);
+                var lstFarmsDto = _mapper.Map<List<FarmDto>>(lstFarms);
+
+                if(!string.IsNullOrEmpty(searchString))
+                {
+                    lstFarmsDto = lstFarmsDto.Where(u => u.Name.ToLower().Contains(searchString.ToLower()) || u.Location.Address.ToLower().Contains(searchString.ToLower())).ToList();
+                }
+
+                Pagination pagination = new()
+                {
+                    CurrentPage = pageNumber,
+                    PageSize = pageSize,
+                    TotalRecords = lstFarms.Count(),
+                };
+                Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagination));
                 
-                _response.Result = _mapper.Map<List<FarmDto>>(lstFarms);
+                _response.Result = lstFarmsDto;
                 _response.StatusCode = HttpStatusCode.OK;
                 return Ok(_response);
             }
