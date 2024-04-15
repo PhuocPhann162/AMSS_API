@@ -29,16 +29,8 @@ namespace AMSS.Controllers
         {
             try
             {
-                List<Field> lstFields = await _fieldRepository.GetAllAsync();
-                List<FieldDto> lstFieldDtos = _mapper.Map<List<FieldDto>>(lstFields);
-                if (lstFields == null)
-                {
-                    _response.IsSuccess = false;
-                    _response.StatusCode = HttpStatusCode.NotFound;
-                    _response.ErrorMessages.Add("Something wrong when get all Fields");
-                    return NotFound(_response);
-                }
-                _response.Result = lstFieldDtos;
+                List<Field> lstFields = await _fieldRepository.GetAllAsync(includeProperties: "Location");
+                _response.Result = _mapper.Map<List<FieldDto>>(lstFields);
                 _response.StatusCode = HttpStatusCode.OK;
                 return Ok(_response);
             }
@@ -87,13 +79,12 @@ namespace AMSS.Controllers
 
         [HttpPost]
         [Authorize(Roles = nameof(Role.ADMIN))]
-        public async Task<ActionResult<APIResponse>> CreateField(CreateFieldDto createFieldDto)
+        public async Task<ActionResult<APIResponse>> CreateField([FromForm]CreateFieldDto createFieldDto)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    
                     var newField = _mapper.Map<Field>(createFieldDto);
                     newField.CreatedAt = DateTime.Now;
                     newField.UpdatedAt = DateTime.Now;

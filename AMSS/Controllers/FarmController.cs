@@ -32,16 +32,9 @@ namespace AMSS.Controllers
         {
             try
             {
-                List<Farm> lstFarms = await _farmRepository.GetAllAsync();
-                List<FarmDto> lstFarmDtos = _mapper.Map<List<FarmDto>>(lstFarms);
-                if (lstFarms == null)
-                {
-                    _response.IsSuccess = false;
-                    _response.StatusCode = HttpStatusCode.NotFound;
-                    _response.ErrorMessages.Add("Something wrong when get all Farms");
-                    return NotFound(_response);
-                }
-                _response.Result = lstFarmDtos;
+                List<Farm> lstFarms = await _farmRepository.GetAllAsync(includeProperties: "Location");
+                
+                _response.Result = _mapper.Map<List<FarmDto>>(lstFarms);
                 _response.StatusCode = HttpStatusCode.OK;
                 return Ok(_response);
             }
@@ -90,7 +83,7 @@ namespace AMSS.Controllers
 
         [HttpPost]
         [Authorize(Roles = nameof(Role.ADMIN))]
-        public async Task<ActionResult<APIResponse>> CreateFarm(CreateFarmDto createFarmDto)
+        public async Task<ActionResult<APIResponse>> CreateFarm([FromForm]CreateFarmDto createFarmDto)
         {
             try
             {

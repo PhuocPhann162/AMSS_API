@@ -5,7 +5,7 @@ namespace AMSS.Models
     public class CropType
     {
         [Key]
-        public int ID { get; set; }
+        public int Id { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]

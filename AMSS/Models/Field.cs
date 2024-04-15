@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AMSS.Models
@@ -9,19 +10,25 @@ namespace AMSS.Models
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
-        public double Area { get; set; }
-        public int FarmId { get; set; }
-        public int LocationId { get; set; }
 
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
+        [Required]
+        public double Area { get; set; }
+
+        [Required]
+        public int FarmId { get; set; }
+
+        [ForeignKey("FarmId")]
+        [ValidateNever]
+        public Farm Farm { get; set; }
+
+        [Required]
+        public int LocationId { get; set; }
 
         [NotMapped]
         [ForeignKey("LocationId")]
         public Location Location { get; set; }
 
-        [NotMapped]
-        [ForeignKey("FarmId")]
-        public Farm Farm { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
     }
 }

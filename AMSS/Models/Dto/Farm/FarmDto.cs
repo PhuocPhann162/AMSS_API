@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using AMSS.Models.Dto.Location;
 
 namespace AMSS.Models.Dto.Farm
 {
@@ -14,6 +15,8 @@ namespace AMSS.Models.Dto.Farm
 
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
+
+        public LocationDto Location { get; set; }
        
     }
 }

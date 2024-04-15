@@ -88,7 +88,7 @@ namespace AMSS.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = nameof(Role.ADMIN))]
+        [Authorize(Roles = nameof(Role.ADMIN))]
         public async Task<ActionResult<APIResponse>> CreateLocation(CreateLocationDto createLocationDto)
         {
             try

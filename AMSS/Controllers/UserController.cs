@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using System.Text.Json;
 
 namespace AMSS.Controllers
 {
@@ -28,11 +29,11 @@ namespace AMSS.Controllers
         
         [HttpGet("getAll")]
         [Authorize(Roles = nameof(Role.ADMIN))]
-        public async Task<ActionResult<APIResponse>> GetAllUsers()
+        public async Task<ActionResult<APIResponse>> GetAllUsers([FromQuery] string searchString, int pageSize = 0, int pageNumber = 1)
         {
             try
             {
-                List<ApplicationUser> lstUsers = await _userRepository.GetAllAsync();
+                List<ApplicationUser> lstUsers = await _userRepository.GetAllAsync(pageNumber: pageSize, pageSize: pageNumber);
 
                 if (lstUsers == null)
                 {
@@ -48,13 +49,25 @@ namespace AMSS.Controllers
                     user.Role = Enum.Parse<Role>(_userManager.GetRolesAsync(user).GetAwaiter().GetResult().FirstOrDefault());
                 }
 
+                if (!string.IsNullOrEmpty(searchString))
+                {
+                    lstUsers = lstUsers.Where(u => u.FullName.ToLower().Contains(searchString) || u.PhoneNumber.Contains(searchString)).ToList();
+                }
+
+                Pagination pagination = new()
+                {
+                    CurrentPage = pageNumber,
+                    PageSize = pageSize,
+                    TotalRecords = lstUsers.Count(),
+                };
+                Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagination));
+
                 _response.Result = lstUsers;
                 _response.StatusCode = HttpStatusCode.OK;
                 return Ok(_response);
             }
             catch (Exception ex)
             {
-                _response.Result = new List<ApplicationUser>();
                 _response.IsSuccess = false;
                 _response.StatusCode = HttpStatusCode.BadRequest;
                 _response.ErrorMessages.Add(ex.Message);

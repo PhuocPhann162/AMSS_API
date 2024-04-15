@@ -46,7 +46,7 @@ namespace AMSS.Repositories
             return await query.FirstOrDefaultAsync();
         }
 
-        public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null, string? includeProperties = null,
+        public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null, string? includeProperties = null, 
             int pageSize = 0, int pageNumber = 1)
         {
             IQueryable<T> query = dbSet;

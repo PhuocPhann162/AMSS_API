@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using AMSS.Models.Dto.Location;
+using AMSS.Models.Dto.Farm;
 
 namespace AMSS.Models.Dto.Field
 {
@@ -8,7 +10,10 @@ namespace AMSS.Models.Dto.Field
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
+
+        [Required]
         public double Area { get; set; }
+
         [Required]
         public int FarmId { get; set; }
         [Required]  
@@ -16,5 +21,8 @@ namespace AMSS.Models.Dto.Field
 
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
+
+        public LocationDto Location { get; set; }
+        public FarmDto Farm { get; set; }
     }
 }

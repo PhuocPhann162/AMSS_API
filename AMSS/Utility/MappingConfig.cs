@@ -23,7 +23,7 @@ namespace AMSS.Utility
 
                 // Farm
                 config.CreateMap<Farm, FarmDto>().ReverseMap();
-                config.CreateMap<Farm, CreateLocationDto>().ReverseMap();
+                config.CreateMap<Farm, CreateFarmDto>().ReverseMap();
 
                 // Field
                 config.CreateMap<Field, Field>().ReverseMap();

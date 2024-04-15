@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -15,31 +16,30 @@ namespace AMSS.Models
         [Required]
         public string Name { get; set; }
 
-        [Required]
-        public int CropTypeId { get; set; }
-        
-
-        public int Quantity { get; set; }
-
         public double CultivatedArea { get; set; }
 
         public DateTime PlantedDate { get; set; }
 
         public DateTime ExpectedDate { get; set; }
 
+        [Required]
+        public int CropTypeId { get; set; }
+
+        [ForeignKey("CropTypeId")]
+        [ValidateNever]
+        public CropType CropType { get; set; }
+
+        public int Quantity { get; set; }
+
+        [Required]
         public int FieldId { get; set; }
-        
 
-        public DateTime CreatedAt { get; set; }
-
-        public DateTime UpdatedAt { get; set; }
-
-        [NotMapped]
         [ForeignKey("FieldId")]
+        [ValidateNever]
         public Field Field { get; set; }
 
-        [NotMapped]
-        [ForeignKey("CropTypeId")]
-        public CropType CropType { get; set; }
+        public DateTime? CreatedAt { get; set; }
+
+        public DateTime? UpdatedAt { get; set; }
     }
 }
