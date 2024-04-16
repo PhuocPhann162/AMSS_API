@@ -9,6 +9,7 @@ using AutoMapper;
 using Azure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Net;
 using System.Text.Json;
 
@@ -29,11 +30,11 @@ namespace AMSS.Controllers
         }
 
         [HttpGet("getAll")]
-        public async Task<ActionResult<APIResponse>> GetAllFarms(string? searchString, int pageNumber = 1, int pageSize = 5)
+        public async Task<ActionResult<APIResponse>> GetAllFarms(string? searchString, int? pageNumber, int? pageSize)
         {
             try
             {
-                List<Farm> lstFarms = await _farmRepository.GetAllAsync(includeProperties: "Location", pageNumber: pageNumber, pageSize: pageSize);
+                List<Farm> lstFarms = await _farmRepository.GetAllAsync(includeProperties: "Location");
                 var lstFarmsDto = _mapper.Map<List<FarmDto>>(lstFarms);
 
                 if(!string.IsNullOrEmpty(searchString))
@@ -41,14 +42,20 @@ namespace AMSS.Controllers
                     lstFarmsDto = lstFarmsDto.Where(u => u.Name.ToLower().Contains(searchString.ToLower()) || u.Location.Address.ToLower().Contains(searchString.ToLower())).ToList();
                 }
 
-                Pagination pagination = new()
+                if(pageNumber.HasValue && pageSize.HasValue)
                 {
-                    CurrentPage = pageNumber,
-                    PageSize = pageSize,
-                    TotalRecords = lstFarms.Count(),
-                };
-                Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagination));
-                
+                    Pagination pagination = new()
+                    {
+                        CurrentPage = pageNumber,
+                        PageSize = pageSize,
+                        TotalRecords = lstFarms.Count(),
+                    };
+                    Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagination));
+
+                    _response.Result = lstFarmsDto.Skip((int)((pageNumber - 1) * pageSize)).Take((int)pageSize);
+                    _response.StatusCode = HttpStatusCode.OK;
+                    return Ok(_response);
+                }
                 _response.Result = lstFarmsDto;
                 _response.StatusCode = HttpStatusCode.OK;
                 return Ok(_response);

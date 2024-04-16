@@ -217,8 +217,6 @@ namespace AMSS.Controllers
                 }
                 var userEmail = principal.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
                 var user = await _userRepository.GetAsync(u => u.Email == userEmail);
-                bool temp1 = user.RefreshToken != tokenRequestDto.RefreshToken;
-                bool temp2 = !_jwtTokenService.ValidateTokenExpire(tokenRequestDto.RefreshToken);
                 if(user.RefreshToken != tokenRequestDto.RefreshToken || !_jwtTokenService.ValidateTokenExpire(tokenRequestDto.RefreshToken))
                 {
                     _response.IsSuccess = false;

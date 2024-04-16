@@ -25,12 +25,31 @@ namespace AMSS.Controllers
         }
 
         [HttpGet("getAll")]
-        public async Task<ActionResult<APIResponse>> GetAllFields()
+        public async Task<ActionResult<APIResponse>> GetAllFields(string? searchString, int? pageNumber, int? pageSize)
         {
             try
             {
                 List<Field> lstFields = await _fieldRepository.GetAllAsync(includeProperties: "Location");
-                _response.Result = _mapper.Map<List<FieldDto>>(lstFields);
+                var lstFieldsDto = _mapper.Map<List<FieldDto>>(lstFields);
+
+                if (!string.IsNullOrEmpty(searchString))
+                {
+                    lstFieldsDto = lstFieldsDto.Where(u => u.Name.ToLower().Contains(searchString.ToLower()) || u.Farm.Name.ToLower().Contains(searchString.ToLower())).ToList();
+                }
+                if (pageNumber.HasValue && pageSize.HasValue)
+                {
+                    Pagination pagination = new()
+                    {
+                        CurrentPage = pageNumber,
+                        PageSize = pageSize,
+                        TotalRecords = lstFieldsDto.Count(),
+                    };
+
+                    _response.Result = lstFieldsDto.Skip((int)((pageNumber - 1) * pageSize)).Take((int)pageSize);
+                    _response.StatusCode = HttpStatusCode.OK;
+                    return Ok(_response);
+                }
+                _response.Result = lstFieldsDto;
                 _response.StatusCode = HttpStatusCode.OK;
                 return Ok(_response);
             }

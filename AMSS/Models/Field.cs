@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+﻿using AMSS.Models.Polygon;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -20,6 +21,12 @@ namespace AMSS.Models
         [ForeignKey("FarmId")]
         [ValidateNever]
         public Farm Farm { get; set; }
+
+        [Required]
+        public int PolygonAppId { get; set; }
+        [NotMapped]
+        [ForeignKey("PolygonAppId")]
+        public PolygonApp PolygonApp { get; set; }
 
         [Required]
         public int LocationId { get; set; }

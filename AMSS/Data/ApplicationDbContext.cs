@@ -1,4 +1,5 @@
 ﻿using AMSS.Models;
+using AMSS.Models.Polygon;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,12 +16,26 @@ namespace AMSS.Data
         public DbSet<Farm> Farms { get; set; }
         public DbSet<Field> Fields { get; set; }
         public DbSet<Location> Locations { get; set; }
+        public DbSet<PolygonApp> PolygonApps { get; set; }
+        public DbSet<Position> Positions { get; set; }
         public DbSet<Crop> Crops { get; set; }
         public DbSet<CropType> CropTypes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Position>()
+        .HasOne(p => p.PolygonApp)
+        .WithMany(pa => pa.Positions)
+        .HasForeignKey(p => p.PolygonAppId)
+        .HasConstraintName("FK_Position_PolygonApp");
+
+            modelBuilder.Entity<PolygonApp>()
+                .HasMany(pa => pa.Positions)
+                .WithOne(p => p.PolygonApp)
+                .HasForeignKey(p => p.PolygonAppId)
+                .HasConstraintName("FK_PolygonApp_Position");
         }
     }
 }
