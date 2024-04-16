@@ -34,7 +34,7 @@ namespace AMSS.Controllers
         {
             try
             {
-                List<Farm> lstFarms = await _farmRepository.GetAllAsync(includeProperties: "Location");
+                List<Farm> lstFarms = await _farmRepository.GetAllAsync(includeProperties: "Location,PolygonApp");
                 var lstFarmsDto = _mapper.Map<List<FarmDto>>(lstFarms);
 
                 if(!string.IsNullOrEmpty(searchString))

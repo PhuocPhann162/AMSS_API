@@ -24,16 +24,9 @@ namespace AMSS.Models
         [ValidateNever]
         public Location Location { get; set; }
 
-        [Required]
-        public int PolygonAppId { get; set; }
-
-        [ForeignKey("PolygonAppId")]
-        [ValidateNever]
-        public PolygonApp? PolygonApp { get; set; }
+        public PolygonApp PolygonApp { get; set; }
 
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
-
-        
     }
 }

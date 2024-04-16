@@ -4,17 +4,17 @@ using AMSS.Repositories.IRepository;
 
 namespace AMSS.Repositories
 {
-    public class PositionRepository : Repository<Position>, IPositionRepository
+    public class PolygonAppRepository : Repository<PolygonApp>, IPolygonAppRepository
     {
         private readonly ApplicationDbContext _db;
-        public PositionRepository(ApplicationDbContext db) : base(db)
+        public PolygonAppRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
         }
 
-        public async Task<Position> Update(Position position)
+        public async Task<PolygonApp> Update(PolygonApp polygonApp)
         {
-            _db.Positions.Update(position);
+            _db.PolygonApps.Update(polygonApp);
             await _db.SaveChangesAsync();
             return null;
         }

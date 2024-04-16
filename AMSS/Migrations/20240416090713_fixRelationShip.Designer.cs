@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AMSS.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240416071322_AddPointAndPolygonAppTableToDb")]
-    partial class AddPointAndPolygonAppTableToDb
+    [Migration("20240416090713_fixRelationShip")]
+    partial class fixRelationShip
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -217,17 +217,12 @@ namespace AMSS.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PolygonAppId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.HasIndex("LocationId");
-
-                    b.HasIndex("PolygonAppId");
 
                     b.ToTable("Farms");
                 });
@@ -255,9 +250,6 @@ namespace AMSS.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PolygonAppId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -310,7 +302,13 @@ namespace AMSS.Migrations
                     b.Property<string>("Color")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("FarmId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("FarmId")
+                        .IsUnique();
 
                     b.ToTable("PolygonApps");
                 });
@@ -499,15 +497,7 @@ namespace AMSS.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AMSS.Models.Polygon.PolygonApp", "PolygonApp")
-                        .WithMany()
-                        .HasForeignKey("PolygonAppId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Location");
-
-                    b.Navigation("PolygonApp");
                 });
 
             modelBuilder.Entity("AMSS.Models.Field", b =>
@@ -515,6 +505,17 @@ namespace AMSS.Migrations
                     b.HasOne("AMSS.Models.Farm", "Farm")
                         .WithMany()
                         .HasForeignKey("FarmId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Farm");
+                });
+
+            modelBuilder.Entity("AMSS.Models.Polygon.PolygonApp", b =>
+                {
+                    b.HasOne("AMSS.Models.Farm", "Farm")
+                        .WithOne("PolygonApp")
+                        .HasForeignKey("AMSS.Models.Polygon.PolygonApp", "FarmId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -580,6 +581,12 @@ namespace AMSS.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("AMSS.Models.Farm", b =>
+                {
+                    b.Navigation("PolygonApp")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

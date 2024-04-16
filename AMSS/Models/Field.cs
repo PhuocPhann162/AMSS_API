@@ -23,12 +23,6 @@ namespace AMSS.Models
         public Farm Farm { get; set; }
 
         [Required]
-        public int PolygonAppId { get; set; }
-        [NotMapped]
-        [ForeignKey("PolygonAppId")]
-        public PolygonApp PolygonApp { get; set; }
-
-        [Required]
         public int LocationId { get; set; }
 
         [NotMapped]

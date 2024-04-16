@@ -24,18 +24,6 @@ namespace AMSS.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<Position>()
-        .HasOne(p => p.PolygonApp)
-        .WithMany(pa => pa.Positions)
-        .HasForeignKey(p => p.PolygonAppId)
-        .HasConstraintName("FK_Position_PolygonApp");
-
-            modelBuilder.Entity<PolygonApp>()
-                .HasMany(pa => pa.Positions)
-                .WithOne(p => p.PolygonApp)
-                .HasForeignKey(p => p.PolygonAppId)
-                .HasConstraintName("FK_PolygonApp_Position");
         }
     }
 }

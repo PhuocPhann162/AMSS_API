@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using AMSS.Models.Dto.Location;
+using AMSS.Models.Dto.Polygon;
 
 namespace AMSS.Models.Dto.Farm
 {
@@ -17,6 +18,7 @@ namespace AMSS.Models.Dto.Farm
         public DateTime? UpdatedAt { get; set; }
 
         public LocationDto Location { get; set; }
+        public PolygonDto PolygonApp { get; set; }
        
     }
 }

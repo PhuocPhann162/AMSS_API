@@ -6,7 +6,7 @@ namespace AMSS.Models.Polygon
 {
     public class Position
     {
-        [Required]
+        [Key]
         public int Id { get; set; }
         
         public float Lat { get; set; }

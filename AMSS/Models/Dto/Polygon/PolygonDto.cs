@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-using System.ComponentModel.DataAnnotations;
+﻿using AMSS.Models.Polygon;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using AMSS.Models.Dto.Farm;
 
-namespace AMSS.Models.Polygon
+namespace AMSS.Models.Dto.Polygon
 {
-    public class PolygonApp
+    public class PolygonDto
     {
         [Key]
         public int Id { get; set; }
@@ -12,9 +14,8 @@ namespace AMSS.Models.Polygon
 
         [Required]
         public int FarmId { get; set; }
-        [ForeignKey("FarmId")]
-        [ValidateNever]
-        public Farm Farm { get; set; }
+      
+        public FarmDto Farm { get; set; }
 
         public IEnumerable<Position> Positions { get; set; }
     }
