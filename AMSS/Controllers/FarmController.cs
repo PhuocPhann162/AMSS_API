@@ -20,13 +20,15 @@ namespace AMSS.Controllers
     public class FarmController : ControllerBase
     {
         private readonly IFarmRepository _farmRepository;
+        private readonly IPositionRepository _positionRepository;
         protected APIResponse _response;
         private readonly IMapper _mapper;
-        public FarmController(IFarmRepository farmRepository, IMapper mapper)
+        public FarmController(IFarmRepository farmRepository, IPositionRepository positionRepository, IMapper mapper)
         {
             _farmRepository = farmRepository;
+            _positionRepository = positionRepository;
             _mapper = mapper;
-            _response = new ();
+            _response = new();
         }
 
         [HttpGet("getAll")]
@@ -36,13 +38,20 @@ namespace AMSS.Controllers
             {
                 List<Farm> lstFarms = await _farmRepository.GetAllAsync(includeProperties: "Location,PolygonApp");
                 var lstFarmsDto = _mapper.Map<List<FarmDto>>(lstFarms);
+                foreach (var f in lstFarmsDto)
+                {
+                    if (f.PolygonApp != null)
+                    {
+                        f.PolygonApp.Positions = await _positionRepository.GetAllAsync(u => u.PolygonAppId == f.PolygonApp.Id);
+                    }
+                }
 
-                if(!string.IsNullOrEmpty(searchString))
+                if (!string.IsNullOrEmpty(searchString))
                 {
                     lstFarmsDto = lstFarmsDto.Where(u => u.Name.ToLower().Contains(searchString.ToLower()) || u.Location.Address.ToLower().Contains(searchString.ToLower())).ToList();
                 }
 
-                if(pageNumber.HasValue && pageSize.HasValue)
+                if (pageNumber.HasValue && pageSize.HasValue)
                 {
                     Pagination pagination = new()
                     {
@@ -60,7 +69,7 @@ namespace AMSS.Controllers
                 _response.StatusCode = HttpStatusCode.OK;
                 return Ok(_response);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _response.IsSuccess = false;
                 _response.StatusCode = HttpStatusCode.BadRequest;
@@ -105,7 +114,7 @@ namespace AMSS.Controllers
 
         [HttpPost]
         [Authorize(Roles = nameof(Role.ADMIN))]
-        public async Task<ActionResult<APIResponse>> CreateFarm([FromForm]CreateFarmDto createFarmDto)
+        public async Task<ActionResult<APIResponse>> CreateFarm([FromForm] CreateFarmDto createFarmDto)
         {
             try
             {

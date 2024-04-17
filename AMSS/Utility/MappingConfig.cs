@@ -36,6 +36,7 @@ namespace AMSS.Utility
                 config.CreateMap<Crop, CreateCropDto>().ReverseMap();
 
                 // Polygon 
+                config.CreateMap<PolygonApp, PolygonDto>().ReverseMap();
                 config.CreateMap<PolygonApp, CreatePolygonDto>().ReverseMap();
             });
 

@@ -21,6 +21,11 @@ namespace AMSS.Data
         public DbSet<Crop> Crops { get; set; }
         public DbSet<CropType> CropTypes { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.EnableSensitiveDataLogging();
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
