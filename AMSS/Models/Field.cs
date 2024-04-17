@@ -22,6 +22,8 @@ namespace AMSS.Models
         [ValidateNever]
         public Farm Farm { get; set; }
 
+        public PolygonApp PolygonApp { get; set; }
+
         [Required]
         public int LocationId { get; set; }
 

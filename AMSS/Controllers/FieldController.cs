@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using AMSS.Repositories;
 
 namespace AMSS.Controllers
 {
@@ -15,11 +16,13 @@ namespace AMSS.Controllers
     public class FieldController : ControllerBase
     {
         private readonly IFieldRepository _fieldRepository;
+        private readonly IPositionRepository _positionRepository;
         protected APIResponse _response;
         private readonly IMapper _mapper;
-        public FieldController(IFieldRepository fieldRepository, IMapper mapper)
+        public FieldController(IFieldRepository fieldRepository, IPositionRepository positionRepository, IMapper mapper)
         {
             _fieldRepository = fieldRepository;
+            _positionRepository = positionRepository;
             _mapper = mapper;
             _response = new();
         }
@@ -29,8 +32,16 @@ namespace AMSS.Controllers
         {
             try
             {
-                List<Field> lstFields = await _fieldRepository.GetAllAsync(includeProperties: "Location");
+                List<Field> lstFields = await _fieldRepository.GetAllAsync(includeProperties: "Location,Polygon");
                 var lstFieldsDto = _mapper.Map<List<FieldDto>>(lstFields);
+
+                foreach (var f in lstFieldsDto)
+                {
+                    if (f.PolygonApp != null)
+                    {
+                        f.PolygonApp.Positions = await _positionRepository.GetAllAsync(u => u.PolygonAppId == f.PolygonApp.Id);
+                    }
+                }
 
                 if (!string.IsNullOrEmpty(searchString))
                 {
