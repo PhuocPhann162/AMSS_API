@@ -7,7 +7,7 @@ namespace AMSS.Models
 {
     public class Field
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
@@ -15,21 +15,19 @@ namespace AMSS.Models
         [Required]
         public double Area { get; set; }
 
-        [Required]
-        public int FarmId { get; set; }
-
+        public int? FarmId { get; set; }
         [ForeignKey("FarmId")]
-        [ValidateNever]
-        public Farm Farm { get; set; }
-
-        public PolygonApp PolygonApp { get; set; }
+        public virtual Farm Farm { get; set; }
 
         [Required]
         public int LocationId { get; set; }
-
         [NotMapped]
         [ForeignKey("LocationId")]
-        public Location Location { get; set; }
+        public virtual Location Location { get; set; }
+
+        [Required]
+        public int PolygonAppId { get; set; }
+        public virtual PolygonApp PolygonApp { get; set; }
 
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }

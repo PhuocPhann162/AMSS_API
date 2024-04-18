@@ -6,20 +6,15 @@ namespace AMSS.Models.Polygon
 {
     public class PolygonApp
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string? Color { get; set; }
+        public int? Type { get; set; }
 
-        public int? FarmId { get; set; }
-        [ForeignKey("FarmId")]
-        [ValidateNever]
-        public Farm Farm { get; set; }
+        public virtual Farm Farm { get; set; }
 
-        public int? FieldId { get; set; }
-        [ForeignKey("FieldId")]
-        [ValidateNever]
-        public Field Field { get; set; }
+        public virtual Field Field { get; set; }
 
-        public IEnumerable<Position> Positions { get; set; }
+        public virtual IEnumerable<Position> Positions { get; set; }
     }
 }

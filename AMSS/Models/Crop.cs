@@ -7,7 +7,7 @@ namespace AMSS.Models
 {
     public class Crop
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [StringLength(500)]
@@ -31,10 +31,9 @@ namespace AMSS.Models
 
         public int Quantity { get; set; }
 
-        [Required]
-        public int FieldId { get; set; }
+        public int? FieldCropId { get; set; }
 
-        [ForeignKey("FieldId")]
+        [ForeignKey("FieldCropId")]
         [ValidateNever]
         public Field Field { get; set; }
 

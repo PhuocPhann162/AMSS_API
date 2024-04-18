@@ -28,7 +28,7 @@ namespace AMSS.Utility
                 config.CreateMap<Farm, CreateFarmDto>().ReverseMap();
 
                 // Field
-                config.CreateMap<Field, Field>().ReverseMap();
+                config.CreateMap<Field, FieldDto>().ReverseMap();
                 config.CreateMap<Field, CreateFieldDto>().ReverseMap();
 
                 // Crop

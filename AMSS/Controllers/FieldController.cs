@@ -32,7 +32,7 @@ namespace AMSS.Controllers
         {
             try
             {
-                List<Field> lstFields = await _fieldRepository.GetAllAsync(includeProperties: "Location,Polygon");
+                List<Field> lstFields = await _fieldRepository.GetAllAsync(includeProperties: "PolygonApp");
                 var lstFieldsDto = _mapper.Map<List<FieldDto>>(lstFields);
 
                 foreach (var f in lstFieldsDto)

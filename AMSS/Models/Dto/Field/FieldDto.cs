@@ -15,10 +15,10 @@ namespace AMSS.Models.Dto.Field
         [Required]
         public double Area { get; set; }
 
-        [Required]
-        public int FarmId { get; set; }
-        [Required]  
-        public int LocationId { get; set; }
+        
+        public int? FarmId { get; set; }
+        public int? LocationId { get; set; }
+        public int? PolygonAppId { get; set; }
 
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }

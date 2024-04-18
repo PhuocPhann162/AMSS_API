@@ -50,43 +50,43 @@ namespace AMSS.Controllers
             }
         }
 
-        [HttpGet("getPolygonByFarmId/{id:int}")]
-        public async Task<ActionResult<APIResponse>> GetPolygonByFarmId(int farmId)
-        {
-            try
-            {
-                if (farmId == null || farmId == 0)
-                {
-                    _response.IsSuccess = false;
-                    _response.StatusCode = HttpStatusCode.NotFound;
-                    _response.ErrorMessages.Add("Something wrong when get polygon");
-                    return NotFound(_response);
-                }
-                PolygonApp polygon = await _polygonRepository.GetAsync(u => u.FarmId == farmId);
-                if (polygon == null)
-                {
-                    _response.IsSuccess = false;
-                    _response.StatusCode = HttpStatusCode.NotFound;
-                    _response.ErrorMessages.Add("Something wrong when get polygon");
-                    return NotFound(_response);
-                }
-                var polygonDto = _mapper.Map<PolygonDto>(polygon);
-                var lstPositions = await _positionRepository.GetAllAsync(u => u.PolygonAppId == polygon.Id);
-                polygonDto.Positions = lstPositions;
+        //[HttpGet("getPolygonByFarmId/{id:int}")]
+        //public async Task<ActionResult<APIResponse>> GetPolygonByFarmId(int farmId)
+        //{
+        //    try
+        //    {
+        //        if (farmId == null || farmId == 0)
+        //        {
+        //            _response.IsSuccess = false;
+        //            _response.StatusCode = HttpStatusCode.NotFound;
+        //            _response.ErrorMessages.Add("Something wrong when get polygon");
+        //            return NotFound(_response);
+        //        }
+        //        PolygonApp polygon = await _polygonRepository.GetAsync(u => u.FarmId == farmId);
+        //        if (polygon == null)
+        //        {
+        //            _response.IsSuccess = false;
+        //            _response.StatusCode = HttpStatusCode.NotFound;
+        //            _response.ErrorMessages.Add("Something wrong when get polygon");
+        //            return NotFound(_response);
+        //        }
+        //        var polygonDto = _mapper.Map<PolygonDto>(polygon);
+        //        var lstPositions = await _positionRepository.GetAllAsync(u => u.PolygonAppId == polygon.Id);
+        //        polygonDto.Positions = lstPositions;
 
-                _response.Result = polygonDto;
-                _response.SuccessMessage = "Get polygon successfully";
-                _response.StatusCode = HttpStatusCode.OK;
-                return Ok(_response);
-            }
-            catch (Exception ex)
-            {
-                _response.IsSuccess = false;
-                _response.StatusCode = HttpStatusCode.BadRequest;
-                _response.ErrorMessages.Add(ex.Message);
-                return StatusCode(StatusCodes.Status500InternalServerError, _response);
-            }
-        }
+        //        _response.Result = polygonDto;
+        //        _response.SuccessMessage = "Get polygon successfully";
+        //        _response.StatusCode = HttpStatusCode.OK;
+        //        return Ok(_response);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _response.IsSuccess = false;
+        //        _response.StatusCode = HttpStatusCode.BadRequest;
+        //        _response.ErrorMessages.Add(ex.Message);
+        //        return StatusCode(StatusCodes.Status500InternalServerError, _response);
+        //    }
+        //}
 
         [HttpPost]
         [Authorize(Roles = nameof(Role.ADMIN))]

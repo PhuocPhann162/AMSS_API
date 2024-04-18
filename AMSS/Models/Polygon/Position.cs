@@ -6,15 +6,13 @@ namespace AMSS.Models.Polygon
 {
     public class Position
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         
         public float Lat { get; set; }
         public float lng { get; set; }
 
-        [Required]
-        public int PolygonAppId { get; set; }
-
+        public int? PolygonAppId { get; set; }
         [ForeignKey("PolygonAppId")]
         [ValidateNever]
         public PolygonApp PolygonApp { get; set; }

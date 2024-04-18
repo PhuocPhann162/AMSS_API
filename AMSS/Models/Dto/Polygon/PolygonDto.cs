@@ -12,14 +12,10 @@ namespace AMSS.Models.Dto.Polygon
         [Key]
         public int Id { get; set; }
         public string? Color { get; set; }
+        public int? Type { get; set; }
 
-        [Required]
-        public int FarmId { get; set; }
-      
         public FarmDto Farm { get; set; }
-
-        [Required]
-        public int FieldId { get; set; }
+       
         public FieldDto Field { get; set; }
 
         public IEnumerable<Position> Positions { get; set; }
