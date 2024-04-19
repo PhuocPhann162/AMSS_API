@@ -15,7 +15,8 @@ namespace AMSS.Models.Dto.Field
         [Required]
         public double Area { get; set; }
 
-        
+        public string? Status { get; set; }
+
         public int? FarmId { get; set; }
         public int? LocationId { get; set; }
         public int? PolygonAppId { get; set; }

@@ -22,20 +22,19 @@ namespace AMSS.Models
 
         public DateTime ExpectedDate { get; set; }
 
-        [Required]
-        public int CropTypeId { get; set; }
-
-        [ForeignKey("CropTypeId")]
-        [ValidateNever]
-        public CropType CropType { get; set; }
 
         public int Quantity { get; set; }
 
-        public int? FieldCropId { get; set; }
-
-        [ForeignKey("FieldCropId")]
+        public int? FieldId { get; set; }
+        [ForeignKey("FieldId")]
         [ValidateNever]
-        public Field Field { get; set; }
+        public virtual Field Field { get; set; }
+
+
+        public int? CropTypeId { get; set; }
+        [ForeignKey("CropTypeId")]
+        [ValidateNever]
+        public virtual CropType CropType { get; set; }
 
         public DateTime? CreatedAt { get; set; }
 

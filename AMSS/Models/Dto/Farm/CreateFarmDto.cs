@@ -11,6 +11,8 @@ namespace AMSS.Models.Dto.Farm
         [Required]
         public int LocationId { get; set; }
 
+        public string? OwnerName { get; set; }
+
         [Required]
         public int PolygonAppId { get; set; }
 

@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using AMSS.Repositories;
+using System.Text.Json;
+using AMSS.Utility;
 
 namespace AMSS.Controllers
 {
@@ -32,7 +34,7 @@ namespace AMSS.Controllers
         {
             try
             {
-                List<Field> lstFields = await _fieldRepository.GetAllAsync(includeProperties: "PolygonApp");
+                List<Field> lstFields = await _fieldRepository.GetAllAsync(includeProperties: "PolygonApp,Farm");
                 var lstFieldsDto = _mapper.Map<List<FieldDto>>(lstFields);
 
                 foreach (var f in lstFieldsDto)
@@ -55,6 +57,7 @@ namespace AMSS.Controllers
                         PageSize = pageSize,
                         TotalRecords = lstFieldsDto.Count(),
                     };
+                    Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagination));
 
                     _response.Result = lstFieldsDto.Skip((int)((pageNumber - 1) * pageSize)).Take((int)pageSize);
                     _response.StatusCode = HttpStatusCode.OK;
@@ -116,6 +119,9 @@ namespace AMSS.Controllers
                 if (ModelState.IsValid)
                 {
                     var newField = _mapper.Map<Field>(createFieldDto);
+
+                    newField.Status = String.IsNullOrEmpty(newField.Status) ? SD.Status_Idle : newField.Status;
+
                     newField.CreatedAt = DateTime.Now;
                     newField.UpdatedAt = DateTime.Now;
 

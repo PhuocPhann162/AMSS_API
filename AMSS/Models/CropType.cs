@@ -11,5 +11,8 @@ namespace AMSS.Models
         public string Name { get; set; }
         [Required]
         public string Code { get; set; }
+
+        public virtual IEnumerable<Crop> Crops { get; set; }
+
     }
 }

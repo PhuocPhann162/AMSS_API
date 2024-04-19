@@ -1,4 +1,5 @@
-﻿using AMSS.Models.Polygon;
+﻿using AMSS.Models.Dto.Farm;
+using AMSS.Models.Polygon;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -15,9 +16,12 @@ namespace AMSS.Models
         [Required]
         public double Area { get; set; }
 
+        public string? Status { get; set; }
+
         public int? FarmId { get; set; }
         [ForeignKey("FarmId")]
         public virtual Farm Farm { get; set; }
+
 
         [Required]
         public int LocationId { get; set; }
@@ -28,6 +32,8 @@ namespace AMSS.Models
         [Required]
         public int PolygonAppId { get; set; }
         public virtual PolygonApp PolygonApp { get; set; }
+
+        public virtual IEnumerable<Crop> Crops { get; set; }
 
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }

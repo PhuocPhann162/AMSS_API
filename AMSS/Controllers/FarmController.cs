@@ -32,6 +32,7 @@ namespace AMSS.Controllers
         }
 
         [HttpGet("getAll")]
+        [Authorize(Roles = nameof(Role.ADMIN))]
         public async Task<ActionResult<APIResponse>> GetAllFarms(string? searchString, int? pageNumber, int? pageSize)
         {
             try

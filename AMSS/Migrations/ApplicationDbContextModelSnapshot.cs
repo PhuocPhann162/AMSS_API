@@ -134,7 +134,7 @@ namespace AMSS.Migrations
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CropTypeId")
+                    b.Property<int?>("CropTypeId")
                         .HasColumnType("int");
 
                     b.Property<double>("CultivatedArea")
@@ -143,7 +143,7 @@ namespace AMSS.Migrations
                     b.Property<DateTime>("ExpectedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("FieldCropId")
+                    b.Property<int?>("FieldId")
                         .HasColumnType("int");
 
                     b.Property<string>("Icon")
@@ -167,7 +167,7 @@ namespace AMSS.Migrations
 
                     b.HasIndex("CropTypeId");
 
-                    b.HasIndex("FieldCropId");
+                    b.HasIndex("FieldId");
 
                     b.ToTable("Crops");
                 });
@@ -214,6 +214,10 @@ namespace AMSS.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("OwnerName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("PolygonAppId")
                         .HasColumnType("int");
 
@@ -256,6 +260,9 @@ namespace AMSS.Migrations
 
                     b.Property<int>("PolygonAppId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -479,14 +486,12 @@ namespace AMSS.Migrations
             modelBuilder.Entity("AMSS.Models.Crop", b =>
                 {
                     b.HasOne("AMSS.Models.CropType", "CropType")
-                        .WithMany()
-                        .HasForeignKey("CropTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Crops")
+                        .HasForeignKey("CropTypeId");
 
                     b.HasOne("AMSS.Models.Field", "Field")
-                        .WithMany()
-                        .HasForeignKey("FieldCropId");
+                        .WithMany("Crops")
+                        .HasForeignKey("FieldId");
 
                     b.Navigation("CropType");
 
@@ -587,9 +592,19 @@ namespace AMSS.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("AMSS.Models.CropType", b =>
+                {
+                    b.Navigation("Crops");
+                });
+
             modelBuilder.Entity("AMSS.Models.Farm", b =>
                 {
                     b.Navigation("Fields");
+                });
+
+            modelBuilder.Entity("AMSS.Models.Field", b =>
+                {
+                    b.Navigation("Crops");
                 });
 
             modelBuilder.Entity("AMSS.Models.Polygon.PolygonApp", b =>

@@ -6,7 +6,11 @@ namespace AMSS.Models.Dto.Field
     {
         [Required]
         public string Name { get; set; }
+
         public double Area { get; set; }
+
+        public string? Status { get; set; }
+
         [Required]
         public int FarmId { get; set; }
         [Required]
