@@ -9,7 +9,6 @@ namespace AMSS.Data
     {
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
-
         }
 
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
@@ -29,6 +28,68 @@ namespace AMSS.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<CropType>().HasData(
+                new CropType
+                {
+                    Id = 1,
+                    Name = "Rice",
+                    Code = "RC",
+                },
+                new CropType
+                {
+                    Id = 2,
+                    Name = "Corn",
+                    Code = "CN",
+                },
+                new CropType
+                {
+                    Id = 3,
+                    Name = "Soybean",
+                    Code = "SB",
+                },
+                new CropType
+                {
+                    Id = 4,
+                    Name = "Sugarcane",
+                    Code = "SG",
+                },
+                new CropType
+                {
+                    Id = 5,
+                    Name = "Coffee",
+                    Code = "CF",
+                }
+            );
+
+            modelBuilder.Entity<Crop>().HasData(
+                 new Crop
+                 {
+                     Id = 1,
+                     Icon = "rice_icon.png",
+                     Name = "Long Grain Rice",
+                     CultivatedArea = 100.5,
+                     PlantedDate = new DateTime(2024, 4, 1),
+                     ExpectedDate = new DateTime(2024, 9, 1),
+                     Quantity = 500,
+                     CropTypeId = 1, 
+                     CreatedAt = DateTime.UtcNow,
+                     UpdatedAt = DateTime.UtcNow
+                 },
+                 new Crop
+                 {
+                     Id = 2,
+                     Icon = "corn_icon.png",
+                     Name = "Yellow Corn",
+                     CultivatedArea = 75.2,
+                     PlantedDate = new DateTime(2024, 4, 15),
+                     ExpectedDate = new DateTime(2024, 8, 15),
+                     Quantity = 300,
+                     CropTypeId = 2, 
+                     CreatedAt = DateTime.UtcNow,
+                     UpdatedAt = DateTime.UtcNow
+                 }
+            );
         }
     }
 }

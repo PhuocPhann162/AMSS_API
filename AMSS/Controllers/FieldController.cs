@@ -30,12 +30,12 @@ namespace AMSS.Controllers
         }
 
         [HttpGet("getAll")]
-        public async Task<ActionResult<APIResponse>> GetAllFields(string? searchString, int? pageNumber, int? pageSize)
+        public async Task<ActionResult<APIResponse>> GetAllFields(string? searchString, string? status, int? pageNumber, int? pageSize)
         {
             try
             {
-                List<Field> lstFields = await _fieldRepository.GetAllAsync(includeProperties: "PolygonApp,Farm");
-                var lstFieldsDto = _mapper.Map<List<FieldDto>>(lstFields);
+                IEnumerable<Field> lstFields = await _fieldRepository.GetAllAsync(includeProperties: "PolygonApp,Farm");
+                var lstFieldsDto = _mapper.Map<IEnumerable<FieldDto>>(lstFields);
 
                 foreach (var f in lstFieldsDto)
                 {
@@ -49,6 +49,12 @@ namespace AMSS.Controllers
                 {
                     lstFieldsDto = lstFieldsDto.Where(u => u.Name.ToLower().Contains(searchString.ToLower()) || u.Farm.Name.ToLower().Contains(searchString.ToLower())).ToList();
                 }
+
+                if (!string.IsNullOrEmpty(status))
+                {
+                    lstFieldsDto = lstFieldsDto.Where(u => u.Status.ToLower() == status.ToLower());
+                }
+
                 if (pageNumber.HasValue && pageSize.HasValue)
                 {
                     Pagination pagination = new()
