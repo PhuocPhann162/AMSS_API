@@ -12,7 +12,10 @@ namespace AMSS.Models
         [Required]
         public string Code { get; set; }
 
-        public virtual IEnumerable<Crop> Crops { get; set; }
+        public virtual ICollection<Crop> Crops { get; set; } 
+
+        public DateTime? CreatedAt{ get; set; }
+        public DateTime? UpdatedAt{ get; set; }
 
     }
 }

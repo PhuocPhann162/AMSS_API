@@ -13,5 +13,8 @@ namespace AMSS.Models.Dto.CropType
         public string Code { get; set; }
 
         public virtual IEnumerable<CropDto> Crops { get; set; }
+
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
     }
 }

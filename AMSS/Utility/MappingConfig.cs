@@ -1,5 +1,6 @@
 ﻿using AMSS.Models;
 using AMSS.Models.Dto.Crop;
+using AMSS.Models.Dto.CropType;
 using AMSS.Models.Dto.Farm;
 using AMSS.Models.Dto.Field;
 using AMSS.Models.Dto.Location;
@@ -34,6 +35,9 @@ namespace AMSS.Utility
                 // Crop
                 config.CreateMap<Crop, CropDto>().ReverseMap();
                 config.CreateMap<Crop, CreateCropDto>().ReverseMap();
+
+                // CropType
+                config.CreateMap<CropType, CropTypeDto>().ReverseMap();
 
                 // Polygon 
                 config.CreateMap<PolygonApp, PolygonDto>().ReverseMap();

@@ -15,6 +15,6 @@ namespace AMSS.Models.Polygon
 
         public virtual Field Field { get; set; }
 
-        public virtual IEnumerable<Position> Positions { get; set; }
+        public virtual ICollection<Position> Positions { get; set; }
     }
 }

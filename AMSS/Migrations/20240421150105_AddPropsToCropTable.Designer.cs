@@ -4,6 +4,7 @@ using AMSS.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AMSS.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240421150105_AddPropsToCropTable")]
+    partial class AddPropsToCropTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -169,7 +172,7 @@ namespace AMSS.Migrations
 
                     b.HasIndex("FieldId");
 
-                    b.ToTable("Crops", (string)null);
+                    b.ToTable("Crops");
 
                     b.HasData(
                         new
@@ -558,7 +561,7 @@ namespace AMSS.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CropTypes", (string)null);
+                    b.ToTable("CropTypes");
 
                     b.HasData(
                         new
@@ -709,7 +712,7 @@ namespace AMSS.Migrations
                     b.HasIndex("PolygonAppId")
                         .IsUnique();
 
-                    b.ToTable("Farms", (string)null);
+                    b.ToTable("Farms");
                 });
 
             modelBuilder.Entity("AMSS.Models.Field", b =>
@@ -752,7 +755,7 @@ namespace AMSS.Migrations
                     b.HasIndex("PolygonAppId")
                         .IsUnique();
 
-                    b.ToTable("Fields", (string)null);
+                    b.ToTable("Fields");
                 });
 
             modelBuilder.Entity("AMSS.Models.Location", b =>
@@ -782,7 +785,7 @@ namespace AMSS.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Locations", (string)null);
+                    b.ToTable("Locations");
                 });
 
             modelBuilder.Entity("AMSS.Models.Polygon.PolygonApp", b =>
@@ -801,7 +804,7 @@ namespace AMSS.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PolygonApps", (string)null);
+                    b.ToTable("PolygonApps");
                 });
 
             modelBuilder.Entity("AMSS.Models.Polygon.Position", b =>
@@ -825,7 +828,7 @@ namespace AMSS.Migrations
 
                     b.HasIndex("PolygonAppId");
 
-                    b.ToTable("Positions", (string)null);
+                    b.ToTable("Positions");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
