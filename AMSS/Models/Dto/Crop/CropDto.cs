@@ -16,6 +16,8 @@ namespace AMSS.Models.Dto.Crop
         [Required]
         public string Name { get; set; }
 
+        public string? Description { get; set; }
+
         public double CultivatedArea { get; set; }
 
         public DateTime PlantedDate { get; set; }

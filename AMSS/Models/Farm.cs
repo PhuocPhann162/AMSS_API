@@ -17,7 +17,7 @@ namespace AMSS.Models
         [Required]
         public double Area { get; set; }
 
-        public string OwnerName { get; set; }
+        public string? OwnerName { get; set; }
 
         public int? LocationId { get; set; }
         [ForeignKey("LocationId")]

@@ -9,12 +9,14 @@ namespace AMSS.Models
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-
+        
         [StringLength(500)]
         public string? Icon { get; set; }
 
         [Required]
         public string Name { get; set; }
+
+        public string? Description { get; set; }
 
         public double CultivatedArea { get; set; }
 
@@ -25,11 +27,10 @@ namespace AMSS.Models
 
         public int Quantity { get; set; }
 
-        public int? FieldId { get; set; }
+        public int? FieldId { get; set; }   
         [ForeignKey("FieldId")]
         [ValidateNever]
         public virtual Field Field { get; set; }
-
 
         public int? CropTypeId { get; set; }
         [ForeignKey("CropTypeId")]

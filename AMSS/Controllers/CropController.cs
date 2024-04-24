@@ -33,8 +33,8 @@ namespace AMSS.Controllers
         {
             try
             {
-                List<Crop> lstCrops = await _cropRepository.GetAllAsync(includeProperties: "CropType");
-                List<CropDto> lstCropDtos = _mapper.Map<List<CropDto>>(lstCrops);
+                IEnumerable<Crop> lstCrops = await _cropRepository.GetAllAsync(includeProperties: "CropType");
+                var lstCropDtos = _mapper.Map<IEnumerable<CropDto>>(lstCrops);
                 if (lstCrops == null)
                 {
                     _response.IsSuccess = false;

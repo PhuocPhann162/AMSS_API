@@ -157,7 +157,7 @@ namespace AMSS.Controllers
 
         [HttpPut("{id:int}")]
         [Authorize(Roles = nameof(Role.ADMIN))]
-        public async Task<ActionResult<APIResponse>> UpdateField(int id, [FromForm] FieldDto updateFieldDto)
+        public async Task<ActionResult<APIResponse>> UpdateField(int id, [FromBody] UpdateFieldDto updateFieldDto)
         {
             try
             {
@@ -180,7 +180,17 @@ namespace AMSS.Controllers
                         _response.ErrorMessages.Add("Not found this Field");
                         return NotFound(_response);
                     }
-                    fieldFromDb = _mapper.Map<Field>(updateFieldDto);
+
+                    if(!string.IsNullOrEmpty(updateFieldDto.Name))
+                    {
+                        fieldFromDb.Name = updateFieldDto.Name;
+                    }
+
+                    if (!string.IsNullOrEmpty(updateFieldDto.Status))
+                    {
+                        fieldFromDb.Status = updateFieldDto.Status;
+                    }
+
                     fieldFromDb.UpdatedAt = DateTime.Now;
 
                     await _fieldRepository.Update(fieldFromDb);

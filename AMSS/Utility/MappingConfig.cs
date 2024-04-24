@@ -31,6 +31,7 @@ namespace AMSS.Utility
                 // Field
                 config.CreateMap<Field, FieldDto>().ReverseMap();
                 config.CreateMap<Field, CreateFieldDto>().ReverseMap();
+                config.CreateMap<Field, UpdateFieldDto>().ReverseMap();
 
                 // Crop
                 config.CreateMap<Crop, CropDto>().ReverseMap();
