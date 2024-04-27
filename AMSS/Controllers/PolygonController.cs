@@ -130,5 +130,36 @@ namespace AMSS.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, _response);
             }
         }
+
+        [HttpPut]
+        [Authorize(Roles = nameof(Role.ADMIN))]
+        public async Task<ActionResult<APIResponse>> UpdatePolygon(UpdatePolygonDto updatePolygonDto)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    
+
+                    _response.StatusCode = HttpStatusCode.Created;
+                    _response.SuccessMessage = "Polygon created successfully";
+                    return Ok(_response);
+                }
+                else
+                {
+                    _response.IsSuccess = false;
+                    _response.StatusCode = HttpStatusCode.BadRequest;
+                    _response.ErrorMessages.Add("Something wrong when creating new Farm");
+                    return BadRequest(_response);
+                }
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages.Add(ex.Message);
+                _response.StatusCode = HttpStatusCode.BadRequest;
+                return StatusCode(StatusCodes.Status500InternalServerError, _response);
+            }
+        }
     }
 }

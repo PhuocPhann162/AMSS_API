@@ -22,11 +22,9 @@ namespace AMSS.Models
         [ForeignKey("FarmId")]
         public virtual Farm Farm { get; set; }
 
-
-        [Required]
-        public int LocationId { get; set; }
-        [NotMapped]
+        public int? LocationId { get; set; }
         [ForeignKey("LocationId")]
+        [ValidateNever]
         public virtual Location Location { get; set; }
 
         [Required]

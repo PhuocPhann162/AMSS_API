@@ -34,7 +34,7 @@ namespace AMSS.Controllers
         {
             try
             {
-                IEnumerable<Field> lstFields = await _fieldRepository.GetAllAsync(includeProperties: "PolygonApp,Farm");
+                IEnumerable<Field> lstFields = await _fieldRepository.GetAllAsync(includeProperties: "Location,PolygonApp,Farm");
                 var lstFieldsDto = _mapper.Map<IEnumerable<FieldDto>>(lstFields);
 
                 foreach (var f in lstFieldsDto)
@@ -94,15 +94,17 @@ namespace AMSS.Controllers
                     _response.StatusCode = HttpStatusCode.BadRequest;
                     return BadRequest(_response);
                 }
-                Field Field = await _fieldRepository.GetAsync(u => u.Id == id);
-                if (Field == null)
+                Field fieldFromDb = await _fieldRepository.GetAsync(u => u.Id == id, includeProperties: "PolygonApp");
+
+                fieldFromDb.PolygonApp.Positions = await _positionRepository.GetAllAsync(u => u.PolygonAppId == fieldFromDb.PolygonApp.Id);
+                if (fieldFromDb == null)
                 {
                     _response.IsSuccess = false;
                     _response.ErrorMessages.Add("Oops ! Something wrong when get crop by id");
                     _response.StatusCode = HttpStatusCode.NotFound;
                     return NotFound(_response);
                 }
-                FieldDto FieldDto = _mapper.Map<FieldDto>(Field);
+                FieldDto FieldDto = _mapper.Map<FieldDto>(fieldFromDb);
                 _response.Result = FieldDto;
                 _response.StatusCode = HttpStatusCode.OK;
                 return Ok(_response);
@@ -118,7 +120,7 @@ namespace AMSS.Controllers
 
         [HttpPost]
         [Authorize(Roles = nameof(Role.ADMIN))]
-        public async Task<ActionResult<APIResponse>> CreateField([FromForm]CreateFieldDto createFieldDto)
+        public async Task<ActionResult<APIResponse>> CreateField([FromForm] CreateFieldDto createFieldDto)
         {
             try
             {
@@ -181,7 +183,7 @@ namespace AMSS.Controllers
                         return NotFound(_response);
                     }
 
-                    if(!string.IsNullOrEmpty(updateFieldDto.Name))
+                    if (!string.IsNullOrEmpty(updateFieldDto.Name))
                     {
                         fieldFromDb.Name = updateFieldDto.Name;
                     }

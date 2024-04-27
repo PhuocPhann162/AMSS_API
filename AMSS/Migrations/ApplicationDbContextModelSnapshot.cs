@@ -181,11 +181,11 @@ namespace AMSS.Migrations
                             CropTypeId = 1,
                             CultivatedArea = 891.0,
                             Description = "High-yielding rice variety suitable for wetland cultivation.",
-                            ExpectedDate = new DateTime(2024, 7, 21, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6380),
+                            ExpectedDate = new DateTime(2024, 7, 25, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9275),
                             FieldId = 7,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Rice.jpg",
                             Name = "Rice Crop 1",
-                            PlantedDate = new DateTime(2024, 3, 23, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6361),
+                            PlantedDate = new DateTime(2024, 3, 27, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9254),
                             Quantity = 500
                         },
                         new
@@ -194,11 +194,11 @@ namespace AMSS.Migrations
                             CropTypeId = 1,
                             CultivatedArea = 900.20000000000005,
                             Description = "High-yielding rice variety suitable for wetland cultivation.",
-                            ExpectedDate = new DateTime(2024, 7, 26, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6385),
+                            ExpectedDate = new DateTime(2024, 7, 30, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9278),
                             FieldId = 3,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Rice.jpg",
                             Name = "Rice Crop 2",
-                            PlantedDate = new DateTime(2024, 3, 8, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6384),
+                            PlantedDate = new DateTime(2024, 3, 12, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9278),
                             Quantity = 400
                         },
                         new
@@ -207,11 +207,11 @@ namespace AMSS.Migrations
                             CropTypeId = 2,
                             CultivatedArea = 667.70000000000005,
                             Description = "Maize crop known for its versatility and use in various food products.",
-                            ExpectedDate = new DateTime(2024, 7, 31, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6388),
+                            ExpectedDate = new DateTime(2024, 8, 4, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9281),
                             FieldId = 5,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Corn.jpg",
                             Name = "Corn Crop 1",
-                            PlantedDate = new DateTime(2024, 4, 2, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6387),
+                            PlantedDate = new DateTime(2024, 4, 6, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9281),
                             Quantity = 700
                         },
                         new
@@ -220,11 +220,11 @@ namespace AMSS.Migrations
                             CropTypeId = 2,
                             CultivatedArea = 292.30000000000001,
                             Description = "Maize crop known for its versatility and use in various food products.",
-                            ExpectedDate = new DateTime(2024, 8, 5, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6391),
+                            ExpectedDate = new DateTime(2024, 8, 9, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9284),
                             FieldId = 6,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Corn.jpg",
                             Name = "Corn Crop 2",
-                            PlantedDate = new DateTime(2024, 3, 18, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6390),
+                            PlantedDate = new DateTime(2024, 3, 22, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9283),
                             Quantity = 600
                         },
                         new
@@ -233,11 +233,11 @@ namespace AMSS.Migrations
                             CropTypeId = 5,
                             CultivatedArea = 729.39999999999998,
                             Description = "Starchy tuberous crop widely consumed as a staple food.",
-                            ExpectedDate = new DateTime(2024, 8, 30, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6393),
+                            ExpectedDate = new DateTime(2024, 9, 3, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9287),
                             FieldId = 3,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Potato.jpg",
                             Name = "Potato Crop 1",
-                            PlantedDate = new DateTime(2024, 4, 12, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6393),
+                            PlantedDate = new DateTime(2024, 4, 16, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9286),
                             Quantity = 1000
                         },
                         new
@@ -246,11 +246,11 @@ namespace AMSS.Migrations
                             CropTypeId = 5,
                             CultivatedArea = 834.0,
                             Description = "Starchy tuberous crop widely consumed as a staple food.",
-                            ExpectedDate = new DateTime(2024, 9, 4, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6396),
+                            ExpectedDate = new DateTime(2024, 9, 8, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9289),
                             FieldId = 6,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Potato.jpg",
                             Name = "Potato Crop 2",
-                            PlantedDate = new DateTime(2024, 3, 28, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6396),
+                            PlantedDate = new DateTime(2024, 4, 1, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9289),
                             Quantity = 900
                         },
                         new
@@ -259,11 +259,11 @@ namespace AMSS.Migrations
                             CropTypeId = 6,
                             CultivatedArea = 662.39999999999998,
                             Description = "Versatile crop used in various culinary dishes and sauces, rich in vitamins and minerals.",
-                            ExpectedDate = new DateTime(2024, 9, 9, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6399),
+                            ExpectedDate = new DateTime(2024, 9, 13, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9292),
                             FieldId = 5,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Tomato.jpg",
                             Name = "Tomato Crop 1",
-                            PlantedDate = new DateTime(2024, 4, 17, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6398),
+                            PlantedDate = new DateTime(2024, 4, 21, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9291),
                             Quantity = 1100
                         },
                         new
@@ -272,11 +272,11 @@ namespace AMSS.Migrations
                             CropTypeId = 6,
                             CultivatedArea = 389.0,
                             Description = "Versatile crop used in various culinary dishes and sauces, rich in vitamins and minerals.",
-                            ExpectedDate = new DateTime(2024, 9, 14, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6402),
+                            ExpectedDate = new DateTime(2024, 9, 18, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9294),
                             FieldId = 6,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Tomato.jpg",
                             Name = "Tomato Crop 2",
-                            PlantedDate = new DateTime(2024, 4, 2, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6401),
+                            PlantedDate = new DateTime(2024, 4, 6, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9294),
                             Quantity = 1000
                         },
                         new
@@ -285,11 +285,11 @@ namespace AMSS.Migrations
                             CropTypeId = 7,
                             CultivatedArea = 732.10000000000002,
                             Description = "Popular fruit crop known for its crisp texture and sweet flavor, cultivated in orchards worldwide.",
-                            ExpectedDate = new DateTime(2024, 9, 19, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6404),
+                            ExpectedDate = new DateTime(2024, 9, 23, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9297),
                             FieldId = 3,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Apple.jpg",
                             Name = "Apple Crop 1",
-                            PlantedDate = new DateTime(2024, 4, 27, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6404),
+                            PlantedDate = new DateTime(2024, 5, 1, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9296),
                             Quantity = 1200
                         },
                         new
@@ -298,11 +298,11 @@ namespace AMSS.Migrations
                             CropTypeId = 7,
                             CultivatedArea = 424.60000000000002,
                             Description = "Popular fruit crop known for its crisp texture and sweet flavor, cultivated in orchards worldwide.",
-                            ExpectedDate = new DateTime(2024, 9, 24, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6407),
+                            ExpectedDate = new DateTime(2024, 9, 28, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9300),
                             FieldId = 7,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Apple.jpg",
                             Name = "Apple Crop 2",
-                            PlantedDate = new DateTime(2024, 4, 12, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6406),
+                            PlantedDate = new DateTime(2024, 4, 16, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9299),
                             Quantity = 1100
                         },
                         new
@@ -311,11 +311,11 @@ namespace AMSS.Migrations
                             CropTypeId = 8,
                             CultivatedArea = 293.39999999999998,
                             Description = "Tropical fruit crop with high nutritional value, grown in warm climates and consumed worldwide.",
-                            ExpectedDate = new DateTime(2024, 9, 29, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6410),
+                            ExpectedDate = new DateTime(2024, 10, 3, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9302),
                             FieldId = 5,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Banana.jpg",
                             Name = "Banana Crop 1",
-                            PlantedDate = new DateTime(2024, 5, 2, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6409),
+                            PlantedDate = new DateTime(2024, 5, 6, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9302),
                             Quantity = 1300
                         },
                         new
@@ -324,11 +324,11 @@ namespace AMSS.Migrations
                             CropTypeId = 8,
                             CultivatedArea = 444.5,
                             Description = "Tropical fruit crop with high nutritional value, grown in warm climates and consumed worldwide.",
-                            ExpectedDate = new DateTime(2024, 10, 4, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6412),
+                            ExpectedDate = new DateTime(2024, 10, 8, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9305),
                             FieldId = 3,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Banana.jpg",
                             Name = "Banana Crop 2",
-                            PlantedDate = new DateTime(2024, 4, 17, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6412),
+                            PlantedDate = new DateTime(2024, 4, 21, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9304),
                             Quantity = 1200
                         },
                         new
@@ -337,11 +337,11 @@ namespace AMSS.Migrations
                             CropTypeId = 9,
                             CultivatedArea = 920.10000000000002,
                             Description = "Citrus fruit crop prized for its tangy flavor and high vitamin C content, cultivated in orchards.",
-                            ExpectedDate = new DateTime(2024, 10, 9, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6415),
+                            ExpectedDate = new DateTime(2024, 10, 13, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9308),
                             FieldId = 6,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Orange.jpg",
                             Name = "Orange Crop 1",
-                            PlantedDate = new DateTime(2024, 5, 7, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6414),
+                            PlantedDate = new DateTime(2024, 5, 11, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9307),
                             Quantity = 1400
                         },
                         new
@@ -350,11 +350,11 @@ namespace AMSS.Migrations
                             CropTypeId = 9,
                             CultivatedArea = 349.5,
                             Description = "Citrus fruit crop prized for its tangy flavor and high vitamin C content, cultivated in orchards.",
-                            ExpectedDate = new DateTime(2024, 10, 14, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6418),
+                            ExpectedDate = new DateTime(2024, 10, 18, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9311),
                             FieldId = 7,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Orange.jpg",
                             Name = "Orange Crop 2",
-                            PlantedDate = new DateTime(2024, 4, 22, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6417),
+                            PlantedDate = new DateTime(2024, 4, 26, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9310),
                             Quantity = 1300
                         },
                         new
@@ -363,11 +363,11 @@ namespace AMSS.Migrations
                             CropTypeId = 10,
                             CultivatedArea = 542.0,
                             Description = "Fruit crop grown in vineyards, used for making wine, juices, and various culinary products.",
-                            ExpectedDate = new DateTime(2024, 10, 19, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6421),
+                            ExpectedDate = new DateTime(2024, 10, 23, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9313),
                             FieldId = 5,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Grape.jpg",
                             Name = "Grapes Crop 1",
-                            PlantedDate = new DateTime(2024, 5, 12, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6420),
+                            PlantedDate = new DateTime(2024, 5, 16, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9313),
                             Quantity = 1500
                         },
                         new
@@ -376,11 +376,11 @@ namespace AMSS.Migrations
                             CropTypeId = 10,
                             CultivatedArea = 1300.3,
                             Description = "Fruit crop grown in vineyards, used for making wine, juices, and various culinary products.",
-                            ExpectedDate = new DateTime(2024, 10, 24, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6424),
+                            ExpectedDate = new DateTime(2024, 10, 28, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9317),
                             FieldId = 6,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Grape.jpg",
                             Name = "Grapes Crop 2",
-                            PlantedDate = new DateTime(2024, 4, 27, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6423),
+                            PlantedDate = new DateTime(2024, 5, 1, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9316),
                             Quantity = 1400
                         },
                         new
@@ -389,11 +389,11 @@ namespace AMSS.Migrations
                             CropTypeId = 11,
                             CultivatedArea = 1250.5999999999999,
                             Description = "Tropical fruit crop known for its sweet and tangy flavor, grown in tropical regions worldwide.",
-                            ExpectedDate = new DateTime(2024, 10, 29, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6427),
+                            ExpectedDate = new DateTime(2024, 11, 2, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9320),
                             FieldId = 3,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Pineapple.jpg",
                             Name = "Pineapple Crop 1",
-                            PlantedDate = new DateTime(2024, 5, 17, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6426),
+                            PlantedDate = new DateTime(2024, 5, 21, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9319),
                             Quantity = 1600
                         },
                         new
@@ -402,11 +402,11 @@ namespace AMSS.Migrations
                             CropTypeId = 11,
                             CultivatedArea = 1332.5999999999999,
                             Description = "Tropical fruit crop known for its sweet and tangy flavor, grown in tropical regions worldwide.",
-                            ExpectedDate = new DateTime(2024, 11, 3, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6429),
+                            ExpectedDate = new DateTime(2024, 11, 7, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9322),
                             FieldId = 6,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Pineapple.jpg",
                             Name = "Pineapple Crop 2",
-                            PlantedDate = new DateTime(2024, 5, 2, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6428),
+                            PlantedDate = new DateTime(2024, 5, 6, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9322),
                             Quantity = 1500
                         },
                         new
@@ -415,11 +415,11 @@ namespace AMSS.Migrations
                             CropTypeId = 12,
                             CultivatedArea = 1330.5,
                             Description = "Small fruit crop with a sweet flavor, often grown in gardens and commercial fields for fresh consumption.",
-                            ExpectedDate = new DateTime(2024, 11, 8, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6432),
+                            ExpectedDate = new DateTime(2024, 11, 12, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9325),
                             FieldId = 5,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Strawberry.jpg",
                             Name = "Strawberry Crop 1",
-                            PlantedDate = new DateTime(2024, 5, 22, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6431),
+                            PlantedDate = new DateTime(2024, 5, 26, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9324),
                             Quantity = 1700
                         },
                         new
@@ -428,11 +428,11 @@ namespace AMSS.Migrations
                             CropTypeId = 12,
                             CultivatedArea = 1232.7,
                             Description = "Small fruit crop with a sweet flavor, often grown in gardens and commercial fields for fresh consumption.",
-                            ExpectedDate = new DateTime(2024, 11, 13, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6435),
+                            ExpectedDate = new DateTime(2024, 11, 17, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9327),
                             FieldId = 7,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Strawberry.jpg",
                             Name = "Strawberry Crop 2",
-                            PlantedDate = new DateTime(2024, 5, 7, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6435),
+                            PlantedDate = new DateTime(2024, 5, 11, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9327),
                             Quantity = 1600
                         },
                         new
@@ -441,11 +441,11 @@ namespace AMSS.Migrations
                             CropTypeId = 13,
                             CultivatedArea = 756.39999999999998,
                             Description = "Caffeinated beverage crop cultivated in tropical regions, harvested for its seeds (coffee beans).",
-                            ExpectedDate = new DateTime(2024, 11, 18, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6439),
+                            ExpectedDate = new DateTime(2024, 11, 22, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9330),
                             FieldId = 5,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Coffee.jpg",
                             Name = "Coffee Crop 1",
-                            PlantedDate = new DateTime(2024, 5, 27, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6439),
+                            PlantedDate = new DateTime(2024, 5, 31, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9329),
                             Quantity = 1800
                         },
                         new
@@ -454,11 +454,11 @@ namespace AMSS.Migrations
                             CropTypeId = 13,
                             CultivatedArea = 842.10000000000002,
                             Description = "Caffeinated beverage crop cultivated in tropical regions, harvested for its seeds (coffee beans).",
-                            ExpectedDate = new DateTime(2024, 11, 23, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6442),
+                            ExpectedDate = new DateTime(2024, 11, 27, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9332),
                             FieldId = 3,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Coffee.jpg",
                             Name = "Coffee Crop 2",
-                            PlantedDate = new DateTime(2024, 5, 12, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6441),
+                            PlantedDate = new DateTime(2024, 5, 16, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9332),
                             Quantity = 1700
                         },
                         new
@@ -467,11 +467,11 @@ namespace AMSS.Migrations
                             CropTypeId = 15,
                             CultivatedArea = 542.29999999999995,
                             Description = "Bean crop used in chocolate production, cultivated in tropical regions within 20 degrees of the equator.",
-                            ExpectedDate = new DateTime(2024, 12, 8, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6444),
+                            ExpectedDate = new DateTime(2024, 12, 12, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9335),
                             FieldId = 6,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Cocoa.jpg",
                             Name = "Cocoa Crop 1",
-                            PlantedDate = new DateTime(2024, 6, 6, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6444),
+                            PlantedDate = new DateTime(2024, 6, 10, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9334),
                             Quantity = 2000
                         },
                         new
@@ -480,11 +480,11 @@ namespace AMSS.Migrations
                             CropTypeId = 15,
                             CultivatedArea = 638.60000000000002,
                             Description = "Bean crop used in chocolate production, cultivated in tropical regions within 20 degrees of the equator.",
-                            ExpectedDate = new DateTime(2024, 12, 13, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6447),
+                            ExpectedDate = new DateTime(2024, 12, 17, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9337),
                             FieldId = 5,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Cocoa.jpg",
                             Name = "Cocoa Crop 2",
-                            PlantedDate = new DateTime(2024, 5, 22, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6447),
+                            PlantedDate = new DateTime(2024, 5, 26, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9337),
                             Quantity = 1900
                         },
                         new
@@ -493,11 +493,11 @@ namespace AMSS.Migrations
                             CropTypeId = 16,
                             CultivatedArea = 447.69999999999999,
                             Description = "Legume crop grown for its edible seeds, rich in protein and healthy fats, cultivated in sandy soils.",
-                            ExpectedDate = new DateTime(2024, 12, 18, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6450),
+                            ExpectedDate = new DateTime(2024, 12, 22, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9344),
                             FieldId = 7,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Peanut.jpg",
                             Name = "Peanut Crop 1",
-                            PlantedDate = new DateTime(2024, 6, 11, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6449),
+                            PlantedDate = new DateTime(2024, 6, 15, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9343),
                             Quantity = 2100
                         },
                         new
@@ -506,11 +506,11 @@ namespace AMSS.Migrations
                             CropTypeId = 16,
                             CultivatedArea = 1140.4000000000001,
                             Description = "Legume crop grown for its edible seeds, rich in protein and healthy fats, cultivated in sandy soils.",
-                            ExpectedDate = new DateTime(2024, 12, 23, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6453),
+                            ExpectedDate = new DateTime(2024, 12, 27, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9347),
                             FieldId = 5,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Peanut.jpg",
                             Name = "Peanut Crop 2",
-                            PlantedDate = new DateTime(2024, 5, 27, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6452),
+                            PlantedDate = new DateTime(2024, 5, 31, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9346),
                             Quantity = 2000
                         },
                         new
@@ -519,11 +519,11 @@ namespace AMSS.Migrations
                             CropTypeId = 17,
                             CultivatedArea = 346.89999999999998,
                             Description = "Root vegetable crop known for its bright orange color and high beta-carotene content, grown in cool climates.",
-                            ExpectedDate = new DateTime(2024, 12, 28, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6455),
+                            ExpectedDate = new DateTime(2025, 1, 1, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9349),
                             FieldId = 6,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Carrot.jpg",
                             Name = "Carrot Crop 1",
-                            PlantedDate = new DateTime(2024, 6, 16, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6455),
+                            PlantedDate = new DateTime(2024, 6, 20, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9348),
                             Quantity = 2200
                         },
                         new
@@ -532,11 +532,11 @@ namespace AMSS.Migrations
                             CropTypeId = 17,
                             CultivatedArea = 342.60000000000002,
                             Description = "Root vegetable crop known for its bright orange color and high beta-carotene content, grown in cool climates.",
-                            ExpectedDate = new DateTime(2025, 1, 2, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6482),
+                            ExpectedDate = new DateTime(2025, 1, 6, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9352),
                             FieldId = 3,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Carrot.jpg",
                             Name = "Carrot Crop 2",
-                            PlantedDate = new DateTime(2024, 6, 1, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6481),
+                            PlantedDate = new DateTime(2024, 6, 5, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9351),
                             Quantity = 2100
                         },
                         new
@@ -545,11 +545,11 @@ namespace AMSS.Migrations
                             CropTypeId = 18,
                             CultivatedArea = 748.10000000000002,
                             Description = "Nutrient-rich vegetable crop belonging to the brassica family, known for its green flowering heads.",
-                            ExpectedDate = new DateTime(2025, 1, 7, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6485),
+                            ExpectedDate = new DateTime(2025, 1, 11, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9354),
                             FieldId = 7,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Brocolli.jpg",
                             Name = "Broccoli Crop 1",
-                            PlantedDate = new DateTime(2024, 6, 21, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6484),
+                            PlantedDate = new DateTime(2024, 6, 25, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9353),
                             Quantity = 2300
                         },
                         new
@@ -558,11 +558,11 @@ namespace AMSS.Migrations
                             CropTypeId = 18,
                             CultivatedArea = 844.0,
                             Description = "Nutrient-rich vegetable crop belonging to the brassica family, known for its green flowering heads.",
-                            ExpectedDate = new DateTime(2025, 1, 12, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6487),
+                            ExpectedDate = new DateTime(2025, 1, 16, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9357),
                             FieldId = 5,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Brocolli.jpg",
                             Name = "Broccoli Crop 2",
-                            PlantedDate = new DateTime(2024, 6, 6, 22, 14, 17, 667, DateTimeKind.Local).AddTicks(6487),
+                            PlantedDate = new DateTime(2024, 6, 10, 8, 36, 51, 999, DateTimeKind.Local).AddTicks(9356),
                             Quantity = 2200
                         });
                 });
@@ -726,7 +726,6 @@ namespace AMSS.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OwnerName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PolygonAppId")
@@ -762,7 +761,7 @@ namespace AMSS.Migrations
                     b.Property<int?>("FarmId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LocationId")
+                    b.Property<int?>("LocationId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -781,6 +780,8 @@ namespace AMSS.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("FarmId");
+
+                    b.HasIndex("LocationId");
 
                     b.HasIndex("PolygonAppId")
                         .IsUnique();
@@ -1032,6 +1033,10 @@ namespace AMSS.Migrations
                         .WithMany("Fields")
                         .HasForeignKey("FarmId");
 
+                    b.HasOne("AMSS.Models.Location", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId");
+
                     b.HasOne("AMSS.Models.Polygon.PolygonApp", "PolygonApp")
                         .WithOne("Field")
                         .HasForeignKey("AMSS.Models.Field", "PolygonAppId")
@@ -1039,6 +1044,8 @@ namespace AMSS.Migrations
                         .IsRequired();
 
                     b.Navigation("Farm");
+
+                    b.Navigation("Location");
 
                     b.Navigation("PolygonApp");
                 });
