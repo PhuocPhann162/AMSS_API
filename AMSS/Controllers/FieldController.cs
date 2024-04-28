@@ -10,6 +10,7 @@ using System.Net;
 using AMSS.Repositories;
 using System.Text.Json;
 using AMSS.Utility;
+using Azure.Core.GeoJson;
 
 namespace AMSS.Controllers
 {
@@ -19,6 +20,7 @@ namespace AMSS.Controllers
     {
         private readonly IFieldRepository _fieldRepository;
         private readonly IPositionRepository _positionRepository;
+        private readonly ILocationRepository _locationRepository;
         protected APIResponse _response;
         private readonly IMapper _mapper;
         public FieldController(IFieldRepository fieldRepository, IPositionRepository positionRepository, IMapper mapper)
@@ -173,7 +175,7 @@ namespace AMSS.Controllers
                         return BadRequest();
                     }
 
-                    Field fieldFromDb = await _fieldRepository.GetAsync(u => u.Id == id, false);
+                    Field fieldFromDb = await _fieldRepository.GetAsync(u => u.Id == id, includeProperties: "Location,PolygonApp");
 
                     if (fieldFromDb == null)
                     {
@@ -183,6 +185,39 @@ namespace AMSS.Controllers
                         return NotFound(_response);
                     }
 
+
+                    // Update Position for Polygon
+                    int noPositions = fieldFromDb.PolygonApp.Positions.Count();
+
+                    if (updateFieldDto.Positions != null)
+                    {
+                        var updatePositions = updateFieldDto.Positions.ToList(); 
+
+                        for (int i = 0; i < noPositions; i++) 
+                        {
+                            var posFromDb = fieldFromDb.PolygonApp.Positions.ToList()[i];
+                            posFromDb.Lat = updatePositions[i].Lat;
+                            posFromDb.lng = updatePositions[i].lng;
+                            _positionRepository.Update(posFromDb);
+                        }
+
+                        if (noPositions < updateFieldDto.Positions.Count())
+                        {
+                            for (int i = noPositions; i < updateFieldDto.Positions.Count(); i++)
+                            {
+                                updatePositions[i].PolygonAppId = fieldFromDb.PolygonAppId;
+                                updatePositions[i].PolygonApp = fieldFromDb.PolygonApp;
+                                _positionRepository.CreateAsync(updatePositions[i]);
+                            }
+                        }
+                    }
+
+                    // Update Field Location
+                    var location = _mapper.Map<Location>(updateFieldDto.Location);
+                    await _locationRepository.Update(location);
+
+
+                    // Update Field Props
                     if (!string.IsNullOrEmpty(updateFieldDto.Name))
                     {
                         fieldFromDb.Name = updateFieldDto.Name;
@@ -191,6 +226,11 @@ namespace AMSS.Controllers
                     if (!string.IsNullOrEmpty(updateFieldDto.Status))
                     {
                         fieldFromDb.Status = updateFieldDto.Status;
+                    }
+
+                    if (updateFieldDto.Area.HasValue)
+                    {
+                        fieldFromDb.Area = updateFieldDto.Area ?? fieldFromDb.Area;
                     }
 
                     fieldFromDb.UpdatedAt = DateTime.Now;
