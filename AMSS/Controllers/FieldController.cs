@@ -11,6 +11,7 @@ using AMSS.Repositories;
 using System.Text.Json;
 using AMSS.Utility;
 using Azure.Core.GeoJson;
+using AMSS.Models.Polygon;
 
 namespace AMSS.Controllers
 {
@@ -23,10 +24,11 @@ namespace AMSS.Controllers
         private readonly ILocationRepository _locationRepository;
         protected APIResponse _response;
         private readonly IMapper _mapper;
-        public FieldController(IFieldRepository fieldRepository, IPositionRepository positionRepository, IMapper mapper)
+        public FieldController(IFieldRepository fieldRepository, IPositionRepository positionRepository, ILocationRepository locationRepository, IMapper mapper)
         {
             _fieldRepository = fieldRepository;
             _positionRepository = positionRepository;
+            _locationRepository = locationRepository;
             _mapper = mapper;
             _response = new();
         }
@@ -176,7 +178,7 @@ namespace AMSS.Controllers
                     }
 
                     Field fieldFromDb = await _fieldRepository.GetAsync(u => u.Id == id, includeProperties: "Location,PolygonApp");
-
+                    List<Position> lstPositionsFromDb = await _positionRepository.GetAllAsync(u => u.PolygonAppId == fieldFromDb.PolygonAppId);
                     if (fieldFromDb == null)
                     {
                         _response.IsSuccess = false;
@@ -187,15 +189,15 @@ namespace AMSS.Controllers
 
 
                     // Update Position for Polygon
-                    int noPositions = fieldFromDb.PolygonApp.Positions.Count();
 
                     if (updateFieldDto.Positions != null)
                     {
+                        int noPositions = lstPositionsFromDb.Count();
                         var updatePositions = updateFieldDto.Positions.ToList(); 
 
                         for (int i = 0; i < noPositions; i++) 
                         {
-                            var posFromDb = fieldFromDb.PolygonApp.Positions.ToList()[i];
+                            var posFromDb = lstPositionsFromDb[i];
                             posFromDb.Lat = updatePositions[i].Lat;
                             posFromDb.lng = updatePositions[i].lng;
                             _positionRepository.Update(posFromDb);
@@ -210,12 +212,17 @@ namespace AMSS.Controllers
                                 _positionRepository.CreateAsync(updatePositions[i]);
                             }
                         }
+
+                        await _positionRepository.SaveAsync();
                     }
 
-                    // Update Field Location
-                    var location = _mapper.Map<Location>(updateFieldDto.Location);
-                    await _locationRepository.Update(location);
-
+                    if(updateFieldDto.Location != null)
+                    {
+                        // Update Field Location
+                        var locationFromDb = await _locationRepository.GetAsync(u => u.Id == fieldFromDb.LocationId);
+                        locationFromDb = _mapper.Map<Location>(updateFieldDto.Location);
+                        await _locationRepository.Update(fieldFromDb.Location);
+                    }
 
                     // Update Field Props
                     if (!string.IsNullOrEmpty(updateFieldDto.Name))
