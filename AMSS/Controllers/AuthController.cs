@@ -185,7 +185,6 @@ namespace AMSS.Controllers
             }
         }
 
-        [Authorize]
         [HttpPost("refreshToken")]
         public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenRequestDto tokenRequestDto)
         {

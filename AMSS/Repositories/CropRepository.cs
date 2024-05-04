@@ -1,6 +1,7 @@
 ﻿using AMSS.Data;
 using AMSS.Models;
 using AMSS.Repositories.IRepository;
+using AutoMapper;
 
 namespace AMSS.Repositories
 {

@@ -17,6 +17,7 @@ namespace AMSS.Controllers
 {
     [Route("api/field")]
     [ApiController]
+    [Authorize]
     public class FieldController : ControllerBase
     {
         private readonly IFieldRepository _fieldRepository;
@@ -34,6 +35,7 @@ namespace AMSS.Controllers
         }
 
         [HttpGet("getAll")]
+        [Authorize(Roles = nameof(Role.ADMIN))]
         public async Task<ActionResult<APIResponse>> GetAllFields(string? searchString, string? status, int? pageNumber, int? pageSize)
         {
             try
@@ -87,6 +89,7 @@ namespace AMSS.Controllers
         }
 
         [HttpGet("getFieldById/{id:int}")]
+        [Authorize(Roles = nameof(Role.ADMIN))]
         public async Task<ActionResult<APIResponse>> GetFieldById(int id)
         {
             try
@@ -98,9 +101,7 @@ namespace AMSS.Controllers
                     _response.StatusCode = HttpStatusCode.BadRequest;
                     return BadRequest(_response);
                 }
-                Field fieldFromDb = await _fieldRepository.GetAsync(u => u.Id == id, includeProperties: "PolygonApp");
-
-                fieldFromDb.PolygonApp.Positions = await _positionRepository.GetAllAsync(u => u.PolygonAppId == fieldFromDb.PolygonApp.Id);
+                Field fieldFromDb = await _fieldRepository.GetAsync(u => u.Id == id, includeProperties: "Location,PolygonApp,Farm");
                 if (fieldFromDb == null)
                 {
                     _response.IsSuccess = false;
@@ -108,6 +109,7 @@ namespace AMSS.Controllers
                     _response.StatusCode = HttpStatusCode.NotFound;
                     return NotFound(_response);
                 }
+                fieldFromDb.PolygonApp.Positions = await _positionRepository.GetAllAsync(u => u.PolygonAppId == fieldFromDb.PolygonApp.Id);
                 FieldDto FieldDto = _mapper.Map<FieldDto>(fieldFromDb);
                 _response.Result = FieldDto;
                 _response.StatusCode = HttpStatusCode.OK;

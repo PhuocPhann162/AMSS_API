@@ -17,6 +17,7 @@ namespace AMSS.Controllers
 {
     [Route("api/farm")]
     [ApiController]
+    [Authorize]
     public class FarmController : ControllerBase
     {
         private readonly IFarmRepository _farmRepository;
