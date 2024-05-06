@@ -10,7 +10,7 @@ namespace AMSS.Models.Dto.Polygon
     {
         public string? Color { get; set; }
 
-        public int? Type { get; set; } 
+        public int? Type { get; set; }
 
         public IEnumerable<Position> Positions { get; set; }
     }

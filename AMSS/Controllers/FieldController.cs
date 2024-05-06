@@ -23,13 +23,15 @@ namespace AMSS.Controllers
         private readonly IFieldRepository _fieldRepository;
         private readonly IPositionRepository _positionRepository;
         private readonly ILocationRepository _locationRepository;
+        private readonly IPolygonAppRepository _polygonAppRepository;
         protected APIResponse _response;
         private readonly IMapper _mapper;
-        public FieldController(IFieldRepository fieldRepository, IPositionRepository positionRepository, ILocationRepository locationRepository, IMapper mapper)
+        public FieldController(IFieldRepository fieldRepository, IPositionRepository positionRepository, IPolygonAppRepository polygonAppRepository, ILocationRepository locationRepository, IMapper mapper)
         {
             _fieldRepository = fieldRepository;
             _positionRepository = positionRepository;
             _locationRepository = locationRepository;
+            _polygonAppRepository = polygonAppRepository;
             _mapper = mapper;
             _response = new();
         }
@@ -282,8 +284,23 @@ namespace AMSS.Controllers
                     return BadRequest(_response);
                 }
 
-                Field FieldFromDb = await _fieldRepository.GetAsync(u => u.Id == id);
-                if (FieldFromDb == null)
+                Field fieldFromDb = await _fieldRepository.GetAsync(u => u.Id == id, includeProperties: "Location,PolygonApp");
+                List<Position> lstPositionsFromDb = await _positionRepository.GetAllAsync(u => u.PolygonAppId == fieldFromDb.PolygonAppId);
+                // Delete Location 
+                await _locationRepository.RemoveAsync(fieldFromDb.Location);
+                await _locationRepository.SaveAsync();
+                // Delete Positions
+                foreach(Position pos in lstPositionsFromDb)
+                {
+                    await _positionRepository.RemoveAsync(pos);
+                }
+                await _positionRepository.SaveAsync();
+                // Delete PolygonApp 
+                await _polygonAppRepository.RemoveAsync(fieldFromDb.PolygonApp);
+                await _polygonAppRepository.SaveAsync();
+
+
+                if (fieldFromDb == null)
                 {
                     _response.IsSuccess = false;
                     _response.StatusCode = HttpStatusCode.NotFound;
@@ -291,7 +308,7 @@ namespace AMSS.Controllers
                     return NotFound(_response);
                 }
 
-                await _fieldRepository.RemoveAsync(FieldFromDb);
+                await _fieldRepository.RemoveAsync(fieldFromDb);
                 await _fieldRepository.SaveAsync();
                 _response.SuccessMessage = "Field deleted successfully !";
                 _response.StatusCode = HttpStatusCode.OK;

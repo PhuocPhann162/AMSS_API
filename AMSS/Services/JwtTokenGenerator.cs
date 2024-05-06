@@ -98,7 +98,11 @@ namespace AMSS.Services
 
             if (jwtToken is null) return false;
 
-            return jwtToken.ValidTo > DateTime.Now;
+            var validToUnixTimeSeconds = new DateTimeOffset(jwtToken.ValidTo).ToUnixTimeSeconds();
+
+            var currentUnixTimeSeconds = DateTimeOffset.Now.ToUnixTimeSeconds();
+
+            return validToUnixTimeSeconds > currentUnixTimeSeconds;
         }
     }
 }
