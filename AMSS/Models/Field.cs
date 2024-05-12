@@ -33,6 +33,8 @@ namespace AMSS.Models
 
         public virtual IEnumerable<Crop> Crops { get; set; }
 
+        public virtual SoilQuality SoilQuality { get; set; }
+
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
     }

@@ -19,6 +19,7 @@ namespace AMSS.Data
         public DbSet<Position> Positions { get; set; }
         public DbSet<Crop> Crops { get; set; }
         public DbSet<CropType> CropTypes { get; set; }
+        public DbSet<SoilQuality> SoilQualitys { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -28,6 +29,192 @@ namespace AMSS.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<SoilQuality>().HasData(
+                new SoilQuality
+                {
+                    Id = 1,
+                    InfoTime = DateTime.Now,
+                    Chlorophyll = 0.1f,
+                    Iron = 0.2f,
+                    Nitrate = 0.3f,
+                    Phyto = 0.4f,
+                    Oxygen = 0.5f,
+                    PH = 7.0f,
+                    Phytoplankton = 0.6f,
+                    Silicate = 0.7f,
+                    Salinity = 0.8f,
+                    SoilMoisture = 50,
+                    SoilMoisture10cm = 60,
+                    SoilMoisture40cm = 70,
+                    SoilMoisture100cm = 80,
+                    SoilTemperature = 25,
+                    SoilTemperature10cm = 26,
+                    SoilTemperature40cm = 27,
+                    SoilTemperature100cm = 28,
+                    FieldId = 3
+                },
+                new SoilQuality
+                {
+                    Id = 2,
+                    InfoTime = DateTime.Now,
+                    Chlorophyll = 0.2f,
+                    Iron = 0.3f,
+                    Nitrate = 0.4f,
+                    Phyto = 0.5f,
+                    Oxygen = 0.6f,
+                    PH = 7.1f,
+                    Phytoplankton = 0.7f,
+                    Silicate = 0.8f,
+                    Salinity = 0.9f,
+                    SoilMoisture = 55,
+                    SoilMoisture10cm = 65,
+                    SoilMoisture40cm = 75,
+                    SoilMoisture100cm = 85,
+                    SoilTemperature = 26,
+                    SoilTemperature10cm = 27,
+                    SoilTemperature40cm = 28,
+                    SoilTemperature100cm = 29,
+                    FieldId = 5
+                },
+                new SoilQuality
+                {
+                    Id = 3,
+                    InfoTime = DateTime.Now.AddDays(-1),
+                    Chlorophyll = 0.15f,
+                    Iron = 0.25f,
+                    Nitrate = 0.35f,
+                    Phyto = 0.45f,
+                    Oxygen = 0.55f,
+                    PH = 7.2f,
+                    Phytoplankton = 0.65f,
+                    Silicate = 0.75f,
+                    Salinity = 0.85f,
+                    SoilMoisture = 52,
+                    SoilMoisture10cm = 62,
+                    SoilMoisture40cm = 72,
+                    SoilMoisture100cm = 82,
+                    SoilTemperature = 24,
+                    SoilTemperature10cm = 25,
+                    SoilTemperature40cm = 26,
+                    SoilTemperature100cm = 27,
+                    FieldId = 6
+                },
+                new SoilQuality
+                {
+                    Id = 4,
+                    InfoTime = DateTime.Now.AddDays(-2),
+                    Chlorophyll = 0.12f,
+                    Iron = 0.22f,
+                    Nitrate = 0.32f,
+                    Phyto = 0.42f,
+                    Oxygen = 0.52f,
+                    PH = 7.3f,
+                    Phytoplankton = 0.62f,
+                    Silicate = 0.72f,
+                    Salinity = 0.82f,
+                    SoilMoisture = 53,
+                    SoilMoisture10cm = 63,
+                    SoilMoisture40cm = 73,
+                    SoilMoisture100cm = 83,
+                    SoilTemperature = 23,
+                    SoilTemperature10cm = 24,
+                    SoilTemperature40cm = 25,
+                    SoilTemperature100cm = 26,
+                    FieldId = 7
+                },
+                new SoilQuality
+                {
+                    Id = 5,
+                    InfoTime = DateTime.Now.AddDays(-3),
+                    Chlorophyll = 0.11f,
+                    Iron = 0.21f,
+                    Nitrate = 0.31f,
+                    Phyto = 0.41f,
+                    Oxygen = 0.51f,
+                    PH = 7.4f,
+                    Phytoplankton = 0.61f,
+                    Silicate = 0.71f,
+                    Salinity = 0.81f,
+                    SoilMoisture = 54,
+                    SoilMoisture10cm = 64,
+                    SoilMoisture40cm = 74,
+                    SoilMoisture100cm = 84,
+                    SoilTemperature = 22,
+                    SoilTemperature10cm = 23,
+                    SoilTemperature40cm = 24,
+                    SoilTemperature100cm = 25,
+                    FieldId = 8
+                },
+                 new SoilQuality
+                 {
+                     Id = 6,
+                     InfoTime = DateTime.Now.AddDays(-4),
+                     Chlorophyll = 0.13f,
+                     Iron = 0.23f,
+                     Nitrate = 0.33f,
+                     Phyto = 0.43f,
+                     Oxygen = 0.53f,
+                     PH = 7.5f,
+                     Phytoplankton = 0.63f,
+                     Silicate = 0.73f,
+                     Salinity = 0.83f,
+                     SoilMoisture = 56,
+                     SoilMoisture10cm = 66,
+                     SoilMoisture40cm = 76,
+                     SoilMoisture100cm = 86,
+                     SoilTemperature = 21,
+                     SoilTemperature10cm = 22,
+                     SoilTemperature40cm = 23,
+                     SoilTemperature100cm = 24,
+                     FieldId = 9
+                 },
+                 new SoilQuality
+                 {
+                     Id = 7,
+                     InfoTime = DateTime.Now.AddDays(-5),
+                     Chlorophyll = 0.14f,
+                     Iron = 0.24f,
+                     Nitrate = 0.34f,
+                     Phyto = 0.44f,
+                     Oxygen = 0.54f,
+                     PH = 7.6f,
+                     Phytoplankton = 0.64f,
+                     Silicate = 0.74f,
+                     Salinity = 0.84f,
+                     SoilMoisture = 57,
+                     SoilMoisture10cm = 67,
+                     SoilMoisture40cm = 77,
+                     SoilMoisture100cm = 87,
+                     SoilTemperature = 20,
+                     SoilTemperature10cm = 21,
+                     SoilTemperature40cm = 22,
+                     SoilTemperature100cm = 23,
+                     FieldId = 10
+                 },
+                new SoilQuality
+                {
+                    Id = 8,
+                    InfoTime = DateTime.Now.AddDays(-6),
+                    Chlorophyll = 0.16f,
+                    Iron = 0.26f,
+                    Nitrate = 0.36f,
+                    Phyto = 0.46f,
+                    Oxygen = 0.56f,
+                    PH = 7.7f,
+                    Phytoplankton = 0.66f,
+                    Silicate = 0.76f,
+                    Salinity = 0.86f,
+                    SoilMoisture = 58,
+                    SoilMoisture10cm = 68,
+                    SoilMoisture40cm = 78,
+                    SoilMoisture100cm = 88,
+                    SoilTemperature = 19,
+                    SoilTemperature10cm = 20,
+                    SoilTemperature40cm = 21,
+                    SoilTemperature100cm = 22,
+                    FieldId = 11
+                });
 
             modelBuilder.Entity<CropType>().HasData(
                new CropType
@@ -165,7 +352,7 @@ namespace AMSS.Data
                     ExpectedDate = DateTime.Now.AddDays(95),
                     Quantity = 400,
                     CropTypeId = 1,
-                    FieldId = 3, 
+                    FieldId = 3,
                 },
 
                 new Crop
@@ -179,7 +366,7 @@ namespace AMSS.Data
                     ExpectedDate = DateTime.Now.AddDays(100),
                     Quantity = 700,
                     CropTypeId = 2,
-                    FieldId = 5, 
+                    FieldId = 5,
                 },
                 new Crop
                 {
@@ -191,7 +378,7 @@ namespace AMSS.Data
                     PlantedDate = DateTime.Now.AddDays(-35),
                     ExpectedDate = DateTime.Now.AddDays(105),
                     Quantity = 600,
-                    CropTypeId = 2, 
+                    CropTypeId = 2,
                     FieldId = 6,
                 },
                 new Crop
@@ -360,7 +547,7 @@ namespace AMSS.Data
                     PlantedDate = DateTime.Now.AddDays(25),
                     ExpectedDate = DateTime.Now.AddDays(190),
                     Quantity = 1600,
-                    CropTypeId = 11, 
+                    CropTypeId = 11,
                     FieldId = 3,
                 },
                 new Crop
