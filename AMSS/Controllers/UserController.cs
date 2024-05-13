@@ -1,7 +1,10 @@
 ﻿using AMSS.Enums;
 using AMSS.Models;
+using AMSS.Models.Dto.Field;
+using AMSS.Models.Dto.User;
 using AMSS.Repository.IRepository;
 using AMSS.Utility;
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -19,7 +22,7 @@ namespace AMSS.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         protected APIResponse _response;
-        public UserController(IUserRepository userRepository, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+        public UserController(IUserRepository userRepository, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IMapper mapper)
         {
             _response = new APIResponse();
             _userRepository = userRepository;
@@ -143,6 +146,75 @@ namespace AMSS.Controllers
                 _response.Result = true;
                 _response.StatusCode = HttpStatusCode.OK;
                 return Ok(_response);
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.StatusCode = HttpStatusCode.BadRequest;
+                _response.ErrorMessages.Add("Something wrong when update user role");
+                return StatusCode(StatusCodes.Status500InternalServerError, _response);
+            }
+        }
+
+        [Authorize]
+        [HttpPut("updateInfo/{userId}")]
+        public async Task<ActionResult<APIResponse>> UpdateInfo(string userId, [FromBody] UpdateUserDto updateUserDto)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    if (string.IsNullOrEmpty(userId) || updateUserDto == null)
+                    {
+                        _response.IsSuccess = false;
+                        _response.StatusCode = HttpStatusCode.BadRequest;
+                        _response.ErrorMessages.Add("Invalid User ID");
+                        return StatusCode(StatusCodes.Status500InternalServerError, _response);
+                    }
+                    ApplicationUser userFromDb = await _userRepository.GetAsync(u => u.Id == userId, false);
+                    if (userFromDb == null)
+                    {
+                        _response.IsSuccess = false;
+                        _response.StatusCode = HttpStatusCode.NotFound;
+                        _response.ErrorMessages.Add("Not found this user");
+                        return NotFound(_response);
+                    }
+                    if (!string.IsNullOrEmpty(updateUserDto.FullName))
+                    {
+                        userFromDb.FullName = updateUserDto.FullName;
+                    }
+
+                    if (!string.IsNullOrEmpty(updateUserDto.Email))
+                    {
+                        userFromDb.Email = updateUserDto.Email;
+                    }
+
+                    if (!string.IsNullOrEmpty(updateUserDto.UserName))
+                    {
+                        userFromDb.UserName = updateUserDto.UserName;
+                    }
+
+                    if (!string.IsNullOrEmpty(updateUserDto.PhoneNumber))
+                    {
+                        userFromDb.PhoneNumber = updateUserDto.PhoneNumber;
+                    }
+
+                    userFromDb.UpdatedAt = DateTime.Now;
+                    await _userRepository.Update(userFromDb);
+                    await _userRepository.SaveAsync();
+
+                    _response.SuccessMessage = "Update this user information successfully";
+                    _response.Result = true;
+                    _response.StatusCode = HttpStatusCode.OK;
+                    return Ok(_response);
+                }
+                else
+                {
+                    _response.IsSuccess = false;
+                    _response.StatusCode = HttpStatusCode.BadRequest;
+                    _response.ErrorMessages.Add("Something wrong when updating User Info");
+                    return BadRequest(_response);
+                }
             }
             catch (Exception ex)
             {

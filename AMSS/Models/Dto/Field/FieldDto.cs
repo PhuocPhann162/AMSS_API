@@ -25,5 +25,6 @@ namespace AMSS.Models.Dto.Field
         public LocationDto Location { get; set; }
         public FarmDto Farm { get; set; }
         public PolygonDto PolygonApp { get; set; }
+        public SoilQuality SoilQuality { get; set; }
     }
 }

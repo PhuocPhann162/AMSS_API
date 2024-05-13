@@ -103,7 +103,7 @@ namespace AMSS.Controllers
                     _response.StatusCode = HttpStatusCode.BadRequest;
                     return BadRequest(_response);
                 }
-                Field fieldFromDb = await _fieldRepository.GetAsync(u => u.Id == id, includeProperties: "Location,PolygonApp,Farm");
+                Field fieldFromDb = await _fieldRepository.GetAsync(u => u.Id == id, includeProperties: "Location,PolygonApp,Farm,SoilQuality");
                 if (fieldFromDb == null)
                 {
                     _response.IsSuccess = false;
