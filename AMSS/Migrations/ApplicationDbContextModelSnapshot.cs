@@ -131,6 +131,9 @@ namespace AMSS.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("CareLevel")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -140,18 +143,33 @@ namespace AMSS.Migrations
                     b.Property<double>("CultivatedArea")
                         .HasColumnType("float");
 
+                    b.Property<string>("Cycle")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("Edible")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("ExpectedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("FieldId")
+                    b.Property<string>("GrowthRate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("HardinessZone")
                         .HasColumnType("int");
 
                     b.Property<string>("Icon")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
+
+                    b.Property<bool?>("Indoor")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Maintenance")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -160,17 +178,24 @@ namespace AMSS.Migrations
                     b.Property<DateTime>("PlantedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Propogation")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
+
+                    b.Property<string>("Soil")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Watering")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CropTypeId");
-
-                    b.HasIndex("FieldId");
 
                     b.ToTable("Crops");
 
@@ -178,392 +203,722 @@ namespace AMSS.Migrations
                         new
                         {
                             Id = 1,
+                            CareLevel = "Easy",
+                            CreatedAt = new DateTime(2024, 4, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9419),
                             CropTypeId = 1,
                             CultivatedArea = 891.0,
+                            Cycle = "Annual",
                             Description = "High-yielding rice variety suitable for wetland cultivation.",
-                            ExpectedDate = new DateTime(2024, 8, 10, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2126),
-                            FieldId = 7,
+                            Edible = true,
+                            ExpectedDate = new DateTime(2024, 8, 16, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9416),
+                            GrowthRate = "Fast",
+                            HardinessZone = 8,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Rice.jpg",
+                            Indoor = false,
+                            Maintenance = "Low",
                             Name = "Rice Crop 1",
-                            PlantedDate = new DateTime(2024, 4, 12, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2124),
-                            Quantity = 500
+                            PlantedDate = new DateTime(2024, 4, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9415),
+                            Propogation = "Seed",
+                            Quantity = 500,
+                            Soil = "Clay",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9421),
+                            Watering = "Heavy"
                         },
                         new
                         {
                             Id = 2,
+                            CareLevel = "Easy",
+                            CreatedAt = new DateTime(2024, 4, 3, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9430),
                             CropTypeId = 1,
                             CultivatedArea = 900.20000000000005,
+                            Cycle = "Annual",
                             Description = "High-yielding rice variety suitable for wetland cultivation.",
-                            ExpectedDate = new DateTime(2024, 8, 15, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2131),
-                            FieldId = 3,
+                            Edible = true,
+                            ExpectedDate = new DateTime(2024, 8, 21, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9429),
+                            GrowthRate = "Fast",
+                            HardinessZone = 8,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Rice.jpg",
+                            Indoor = false,
+                            Maintenance = "Low",
                             Name = "Rice Crop 2",
-                            PlantedDate = new DateTime(2024, 3, 28, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2131),
-                            Quantity = 400
+                            PlantedDate = new DateTime(2024, 4, 3, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9427),
+                            Propogation = "Seed",
+                            Quantity = 400,
+                            Soil = "Clay",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9432),
+                            Watering = "Heavy"
                         },
                         new
                         {
                             Id = 3,
+                            CareLevel = "Moderate",
+                            CreatedAt = new DateTime(2024, 4, 28, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9440),
                             CropTypeId = 2,
                             CultivatedArea = 667.70000000000005,
+                            Cycle = "Annual",
                             Description = "Maize crop known for its versatility and use in various food products.",
-                            ExpectedDate = new DateTime(2024, 8, 20, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2134),
-                            FieldId = 5,
+                            Edible = true,
+                            ExpectedDate = new DateTime(2024, 8, 26, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9438),
+                            GrowthRate = "Medium",
+                            HardinessZone = 9,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Corn.jpg",
+                            Indoor = false,
+                            Maintenance = "Medium",
                             Name = "Corn Crop 1",
-                            PlantedDate = new DateTime(2024, 4, 22, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2134),
-                            Quantity = 700
+                            PlantedDate = new DateTime(2024, 4, 28, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9437),
+                            Propogation = "Seed",
+                            Quantity = 700,
+                            Soil = "Loam",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9441),
+                            Watering = "Moderate"
                         },
                         new
                         {
                             Id = 4,
+                            CareLevel = "Moderate",
+                            CreatedAt = new DateTime(2024, 4, 13, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9449),
                             CropTypeId = 2,
                             CultivatedArea = 292.30000000000001,
+                            Cycle = "Annual",
                             Description = "Maize crop known for its versatility and use in various food products.",
-                            ExpectedDate = new DateTime(2024, 8, 25, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2137),
-                            FieldId = 6,
+                            Edible = true,
+                            ExpectedDate = new DateTime(2024, 8, 31, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9448),
+                            GrowthRate = "Medium",
+                            HardinessZone = 9,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Corn.jpg",
+                            Indoor = false,
+                            Maintenance = "Medium",
                             Name = "Corn Crop 2",
-                            PlantedDate = new DateTime(2024, 4, 7, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2136),
-                            Quantity = 600
+                            PlantedDate = new DateTime(2024, 4, 13, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9446),
+                            Propogation = "Seed",
+                            Quantity = 600,
+                            Soil = "Loam",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9450),
+                            Watering = "Moderate"
                         },
                         new
                         {
                             Id = 5,
+                            CareLevel = "Moderate",
+                            CreatedAt = new DateTime(2024, 5, 8, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9519),
                             CropTypeId = 5,
                             CultivatedArea = 729.39999999999998,
+                            Cycle = "Annual",
                             Description = "Starchy tuberous crop widely consumed as a staple food.",
-                            ExpectedDate = new DateTime(2024, 9, 19, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2139),
-                            FieldId = 3,
+                            Edible = true,
+                            ExpectedDate = new DateTime(2024, 9, 25, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9517),
+                            GrowthRate = "Fast",
+                            HardinessZone = 8,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Potato.jpg",
+                            Indoor = false,
+                            Maintenance = "Medium",
                             Name = "Potato Crop 1",
-                            PlantedDate = new DateTime(2024, 5, 2, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2139),
-                            Quantity = 1000
+                            PlantedDate = new DateTime(2024, 5, 8, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9516),
+                            Propogation = "Tuber",
+                            Quantity = 1000,
+                            Soil = "Sandy Loam",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9520),
+                            Watering = "Moderate"
                         },
                         new
                         {
                             Id = 6,
+                            CareLevel = "Moderate",
+                            CreatedAt = new DateTime(2024, 4, 23, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9527),
                             CropTypeId = 5,
                             CultivatedArea = 834.0,
+                            Cycle = "Annual",
                             Description = "Starchy tuberous crop widely consumed as a staple food.",
-                            ExpectedDate = new DateTime(2024, 9, 24, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2142),
-                            FieldId = 6,
+                            Edible = true,
+                            ExpectedDate = new DateTime(2024, 9, 30, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9526),
+                            GrowthRate = "Fast",
+                            HardinessZone = 8,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Potato.jpg",
+                            Indoor = false,
+                            Maintenance = "Medium",
                             Name = "Potato Crop 2",
-                            PlantedDate = new DateTime(2024, 4, 17, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2142),
-                            Quantity = 900
+                            PlantedDate = new DateTime(2024, 4, 23, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9525),
+                            Propogation = "Tuber",
+                            Quantity = 900,
+                            Soil = "Sandy Loam",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9529),
+                            Watering = "Moderate"
                         },
                         new
                         {
                             Id = 7,
+                            CareLevel = "Moderate",
+                            CreatedAt = new DateTime(2024, 5, 13, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9537),
                             CropTypeId = 6,
                             CultivatedArea = 662.39999999999998,
+                            Cycle = "Annual",
                             Description = "Versatile crop used in various culinary dishes and sauces, rich in vitamins and minerals.",
-                            ExpectedDate = new DateTime(2024, 9, 29, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2145),
-                            FieldId = 5,
+                            Edible = true,
+                            ExpectedDate = new DateTime(2024, 10, 5, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9536),
+                            GrowthRate = "Fast",
+                            HardinessZone = 9,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Tomato.jpg",
+                            Indoor = false,
+                            Maintenance = "Medium",
                             Name = "Tomato Crop 1",
-                            PlantedDate = new DateTime(2024, 5, 7, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2144),
-                            Quantity = 1100
+                            PlantedDate = new DateTime(2024, 5, 13, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9534),
+                            Propogation = "Seed",
+                            Quantity = 1100,
+                            Soil = "Loamy",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9538),
+                            Watering = "Moderate"
                         },
                         new
                         {
                             Id = 8,
+                            CareLevel = "Moderate",
+                            CreatedAt = new DateTime(2024, 4, 28, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9545),
                             CropTypeId = 6,
                             CultivatedArea = 389.0,
+                            Cycle = "Annual",
                             Description = "Versatile crop used in various culinary dishes and sauces, rich in vitamins and minerals.",
-                            ExpectedDate = new DateTime(2024, 10, 4, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2147),
-                            FieldId = 6,
+                            Edible = true,
+                            ExpectedDate = new DateTime(2024, 10, 10, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9544),
+                            GrowthRate = "Fast",
+                            HardinessZone = 9,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Tomato.jpg",
+                            Indoor = false,
+                            Maintenance = "Medium",
                             Name = "Tomato Crop 2",
-                            PlantedDate = new DateTime(2024, 4, 22, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2147),
-                            Quantity = 1000
+                            PlantedDate = new DateTime(2024, 4, 28, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9543),
+                            Propogation = "Seed",
+                            Quantity = 1000,
+                            Soil = "Loamy",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9546),
+                            Watering = "Moderate"
                         },
                         new
                         {
                             Id = 9,
+                            CareLevel = "Difficult",
+                            CreatedAt = new DateTime(2024, 5, 13, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9553),
                             CropTypeId = 7,
                             CultivatedArea = 732.10000000000002,
+                            Cycle = "Perennial",
                             Description = "Popular fruit crop known for its crisp texture and sweet flavor, cultivated in orchards worldwide.",
-                            ExpectedDate = new DateTime(2024, 10, 9, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2150),
-                            FieldId = 3,
+                            Edible = true,
+                            ExpectedDate = new DateTime(2024, 10, 15, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9551),
+                            GrowthRate = "Medium",
+                            HardinessZone = 5,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Apple.jpg",
+                            Indoor = false,
+                            Maintenance = "High",
                             Name = "Apple Crop 1",
-                            PlantedDate = new DateTime(2024, 5, 17, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2149),
-                            Quantity = 1200
+                            PlantedDate = new DateTime(2024, 5, 13, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9551),
+                            Propogation = "Seed",
+                            Quantity = 1200,
+                            Soil = "Loamy",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9554),
+                            Watering = "Moderate"
                         },
                         new
                         {
                             Id = 10,
+                            CareLevel = "Difficult",
+                            CreatedAt = new DateTime(2024, 5, 8, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9560),
                             CropTypeId = 7,
                             CultivatedArea = 424.60000000000002,
+                            Cycle = "Perennial",
                             Description = "Popular fruit crop known for its crisp texture and sweet flavor, cultivated in orchards worldwide.",
-                            ExpectedDate = new DateTime(2024, 10, 14, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2153),
-                            FieldId = 7,
+                            Edible = true,
+                            ExpectedDate = new DateTime(2024, 10, 20, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9559),
+                            GrowthRate = "Medium",
+                            HardinessZone = 5,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Apple.jpg",
+                            Indoor = false,
+                            Maintenance = "High",
                             Name = "Apple Crop 2",
-                            PlantedDate = new DateTime(2024, 5, 2, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2152),
-                            Quantity = 1100
+                            PlantedDate = new DateTime(2024, 5, 8, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9558),
+                            Propogation = "Seed",
+                            Quantity = 1100,
+                            Soil = "Loamy",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9562),
+                            Watering = "Moderate"
                         },
                         new
                         {
                             Id = 11,
+                            CareLevel = "Moderate",
+                            CreatedAt = new DateTime(2024, 5, 8, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9570),
                             CropTypeId = 8,
                             CultivatedArea = 293.39999999999998,
+                            Cycle = "Perennial",
                             Description = "Tropical fruit crop with high nutritional value, grown in warm climates and consumed worldwide.",
-                            ExpectedDate = new DateTime(2024, 10, 19, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2187),
-                            FieldId = 5,
+                            Edible = true,
+                            ExpectedDate = new DateTime(2024, 10, 25, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9567),
+                            GrowthRate = "Fast",
+                            HardinessZone = 10,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Banana.jpg",
+                            Indoor = false,
+                            Maintenance = "High",
                             Name = "Banana Crop 1",
-                            PlantedDate = new DateTime(2024, 5, 22, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2186),
-                            Quantity = 1300
+                            PlantedDate = new DateTime(2024, 5, 8, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9566),
+                            Propogation = "Sucker",
+                            Quantity = 1300,
+                            Soil = "Loamy",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9571),
+                            Watering = "Heavy"
                         },
                         new
                         {
                             Id = 12,
+                            CareLevel = "Moderate",
+                            CreatedAt = new DateTime(2024, 5, 13, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9577),
                             CropTypeId = 8,
                             CultivatedArea = 444.5,
+                            Cycle = "Perennial",
                             Description = "Tropical fruit crop with high nutritional value, grown in warm climates and consumed worldwide.",
-                            ExpectedDate = new DateTime(2024, 10, 24, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2189),
-                            FieldId = 3,
+                            Edible = true,
+                            ExpectedDate = new DateTime(2024, 10, 30, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9576),
+                            GrowthRate = "Fast",
+                            HardinessZone = 10,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Banana.jpg",
+                            Indoor = false,
+                            Maintenance = "High",
                             Name = "Banana Crop 2",
-                            PlantedDate = new DateTime(2024, 5, 7, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2189),
-                            Quantity = 1200
+                            PlantedDate = new DateTime(2024, 5, 13, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9575),
+                            Propogation = "Sucker",
+                            Quantity = 1200,
+                            Soil = "Loamy",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9578),
+                            Watering = "Heavy"
                         },
                         new
                         {
                             Id = 13,
+                            CareLevel = "Moderate",
+                            CreatedAt = new DateTime(2024, 5, 23, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9585),
                             CropTypeId = 9,
-                            CultivatedArea = 920.10000000000002,
-                            Description = "Citrus fruit crop prized for its tangy flavor and high vitamin C content, cultivated in orchards.",
-                            ExpectedDate = new DateTime(2024, 10, 29, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2192),
-                            FieldId = 6,
+                            CultivatedArea = 596.70000000000005,
+                            Cycle = "Perennial",
+                            Description = "Citrus fruit crop prized for its tangy flavor and high vitamin C content.",
+                            Edible = true,
+                            ExpectedDate = new DateTime(2024, 11, 4, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9583),
+                            GrowthRate = "Medium",
+                            HardinessZone = 9,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Orange.jpg",
+                            Indoor = false,
+                            Maintenance = "High",
                             Name = "Orange Crop 1",
-                            PlantedDate = new DateTime(2024, 5, 27, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2191),
-                            Quantity = 1400
+                            PlantedDate = new DateTime(2024, 5, 23, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9582),
+                            Propogation = "Seed",
+                            Quantity = 1400,
+                            Soil = "Sandy Loam",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9586),
+                            Watering = "Moderate"
                         },
                         new
                         {
                             Id = 14,
+                            CareLevel = "Moderate",
+                            CreatedAt = new DateTime(2024, 5, 8, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9592),
                             CropTypeId = 9,
-                            CultivatedArea = 349.5,
-                            Description = "Citrus fruit crop prized for its tangy flavor and high vitamin C content, cultivated in orchards.",
-                            ExpectedDate = new DateTime(2024, 11, 3, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2195),
-                            FieldId = 7,
+                            CultivatedArea = 821.10000000000002,
+                            Cycle = "Perennial",
+                            Description = "Citrus fruit crop prized for its tangy flavor and high vitamin C content.",
+                            Edible = true,
+                            ExpectedDate = new DateTime(2024, 11, 9, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9591),
+                            GrowthRate = "Medium",
+                            HardinessZone = 9,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Orange.jpg",
+                            Indoor = false,
+                            Maintenance = "High",
                             Name = "Orange Crop 2",
-                            PlantedDate = new DateTime(2024, 5, 12, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2194),
-                            Quantity = 1300
+                            PlantedDate = new DateTime(2024, 5, 8, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9590),
+                            Propogation = "Seed",
+                            Quantity = 1300,
+                            Soil = "Sandy Loam",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9593),
+                            Watering = "Moderate"
                         },
                         new
                         {
                             Id = 15,
+                            CareLevel = "Easy",
+                            CreatedAt = new DateTime(2024, 6, 2, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9600),
                             CropTypeId = 10,
-                            CultivatedArea = 542.0,
-                            Description = "Fruit crop grown in vineyards, used for making wine, juices, and various culinary products.",
-                            ExpectedDate = new DateTime(2024, 11, 8, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2197),
-                            FieldId = 5,
+                            CultivatedArea = 513.29999999999995,
+                            Cycle = "Annual",
+                            Description = "Staple grain crop known for its high carbohydrate content, used in various food products.",
+                            Edible = true,
+                            ExpectedDate = new DateTime(2024, 11, 14, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9598),
+                            GrowthRate = "Fast",
+                            HardinessZone = 8,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Grape.jpg",
+                            Indoor = false,
+                            Maintenance = "Low",
                             Name = "Grapes Crop 1",
-                            PlantedDate = new DateTime(2024, 6, 1, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2197),
-                            Quantity = 1500
+                            PlantedDate = new DateTime(2024, 6, 2, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9597),
+                            Propogation = "Seed",
+                            Quantity = 1500,
+                            Soil = "Loamy",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9603),
+                            Watering = "Moderate"
                         },
                         new
                         {
                             Id = 16,
+                            CareLevel = "Easy",
+                            CreatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9610),
                             CropTypeId = 10,
-                            CultivatedArea = 1300.3,
-                            Description = "Fruit crop grown in vineyards, used for making wine, juices, and various culinary products.",
-                            ExpectedDate = new DateTime(2024, 11, 13, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2200),
-                            FieldId = 6,
+                            CultivatedArea = 624.70000000000005,
+                            Cycle = "Annual",
+                            Description = "Staple grain crop known for its high carbohydrate content, used in various food products.",
+                            Edible = true,
+                            ExpectedDate = new DateTime(2024, 11, 19, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9608),
+                            GrowthRate = "Fast",
+                            HardinessZone = 8,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Grape.jpg",
+                            Indoor = false,
+                            Maintenance = "Low",
                             Name = "Grapes Crop 2",
-                            PlantedDate = new DateTime(2024, 5, 17, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2199),
-                            Quantity = 1400
+                            PlantedDate = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9607),
+                            Propogation = "Seed",
+                            Quantity = 1400,
+                            Soil = "Loamy",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9611),
+                            Watering = "Moderate"
                         },
                         new
                         {
                             Id = 17,
+                            CareLevel = "Easy",
+                            CreatedAt = new DateTime(2024, 5, 3, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9618),
                             CropTypeId = 11,
-                            CultivatedArea = 1250.5999999999999,
-                            Description = "Tropical fruit crop known for its sweet and tangy flavor, grown in tropical regions worldwide.",
-                            ExpectedDate = new DateTime(2024, 11, 18, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2203),
-                            FieldId = 3,
+                            CultivatedArea = 342.60000000000002,
+                            Cycle = "Annual",
+                            Description = "Grain crop valued for its use in food, beverages, and animal feed.",
+                            Edible = true,
+                            ExpectedDate = new DateTime(2024, 11, 24, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9616),
+                            GrowthRate = "Fast",
+                            HardinessZone = 8,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Pineapple.jpg",
+                            Indoor = false,
+                            Maintenance = "Low",
                             Name = "Pineapple Crop 1",
-                            PlantedDate = new DateTime(2024, 6, 6, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2202),
-                            Quantity = 1600
+                            PlantedDate = new DateTime(2024, 5, 3, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9615),
+                            Propogation = "Seed",
+                            Quantity = 1600,
+                            Soil = "Loamy",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9619),
+                            Watering = "Moderate"
                         },
                         new
                         {
                             Id = 18,
+                            CareLevel = "Easy",
+                            CreatedAt = new DateTime(2024, 4, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9625),
                             CropTypeId = 11,
-                            CultivatedArea = 1332.5999999999999,
-                            Description = "Tropical fruit crop known for its sweet and tangy flavor, grown in tropical regions worldwide.",
-                            ExpectedDate = new DateTime(2024, 11, 23, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2205),
-                            FieldId = 6,
+                            CultivatedArea = 732.89999999999998,
+                            Cycle = "Annual",
+                            Description = "Grain crop valued for its use in food, beverages, and animal feed.",
+                            Edible = true,
+                            ExpectedDate = new DateTime(2024, 11, 29, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9624),
+                            GrowthRate = "Fast",
+                            HardinessZone = 8,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Pineapple.jpg",
+                            Indoor = false,
+                            Maintenance = "Low",
                             Name = "Pineapple Crop 2",
-                            PlantedDate = new DateTime(2024, 5, 22, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2205),
-                            Quantity = 1500
+                            PlantedDate = new DateTime(2024, 4, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9623),
+                            Propogation = "Seed",
+                            Quantity = 1500,
+                            Soil = "Loamy",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9626),
+                            Watering = "Moderate"
                         },
                         new
                         {
                             Id = 19,
+                            CareLevel = "Easy",
+                            CreatedAt = new DateTime(2024, 4, 3, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9633),
                             CropTypeId = 12,
-                            CultivatedArea = 1330.5,
-                            Description = "Small fruit crop with a sweet flavor, often grown in gardens and commercial fields for fresh consumption.",
-                            ExpectedDate = new DateTime(2024, 11, 28, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2208),
-                            FieldId = 5,
+                            CultivatedArea = 921.79999999999995,
+                            Cycle = "Annual",
+                            Description = "Legume crop rich in protein, widely used in food products and animal feed.",
+                            Edible = true,
+                            ExpectedDate = new DateTime(2024, 12, 4, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9632),
+                            GrowthRate = "Medium",
+                            HardinessZone = 8,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Strawberry.jpg",
+                            Indoor = false,
+                            Maintenance = "Low",
                             Name = "Strawberry Crop 1",
-                            PlantedDate = new DateTime(2024, 6, 11, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2207),
-                            Quantity = 1700
+                            PlantedDate = new DateTime(2024, 4, 3, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9631),
+                            Propogation = "Seed",
+                            Quantity = 1700,
+                            Soil = "Loamy",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9634),
+                            Watering = "Moderate"
                         },
                         new
                         {
                             Id = 20,
+                            CareLevel = "Easy",
+                            CreatedAt = new DateTime(2024, 3, 19, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9642),
                             CropTypeId = 12,
-                            CultivatedArea = 1232.7,
-                            Description = "Small fruit crop with a sweet flavor, often grown in gardens and commercial fields for fresh consumption.",
-                            ExpectedDate = new DateTime(2024, 12, 3, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2211),
-                            FieldId = 7,
+                            CultivatedArea = 623.39999999999998,
+                            Cycle = "Annual",
+                            Description = "Legume crop rich in protein, widely used in food products and animal feed.",
+                            Edible = true,
+                            ExpectedDate = new DateTime(2024, 12, 9, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9640),
+                            GrowthRate = "Medium",
+                            HardinessZone = 8,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Strawberry.jpg",
+                            Indoor = false,
+                            Maintenance = "Low",
                             Name = "Strawberry Crop 2",
-                            PlantedDate = new DateTime(2024, 5, 27, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2211),
-                            Quantity = 1600
+                            PlantedDate = new DateTime(2024, 3, 19, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9639),
+                            Propogation = "Seed",
+                            Quantity = 1600,
+                            Soil = "Loamy",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9643),
+                            Watering = "Moderate"
                         },
                         new
                         {
                             Id = 21,
+                            CareLevel = "Easy",
+                            CreatedAt = new DateTime(2024, 4, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9650),
                             CropTypeId = 13,
-                            CultivatedArea = 756.39999999999998,
-                            Description = "Caffeinated beverage crop cultivated in tropical regions, harvested for its seeds (coffee beans).",
-                            ExpectedDate = new DateTime(2024, 12, 8, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2214),
-                            FieldId = 5,
+                            CultivatedArea = 545.10000000000002,
+                            Cycle = "Annual",
+                            Description = "Versatile crop used for food, fodder, and biofuel production.",
+                            Edible = true,
+                            ExpectedDate = new DateTime(2024, 12, 14, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9648),
+                            GrowthRate = "Medium",
+                            HardinessZone = 9,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Coffee.jpg",
+                            Indoor = false,
+                            Maintenance = "Low",
                             Name = "Coffee Crop 1",
-                            PlantedDate = new DateTime(2024, 6, 16, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2214),
-                            Quantity = 1800
+                            PlantedDate = new DateTime(2024, 4, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9647),
+                            Propogation = "Seed",
+                            Quantity = 1800,
+                            Soil = "Sandy Loam",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9651),
+                            Watering = "Moderate"
                         },
                         new
                         {
                             Id = 22,
+                            CareLevel = "Easy",
+                            CreatedAt = new DateTime(2024, 4, 3, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9657),
                             CropTypeId = 13,
-                            CultivatedArea = 842.10000000000002,
-                            Description = "Caffeinated beverage crop cultivated in tropical regions, harvested for its seeds (coffee beans).",
-                            ExpectedDate = new DateTime(2024, 12, 13, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2217),
-                            FieldId = 3,
+                            CultivatedArea = 721.29999999999995,
+                            Cycle = "Annual",
+                            Description = "Versatile crop used for food, fodder, and biofuel production.",
+                            Edible = true,
+                            ExpectedDate = new DateTime(2024, 12, 19, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9656),
+                            GrowthRate = "Medium",
+                            HardinessZone = 9,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Coffee.jpg",
+                            Indoor = false,
+                            Maintenance = "Low",
                             Name = "Coffee Crop 2",
-                            PlantedDate = new DateTime(2024, 6, 1, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2216),
-                            Quantity = 1700
+                            PlantedDate = new DateTime(2024, 4, 3, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9655),
+                            Propogation = "Seed",
+                            Quantity = 1700,
+                            Soil = "Sandy Loam",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9658),
+                            Watering = "Moderate"
                         },
                         new
                         {
                             Id = 23,
+                            CareLevel = "Easy",
+                            CreatedAt = new DateTime(2024, 3, 19, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9664),
                             CropTypeId = 15,
-                            CultivatedArea = 542.29999999999995,
-                            Description = "Bean crop used in chocolate production, cultivated in tropical regions within 20 degrees of the equator.",
-                            ExpectedDate = new DateTime(2024, 12, 28, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2219),
-                            FieldId = 6,
+                            CultivatedArea = 564.70000000000005,
+                            Cycle = "Annual",
+                            Description = "Cereal grain known for its high nutritional value, often used in breakfast foods and animal feed.",
+                            Edible = true,
+                            ExpectedDate = new DateTime(2024, 12, 24, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9663),
+                            GrowthRate = "Fast",
+                            HardinessZone = 7,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Cocoa.jpg",
+                            Indoor = false,
+                            Maintenance = "Low",
                             Name = "Cocoa Crop 1",
-                            PlantedDate = new DateTime(2024, 6, 26, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2219),
-                            Quantity = 2000
+                            PlantedDate = new DateTime(2024, 3, 19, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9662),
+                            Propogation = "Seed",
+                            Quantity = 1900,
+                            Soil = "Loamy",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9665),
+                            Watering = "Moderate"
                         },
                         new
                         {
                             Id = 24,
+                            CareLevel = "Easy",
+                            CreatedAt = new DateTime(2024, 3, 4, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9673),
                             CropTypeId = 15,
-                            CultivatedArea = 638.60000000000002,
-                            Description = "Bean crop used in chocolate production, cultivated in tropical regions within 20 degrees of the equator.",
-                            ExpectedDate = new DateTime(2025, 1, 2, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2222),
-                            FieldId = 5,
+                            CultivatedArea = 633.20000000000005,
+                            Cycle = "Annual",
+                            Description = "Cereal grain known for its high nutritional value, often used in breakfast foods and animal feed.",
+                            Edible = true,
+                            ExpectedDate = new DateTime(2024, 12, 29, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9672),
+                            GrowthRate = "Fast",
+                            HardinessZone = 7,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Cocoa.jpg",
+                            Indoor = false,
+                            Maintenance = "Low",
                             Name = "Cocoa Crop 2",
-                            PlantedDate = new DateTime(2024, 6, 11, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2221),
-                            Quantity = 1900
+                            PlantedDate = new DateTime(2024, 3, 4, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9671),
+                            Propogation = "Seed",
+                            Quantity = 1800,
+                            Soil = "Loamy",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9674),
+                            Watering = "Moderate"
                         },
                         new
                         {
                             Id = 25,
+                            CareLevel = "Easy",
+                            CreatedAt = new DateTime(2024, 4, 23, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9681),
                             CropTypeId = 16,
-                            CultivatedArea = 447.69999999999999,
-                            Description = "Legume crop grown for its edible seeds, rich in protein and healthy fats, cultivated in sandy soils.",
-                            ExpectedDate = new DateTime(2025, 1, 7, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2225),
-                            FieldId = 7,
+                            CultivatedArea = 712.60000000000002,
+                            Cycle = "Annual",
+                            Description = "High-yielding rice variety suitable for wetland cultivation.",
+                            Edible = true,
+                            ExpectedDate = new DateTime(2025, 1, 3, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9680),
+                            GrowthRate = "Fast",
+                            HardinessZone = 8,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Peanut.jpg",
+                            Indoor = false,
+                            Maintenance = "Low",
                             Name = "Peanut Crop 1",
-                            PlantedDate = new DateTime(2024, 7, 1, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2224),
-                            Quantity = 2100
+                            PlantedDate = new DateTime(2024, 4, 23, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9678),
+                            Propogation = "Seed",
+                            Quantity = 2000,
+                            Soil = "Clay",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9682),
+                            Watering = "Heavy"
                         },
                         new
                         {
                             Id = 26,
+                            CareLevel = "Easy",
+                            CreatedAt = new DateTime(2024, 4, 8, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9688),
                             CropTypeId = 16,
-                            CultivatedArea = 1140.4000000000001,
-                            Description = "Legume crop grown for its edible seeds, rich in protein and healthy fats, cultivated in sandy soils.",
-                            ExpectedDate = new DateTime(2025, 1, 12, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2227),
-                            FieldId = 5,
+                            CultivatedArea = 789.10000000000002,
+                            Cycle = "Annual",
+                            Description = "High-yielding rice variety suitable for wetland cultivation.",
+                            Edible = true,
+                            ExpectedDate = new DateTime(2025, 1, 8, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9687),
+                            GrowthRate = "Fast",
+                            HardinessZone = 8,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Peanut.jpg",
+                            Indoor = false,
+                            Maintenance = "Low",
                             Name = "Peanut Crop 2",
-                            PlantedDate = new DateTime(2024, 6, 16, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2227),
-                            Quantity = 2000
+                            PlantedDate = new DateTime(2024, 4, 8, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9686),
+                            Propogation = "Seed",
+                            Quantity = 1900,
+                            Soil = "Clay",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9689),
+                            Watering = "Heavy"
                         },
                         new
                         {
                             Id = 27,
+                            CareLevel = "Moderate",
+                            CreatedAt = new DateTime(2024, 3, 24, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9696),
                             CropTypeId = 17,
-                            CultivatedArea = 346.89999999999998,
-                            Description = "Root vegetable crop known for its bright orange color and high beta-carotene content, grown in cool climates.",
-                            ExpectedDate = new DateTime(2025, 1, 17, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2230),
-                            FieldId = 6,
+                            CultivatedArea = 847.29999999999995,
+                            Cycle = "Annual",
+                            Description = "Maize crop known for its versatility and use in various food products.",
+                            Edible = true,
+                            ExpectedDate = new DateTime(2025, 1, 13, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9695),
+                            GrowthRate = "Medium",
+                            HardinessZone = 9,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Carrot.jpg",
+                            Indoor = false,
+                            Maintenance = "Medium",
                             Name = "Carrot Crop 1",
-                            PlantedDate = new DateTime(2024, 7, 6, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2229),
-                            Quantity = 2200
+                            PlantedDate = new DateTime(2024, 3, 24, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9694),
+                            Propogation = "Seed",
+                            Quantity = 2100,
+                            Soil = "Loam",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9697),
+                            Watering = "Moderate"
                         },
                         new
                         {
                             Id = 28,
+                            CareLevel = "Moderate",
+                            CreatedAt = new DateTime(2024, 3, 9, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9705),
                             CropTypeId = 17,
-                            CultivatedArea = 342.60000000000002,
-                            Description = "Root vegetable crop known for its bright orange color and high beta-carotene content, grown in cool climates.",
-                            ExpectedDate = new DateTime(2025, 1, 22, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2232),
-                            FieldId = 3,
+                            CultivatedArea = 612.39999999999998,
+                            Cycle = "Annual",
+                            Description = "Maize crop known for its versatility and use in various food products.",
+                            Edible = true,
+                            ExpectedDate = new DateTime(2025, 1, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9703),
+                            GrowthRate = "Medium",
+                            HardinessZone = 9,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Carrot.jpg",
+                            Indoor = false,
+                            Maintenance = "Medium",
                             Name = "Carrot Crop 2",
-                            PlantedDate = new DateTime(2024, 6, 21, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2232),
-                            Quantity = 2100
+                            PlantedDate = new DateTime(2024, 3, 9, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9702),
+                            Propogation = "Seed",
+                            Quantity = 2000,
+                            Soil = "Loam",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9706),
+                            Watering = "Moderate"
                         },
                         new
                         {
                             Id = 29,
+                            CareLevel = "Moderate",
+                            CreatedAt = new DateTime(2024, 2, 23, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9712),
                             CropTypeId = 18,
-                            CultivatedArea = 748.10000000000002,
-                            Description = "Nutrient-rich vegetable crop belonging to the brassica family, known for its green flowering heads.",
-                            ExpectedDate = new DateTime(2025, 1, 27, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2235),
-                            FieldId = 7,
+                            CultivatedArea = 445.80000000000001,
+                            Cycle = "Annual",
+                            Description = "Starchy tuberous crop widely consumed as a staple food.",
+                            Edible = true,
+                            ExpectedDate = new DateTime(2025, 1, 23, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9711),
+                            GrowthRate = "Fast",
+                            HardinessZone = 8,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Brocolli.jpg",
+                            Indoor = false,
+                            Maintenance = "Medium",
                             Name = "Broccoli Crop 1",
-                            PlantedDate = new DateTime(2024, 7, 11, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2235),
-                            Quantity = 2300
+                            PlantedDate = new DateTime(2024, 2, 23, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9710),
+                            Propogation = "Tuber",
+                            Quantity = 2200,
+                            Soil = "Sandy Loam",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9713),
+                            Watering = "Moderate"
                         },
                         new
                         {
                             Id = 30,
+                            CareLevel = "Moderate",
+                            CreatedAt = new DateTime(2024, 2, 8, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9719),
                             CropTypeId = 18,
-                            CultivatedArea = 844.0,
-                            Description = "Nutrient-rich vegetable crop belonging to the brassica family, known for its green flowering heads.",
-                            ExpectedDate = new DateTime(2025, 2, 1, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2238),
-                            FieldId = 5,
+                            CultivatedArea = 832.10000000000002,
+                            Cycle = "Annual",
+                            Description = "Starchy tuberous crop widely consumed as a staple food.",
+                            Edible = true,
+                            ExpectedDate = new DateTime(2025, 1, 28, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9718),
+                            GrowthRate = "Fast",
+                            HardinessZone = 8,
                             Icon = "https://amssimages.blob.core.windows.net/agriculture/Brocolli.jpg",
+                            Indoor = false,
+                            Maintenance = "Medium",
                             Name = "Broccoli Crop 2",
-                            PlantedDate = new DateTime(2024, 6, 26, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(2237),
-                            Quantity = 2200
+                            PlantedDate = new DateTime(2024, 2, 8, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9717),
+                            Propogation = "Tuber",
+                            Quantity = 2100,
+                            Soil = "Sandy Loam",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9720),
+                            Watering = "Moderate"
                         });
                 });
 
@@ -586,6 +941,10 @@ namespace AMSS.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
@@ -598,109 +957,163 @@ namespace AMSS.Migrations
                         {
                             Id = 1,
                             Code = "RC",
-                            Name = "Rice"
+                            CreatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9276),
+                            Name = "Rice",
+                            Type = "Cereal",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9281)
                         },
                         new
                         {
                             Id = 2,
                             Code = "CN",
-                            Name = "Corn"
+                            CreatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9284),
+                            Name = "Corn",
+                            Type = "Cereal",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9285)
                         },
                         new
                         {
                             Id = 3,
                             Code = "SB",
-                            Name = "Soybean"
+                            CreatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9288),
+                            Name = "Soybean",
+                            Type = "Legume",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9289)
                         },
                         new
                         {
                             Id = 4,
                             Code = "SC",
-                            Name = "Sugarcane"
+                            CreatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9291),
+                            Name = "Sugarcane",
+                            Type = "Sugar Crop",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9293)
                         },
                         new
                         {
                             Id = 5,
                             Code = "PT",
-                            Name = "Potato"
+                            CreatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9295),
+                            Name = "Potato",
+                            Type = "Tuber",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9296)
                         },
                         new
                         {
                             Id = 6,
                             Code = "TM",
-                            Name = "Tomato"
+                            CreatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9298),
+                            Name = "Tomato",
+                            Type = "Vegetable",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9301)
                         },
                         new
                         {
                             Id = 7,
                             Code = "AP",
-                            Name = "Apple"
+                            CreatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9303),
+                            Name = "Apple",
+                            Type = "Fruit",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9304)
                         },
                         new
                         {
                             Id = 8,
                             Code = "BN",
-                            Name = "Banana"
+                            CreatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9306),
+                            Name = "Banana",
+                            Type = "Fruit",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9307)
                         },
                         new
                         {
                             Id = 9,
                             Code = "OR",
-                            Name = "Orange"
+                            CreatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9309),
+                            Name = "Orange",
+                            Type = "Fruit",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9311)
                         },
                         new
                         {
                             Id = 10,
                             Code = "GP",
-                            Name = "Grapes"
+                            CreatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9313),
+                            Name = "Grapes",
+                            Type = "Fruit",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9314)
                         },
                         new
                         {
                             Id = 11,
                             Code = "PL",
-                            Name = "Pineapple"
+                            CreatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9316),
+                            Name = "Pineapple",
+                            Type = "Fruit",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9317)
                         },
                         new
                         {
                             Id = 12,
                             Code = "SBY",
-                            Name = "Strawberry"
+                            CreatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9320),
+                            Name = "Strawberry",
+                            Type = "Fruit",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9322)
                         },
                         new
                         {
                             Id = 13,
                             Code = "CF",
-                            Name = "Coffee"
+                            CreatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9324),
+                            Name = "Coffee",
+                            Type = "Beverage Crop",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9325)
                         },
                         new
                         {
                             Id = 14,
                             Code = "TE",
-                            Name = "Tea"
+                            CreatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9328),
+                            Name = "Tea",
+                            Type = "Beverage Crop",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9329)
                         },
                         new
                         {
                             Id = 15,
                             Code = "CC",
-                            Name = "Cocoa"
+                            CreatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9331),
+                            Name = "Cocoa",
+                            Type = "Beverage Crop",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9333)
                         },
                         new
                         {
                             Id = 16,
                             Code = "PN",
-                            Name = "Peanut"
+                            CreatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9335),
+                            Name = "Peanut",
+                            Type = "Legume",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9336)
                         },
                         new
                         {
                             Id = 17,
                             Code = "CR",
-                            Name = "Carrot"
+                            CreatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9338),
+                            Name = "Carrot",
+                            Type = "Vegetable",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9339)
                         },
                         new
                         {
                             Id = 18,
                             Code = "BK",
-                            Name = "Broccoli"
+                            CreatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9341),
+                            Name = "Broccoli",
+                            Type = "Vegetable",
+                            UpdatedAt = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(9343)
                         });
                 });
 
@@ -787,6 +1200,109 @@ namespace AMSS.Migrations
                         .IsUnique();
 
                     b.ToTable("Fields");
+                });
+
+            modelBuilder.Entity("AMSS.Models.FieldCrop", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CropId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FieldId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CropId");
+
+                    b.HasIndex("FieldId");
+
+                    b.ToTable("FieldCrops");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CropId = 2,
+                            FieldId = 3
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CropId = 1,
+                            FieldId = 3
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CropId = 4,
+                            FieldId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CropId = 3,
+                            FieldId = 5
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CropId = 2,
+                            FieldId = 5
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CropId = 5,
+                            FieldId = 6
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CropId = 7,
+                            FieldId = 6
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CropId = 6,
+                            FieldId = 7
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CropId = 8,
+                            FieldId = 7
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CropId = 9,
+                            FieldId = 12
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CropId = 10,
+                            FieldId = 8
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CropId = 9,
+                            FieldId = 12
+                        },
+                        new
+                        {
+                            Id = 13,
+                            CropId = 9,
+                            FieldId = 8
+                        });
                 });
 
             modelBuilder.Entity("AMSS.Models.Location", b =>
@@ -941,7 +1457,7 @@ namespace AMSS.Migrations
                             Id = 1,
                             Chlorophyll = 0.1f,
                             FieldId = 3,
-                            InfoTime = new DateTime(2024, 5, 12, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(1733),
+                            InfoTime = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(8836),
                             Iron = 0.2f,
                             Nitrate = 0.3f,
                             Oxygen = 0.5f,
@@ -964,7 +1480,7 @@ namespace AMSS.Migrations
                             Id = 2,
                             Chlorophyll = 0.2f,
                             FieldId = 5,
-                            InfoTime = new DateTime(2024, 5, 12, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(1757),
+                            InfoTime = new DateTime(2024, 5, 18, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(8867),
                             Iron = 0.3f,
                             Nitrate = 0.4f,
                             Oxygen = 0.6f,
@@ -987,7 +1503,7 @@ namespace AMSS.Migrations
                             Id = 3,
                             Chlorophyll = 0.15f,
                             FieldId = 6,
-                            InfoTime = new DateTime(2024, 5, 11, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(1761),
+                            InfoTime = new DateTime(2024, 5, 17, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(8874),
                             Iron = 0.25f,
                             Nitrate = 0.35f,
                             Oxygen = 0.55f,
@@ -1010,7 +1526,7 @@ namespace AMSS.Migrations
                             Id = 4,
                             Chlorophyll = 0.12f,
                             FieldId = 7,
-                            InfoTime = new DateTime(2024, 5, 10, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(1770),
+                            InfoTime = new DateTime(2024, 5, 16, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(8885),
                             Iron = 0.22f,
                             Nitrate = 0.32f,
                             Oxygen = 0.52f,
@@ -1033,7 +1549,7 @@ namespace AMSS.Migrations
                             Id = 5,
                             Chlorophyll = 0.11f,
                             FieldId = 8,
-                            InfoTime = new DateTime(2024, 5, 9, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(1773),
+                            InfoTime = new DateTime(2024, 5, 15, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(8889),
                             Iron = 0.21f,
                             Nitrate = 0.31f,
                             Oxygen = 0.51f,
@@ -1056,7 +1572,7 @@ namespace AMSS.Migrations
                             Id = 6,
                             Chlorophyll = 0.13f,
                             FieldId = 9,
-                            InfoTime = new DateTime(2024, 5, 8, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(1777),
+                            InfoTime = new DateTime(2024, 5, 14, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(8894),
                             Iron = 0.23f,
                             Nitrate = 0.33f,
                             Oxygen = 0.53f,
@@ -1079,7 +1595,7 @@ namespace AMSS.Migrations
                             Id = 7,
                             Chlorophyll = 0.14f,
                             FieldId = 10,
-                            InfoTime = new DateTime(2024, 5, 7, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(1780),
+                            InfoTime = new DateTime(2024, 5, 13, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(8899),
                             Iron = 0.24f,
                             Nitrate = 0.34f,
                             Oxygen = 0.54f,
@@ -1102,7 +1618,7 @@ namespace AMSS.Migrations
                             Id = 8,
                             Chlorophyll = 0.16f,
                             FieldId = 11,
-                            InfoTime = new DateTime(2024, 5, 6, 14, 28, 54, 683, DateTimeKind.Local).AddTicks(1783),
+                            InfoTime = new DateTime(2024, 5, 12, 16, 37, 12, 463, DateTimeKind.Local).AddTicks(8904),
                             Iron = 0.26f,
                             Nitrate = 0.36f,
                             Oxygen = 0.56f,
@@ -1261,13 +1777,7 @@ namespace AMSS.Migrations
                         .WithMany("Crops")
                         .HasForeignKey("CropTypeId");
 
-                    b.HasOne("AMSS.Models.Field", "Field")
-                        .WithMany("Crops")
-                        .HasForeignKey("FieldId");
-
                     b.Navigation("CropType");
-
-                    b.Navigation("Field");
                 });
 
             modelBuilder.Entity("AMSS.Models.Farm", b =>
@@ -1308,6 +1818,25 @@ namespace AMSS.Migrations
                     b.Navigation("Location");
 
                     b.Navigation("PolygonApp");
+                });
+
+            modelBuilder.Entity("AMSS.Models.FieldCrop", b =>
+                {
+                    b.HasOne("AMSS.Models.Crop", "Crop")
+                        .WithMany("FieldCrops")
+                        .HasForeignKey("CropId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AMSS.Models.Field", "Field")
+                        .WithMany("FieldCrops")
+                        .HasForeignKey("FieldId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Crop");
+
+                    b.Navigation("Field");
                 });
 
             modelBuilder.Entity("AMSS.Models.Polygon.Position", b =>
@@ -1379,6 +1908,11 @@ namespace AMSS.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("AMSS.Models.Crop", b =>
+                {
+                    b.Navigation("FieldCrops");
+                });
+
             modelBuilder.Entity("AMSS.Models.CropType", b =>
                 {
                     b.Navigation("Crops");
@@ -1391,7 +1925,7 @@ namespace AMSS.Migrations
 
             modelBuilder.Entity("AMSS.Models.Field", b =>
                 {
-                    b.Navigation("Crops");
+                    b.Navigation("FieldCrops");
 
                     b.Navigation("SoilQuality")
                         .IsRequired();

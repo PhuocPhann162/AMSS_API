@@ -2,6 +2,7 @@
 using AMSS.Models.Dto.Crop;
 using AMSS.Models.Dto.CropType;
 using AMSS.Models.Dto.Field;
+using AMSS.Models.Dto.Location;
 using AMSS.Repositories;
 using AMSS.Repositories.IRepository;
 using AutoMapper;
@@ -18,14 +19,17 @@ namespace AMSS.Controllers
     {
         private readonly ICropTypeRepository _cropTypeRepository;
         private readonly IFieldRepository _fieldRepository;
+        private readonly ILocationRepository _locationRepository;
         private readonly IMapper _mapper;
         protected APIResponse _response;
-        public CropTypeController(ICropTypeRepository cropTypeRepository, IFieldRepository fieldRepository, IMapper mapper)
+        public CropTypeController(ICropTypeRepository cropTypeRepository, IFieldRepository fieldRepository, IMapper mapper, ILocationRepository locationRepository)
         {
             _mapper = mapper;
             _cropTypeRepository = cropTypeRepository;
             _fieldRepository = fieldRepository;
+            _locationRepository = locationRepository;
             _response = new APIResponse();
+
         }
 
         [HttpGet("getAllCropTypes")]
@@ -33,18 +37,12 @@ namespace AMSS.Controllers
         {
             try
             {
-                IEnumerable<CropType> lstCropTypes = await _cropTypeRepository.GetAllAsync(includeProperties: "Crops");
-                var lstCropTypeDtos = _mapper.Map<IEnumerable<CropTypeDto>>(lstCropTypes);
-                foreach (var ct in lstCropTypeDtos)
-                {
-                    foreach (var cr in ct.Crops)
-                    {
-                        cr.Field =_mapper.Map<FieldDto>(_fieldRepository.GetAsync(u => u.Id == cr.FieldId).GetAwaiter().GetResult());
-                    }
-                }
+                List<CropType> lstCropTypes = await _cropTypeRepository.GetAllWithDetailsAsync();
+                var lstCropTypeDtos = lstCropTypes.Select(cropType => _mapper.Map<CropTypeDto>(cropType)).ToList();
+                
                 if (!string.IsNullOrEmpty(searchString))
                 {
-                    lstCropTypeDtos = lstCropTypeDtos.Where(u => u.Name.ToLower().Contains(searchString.ToLower()) || u.Code.ToLower().Contains(searchString.ToLower()));
+                    lstCropTypeDtos = lstCropTypeDtos.Where(u => u.Name.ToLower().Contains(searchString.ToLower()) || u.Code.ToLower().Contains(searchString.ToLower())).ToList();
                 }
 
                 if (pageNumber.HasValue && pageSize.HasValue)

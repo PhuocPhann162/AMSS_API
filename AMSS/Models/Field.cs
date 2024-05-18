@@ -31,7 +31,7 @@ namespace AMSS.Models
         public int PolygonAppId { get; set; }
         public virtual PolygonApp PolygonApp { get; set; }
 
-        public virtual IEnumerable<Crop> Crops { get; set; }
+        public virtual IEnumerable<FieldCrop> FieldCrops { get; set; }
 
         public virtual SoilQuality SoilQuality { get; set; }
 

@@ -131,6 +131,7 @@ namespace AMSS.Controllers
                 NormalizedEmail = registrationDto.UserName.ToUpper(),
                 Password = BCrypt.Net.BCrypt.HashPassword(registrationDto.Password),
                 FullName = registrationDto.FullName,
+                Avatar = registrationDto.Avatar,
                 PhoneNumber = registrationDto.PhoneNumber,
                 StreetAddress = registrationDto.StreetAddress,
                 City = registrationDto.City,
@@ -215,7 +216,7 @@ namespace AMSS.Controllers
                     return Unauthorized(_response);
                 }
                 var userEmail = principal.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
-                var user = await _userRepository.GetAsync(u => u.Email == userEmail);
+                var user = await _userRepository.GetAsync(u => u.UserName == userEmail);
                 if(user.RefreshToken != tokenRequestDto.RefreshToken || !_jwtTokenService.ValidateTokenExpire(tokenRequestDto.RefreshToken))
                 {
                     _response.IsSuccess = false;

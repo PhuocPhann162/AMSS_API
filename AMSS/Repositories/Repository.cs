@@ -13,7 +13,6 @@ namespace AMSS.Repositories
         public Repository(ApplicationDbContext db)
         {
             _db = db;
-            //_db.VillaNumbers.Include(u => u.Villa).ToList();
             this.dbSet = _db.Set<T>();
         }
 
@@ -23,7 +22,6 @@ namespace AMSS.Repositories
             await SaveAsync();
         }
 
-        //"Villa,VillaSpecial"
         public async Task<T> GetAsync(Expression<Func<T, bool>> filter = null, bool tracked = true, string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;

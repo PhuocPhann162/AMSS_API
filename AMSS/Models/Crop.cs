@@ -16,6 +16,26 @@ namespace AMSS.Models
         [Required]
         public string Name { get; set; }
 
+        public string? Cycle { get; set; }
+
+        public bool? Edible { get; set; }
+
+        public string? Soil { get; set; }
+
+        public string? Watering { get; set; }
+
+        public string? Maintenance { get; set; }
+
+        public int? HardinessZone { get; set; }
+
+        public bool? Indoor { get; set; }
+
+        public string? Propogation { get; set; }
+
+        public string? CareLevel { get; set; }
+
+        public string? GrowthRate { get; set; }
+
         public string? Description { get; set; }
 
         public double CultivatedArea { get; set; }
@@ -27,15 +47,12 @@ namespace AMSS.Models
 
         public int Quantity { get; set; }
 
-        public int? FieldId { get; set; }   
-        [ForeignKey("FieldId")]
-        [ValidateNever]
-        public virtual Field Field { get; set; }
-
         public int? CropTypeId { get; set; }
         [ForeignKey("CropTypeId")]
         [ValidateNever]
         public virtual CropType CropType { get; set; }
+
+        public virtual IEnumerable<FieldCrop> FieldCrops { get; set; }
 
         public DateTime? CreatedAt { get; set; }
 

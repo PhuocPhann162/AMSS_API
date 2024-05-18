@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using AMSS.Models.Dto.Crop;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AMSS.Models
@@ -12,7 +13,8 @@ namespace AMSS.Models
         [Required]
         public string Code { get; set; }
 
-        public virtual ICollection<Crop> Crops { get; set; } 
+        public string Type { get; set; }
+        public virtual IEnumerable<Crop> Crops { get; set; } 
 
         public DateTime? CreatedAt{ get; set; }
         public DateTime? UpdatedAt{ get; set; }

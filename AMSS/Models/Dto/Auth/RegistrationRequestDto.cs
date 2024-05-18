@@ -18,6 +18,8 @@ namespace AMSS.Models.Dto.Auth
         public string? City { get; set; }
         public string? State { get; set; }
         public string? Country { get; set; }
+        [StringLength(500)]
+        public string? Avatar { get; set; }
         [Required]
         [MinLength(8)]
         [MaxLength(32)]
