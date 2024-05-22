@@ -55,6 +55,7 @@ namespace AMSS.Controllers
         }
 
         [HttpGet("getCropById/{id:int}")]
+        [Authorize(Roles = nameof(Role.ADMIN))]
         public async Task<ActionResult<APIResponse>> GetCropById(int id)
         {
             try
@@ -66,7 +67,7 @@ namespace AMSS.Controllers
                     _response.StatusCode = HttpStatusCode.BadRequest;
                     return BadRequest(_response);
                 }
-                Crop crop = await _cropRepository.GetAsync(u => u.Id == id);
+                Crop crop = await _cropRepository.GetAsync(u => u.Id == id, includeProperties: "CropType");
                 CropDto cropDto = _mapper.Map<CropDto>(crop);
                 if (crop == null)
                 {

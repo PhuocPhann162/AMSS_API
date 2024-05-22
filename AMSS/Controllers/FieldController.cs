@@ -17,7 +17,7 @@ namespace AMSS.Controllers
 {
     [Route("api/field")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class FieldController : ControllerBase
     {
         private readonly IFieldRepository _fieldRepository;
@@ -37,21 +37,13 @@ namespace AMSS.Controllers
         }
 
         [HttpGet("getAll")]
-        [Authorize(Roles = nameof(Role.ADMIN))]
+        //[Authorize(Roles = nameof(Role.ADMIN))]
         public async Task<ActionResult<APIResponse>> GetAllFields(string? searchString, string? status, int? pageNumber, int? pageSize)
         {
             try
             {
-                IEnumerable<Field> lstFields = await _fieldRepository.GetAllAsync(includeProperties: "Location,PolygonApp,Farm");
+                IEnumerable<Field> lstFields = await _fieldRepository.GetAllFieldWithDetailAsync();
                 var lstFieldsDto = _mapper.Map<IEnumerable<FieldDto>>(lstFields);
-
-                foreach (var f in lstFieldsDto)
-                {
-                    if (f.PolygonApp != null)
-                    {
-                        f.PolygonApp.Positions = await _positionRepository.GetAllAsync(u => u.PolygonAppId == f.PolygonApp.Id);
-                    }
-                }
 
                 if (!string.IsNullOrEmpty(searchString))
                 {

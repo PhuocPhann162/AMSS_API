@@ -1,6 +1,7 @@
 ﻿using AMSS.Data;
 using AMSS.Models;
 using AMSS.Repositories.IRepository;
+using Microsoft.EntityFrameworkCore;
 
 namespace AMSS.Repositories
 {
@@ -10,6 +11,16 @@ namespace AMSS.Repositories
         public FieldRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
+        }
+
+        public async Task<List<Field>> GetAllFieldWithDetailAsync()
+        {
+            return await _db.Fields
+            .Include(f => f.Location)
+            .Include(f => f.PolygonApp)
+            .ThenInclude(p => p.Positions)
+            .Include(f => f.Farm)
+            .Include(f => f.FieldCrops).ToListAsync();
         }
 
         public async Task<Field> Update(Field field)
