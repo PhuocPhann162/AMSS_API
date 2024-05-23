@@ -73,6 +73,7 @@ builder.Services.AddScoped<IPositionRepository, PositionRepository>();
 builder.Services.AddScoped<IPolygonAppRepository, PolygonAppRepository>();
 builder.Services.AddScoped<ICropRepository, CropRepository>();
 builder.Services.AddScoped<ICropTypeRepository, CropTypeRepository>();
+builder.Services.AddScoped<IFieldCropRepository, FieldCropRepository>();
 
 // CORS config
 builder.Services.AddCors();

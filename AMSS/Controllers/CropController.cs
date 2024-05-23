@@ -1,6 +1,7 @@
 ﻿using AMSS.Enums;
 using AMSS.Models;
 using AMSS.Models.Dto.Crop;
+using AMSS.Models.Dto.Field;
 using AMSS.Repositories.IRepository;
 using AMSS.Services.IService;
 using AMSS.Utility;
@@ -16,12 +17,16 @@ namespace AMSS.Controllers
     public class CropController : ControllerBase
     {
         private readonly ICropRepository _cropRepository;
+        private readonly IFieldCropRepository _fieldCropRepository;
+        private readonly IFieldRepository _fieldRepository;
         private readonly IBlobService _blobService;
         private readonly IMapper _mapper;
         protected APIResponse _response;
-        public CropController(ICropRepository cropRepository, IBlobService blobService, IMapper mapper)
+        public CropController(ICropRepository cropRepository, IFieldCropRepository fieldCropRepository, IFieldRepository fieldRepository, IBlobService blobService, IMapper mapper)
         {
             _cropRepository = cropRepository;
+            _fieldCropRepository = fieldCropRepository;
+            _fieldRepository = fieldRepository;
             _blobService = blobService;
             _mapper = mapper;
             _response = new APIResponse();
@@ -81,6 +86,32 @@ namespace AMSS.Controllers
                 return Ok(_response);
             }
             catch (Exception ex)
+            {
+                _response.StatusCode = HttpStatusCode.BadRequest;
+                _response.ErrorMessages.Add(ex.Message);
+                _response.IsSuccess = false;
+                return StatusCode(StatusCodes.Status500InternalServerError, _response);
+            }
+        }
+
+        [HttpGet("getAllByFieldId/{fieldId}")]
+        public async Task<ActionResult<APIResponse>> GetCropsByFieldId(int fieldId)
+        {
+            try
+            {
+                List<FieldCrop> fieldCropFromDb = await _fieldCropRepository.GetAllAsync(u => u.FieldId == fieldId, includeProperties: "Crop");
+                if (fieldCropFromDb == null)
+                {
+                    _response.IsSuccess = false;
+                    _response.ErrorMessages.Add("Oops ! Something wrong when get crop by id");
+                    _response.StatusCode = HttpStatusCode.NotFound;
+                    return NotFound(_response);
+                }
+                _response.Result = fieldCropFromDb;
+                _response.StatusCode = HttpStatusCode.OK;
+                return Ok(_response);
+            }
+            catch(Exception ex)
             {
                 _response.StatusCode = HttpStatusCode.BadRequest;
                 _response.ErrorMessages.Add(ex.Message);

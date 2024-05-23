@@ -37,7 +37,7 @@ namespace AMSS.Controllers
         }
 
         [HttpGet("getAll")]
-        //[Authorize(Roles = nameof(Role.ADMIN))]
+        [Authorize(Roles = nameof(Role.ADMIN))]
         public async Task<ActionResult<APIResponse>> GetAllFields(string? searchString, string? status, int? pageNumber, int? pageSize)
         {
             try
