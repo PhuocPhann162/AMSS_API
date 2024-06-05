@@ -2,7 +2,7 @@
 {
     public class SD
     {
-        public const string SD_Storage_Container = "agriculture";
+        public const string SD_Storage_Container = "amssclient";
 
         public const string Status_Idle = "Idle";
         public const string Status_Planted = "Planted";

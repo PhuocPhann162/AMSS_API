@@ -1,11 +1,14 @@
-﻿using AMSS.Models;
+﻿using AMSS.Enums;
+using AMSS.Models;
 using AMSS.Models.Dto.Crop;
 using AMSS.Models.Dto.CropType;
 using AMSS.Models.Dto.Field;
 using AMSS.Models.Dto.Location;
 using AMSS.Repositories;
 using AMSS.Repositories.IRepository;
+using AMSS.Utility;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -68,6 +71,50 @@ namespace AMSS.Controllers
                 _response.IsSuccess = false;
                 _response.StatusCode = HttpStatusCode.BadRequest;
                 _response.ErrorMessages.Add(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, _response);
+            }
+        }
+
+        [HttpPost]
+        [Authorize(Roles = nameof(Role.ADMIN))]
+        public async Task<ActionResult<APIResponse>> CreateCropType([FromForm] CreateCropTypeDto createCropTypeDto)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    if (createCropTypeDto.Name == null)
+                    {
+                        _response.IsSuccess = false;
+                        _response.StatusCode = HttpStatusCode.BadRequest;
+                        _response.ErrorMessages.Add("Name Type is required");
+                        return BadRequest(_response);
+                    }
+
+                    var newCropType = _mapper.Map<CropType>(createCropTypeDto);
+                    newCropType.CreatedAt = DateTime.Now;
+                    newCropType.UpdatedAt = DateTime.Now;
+
+                    await _cropTypeRepository.CreateAsync(newCropType);
+                    await _cropTypeRepository.SaveAsync();
+                    _response.Result = newCropType;
+                    _response.StatusCode = HttpStatusCode.Created;
+                    _response.SuccessMessage = "Crop type created successfully";
+                    return Ok(_response);
+                }
+                else
+                {
+                    _response.IsSuccess = false;
+                    _response.StatusCode = HttpStatusCode.BadRequest;
+                    _response.ErrorMessages.Add("Something wrong when creating new crop type");
+                    return BadRequest(_response);
+                }
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages.Add(ex.Message);
+                _response.StatusCode = HttpStatusCode.BadRequest;
                 return StatusCode(StatusCodes.Status500InternalServerError, _response);
             }
         }

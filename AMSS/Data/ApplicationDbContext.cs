@@ -2,6 +2,7 @@
 using AMSS.Models.Polygon;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using static System.Net.WebRequestMethods;
 
 namespace AMSS.Data
 {
@@ -467,7 +468,7 @@ namespace AMSS.Data
                  new Crop
                  {
                      Id = 1,
-                     Icon = "https://amssimages.blob.core.windows.net/agriculture/Rice.jpg",
+                     Icon = "https://fucoamssimages.blob.core.windows.net/amssclient/Rice.jpg",
                      Name = "Rice Crop 1",
                      Cycle = "Annual",
                      Edible = true,
@@ -491,7 +492,7 @@ namespace AMSS.Data
                 new Crop
                 {
                     Id = 2,
-                    Icon = "https://amssimages.blob.core.windows.net/agriculture/Rice.jpg",
+                    Icon = "https://fucoamssimages.blob.core.windows.net/amssclient/Rice.jpg",
                     Name = "Rice Crop 2",
                     Cycle = "Annual",
                     Edible = true,
@@ -515,7 +516,7 @@ namespace AMSS.Data
                 new Crop
                 {
                     Id = 3,
-                    Icon = "https://amssimages.blob.core.windows.net/agriculture/Corn.jpg",
+                    Icon = "https://fucoamssimages.blob.core.windows.net/amssclient/Corn.jpg",
                     Name = "Corn Crop 1",
                     Cycle = "Annual",
                     Edible = true,
@@ -539,7 +540,7 @@ namespace AMSS.Data
                 new Crop
                 {
                     Id = 4,
-                    Icon = "https://amssimages.blob.core.windows.net/agriculture/Corn.jpg",
+                    Icon = "https://fucoamssimages.blob.core.windows.net/amssclient/Corn.jpg",
                     Name = "Corn Crop 2",
                     Cycle = "Annual",
                     Edible = true,
@@ -563,7 +564,7 @@ namespace AMSS.Data
                 new Crop
                 {
                     Id = 5,
-                    Icon = "https://amssimages.blob.core.windows.net/agriculture/Potato.jpg",
+                    Icon = "https://fucoamssimages.blob.core.windows.net/amssclient/Potato.jpg",
                     Name = "Potato Crop 1",
                     Cycle = "Annual",
                     Edible = true,
@@ -587,7 +588,7 @@ namespace AMSS.Data
                 new Crop
                 {
                     Id = 6,
-                    Icon = "https://amssimages.blob.core.windows.net/agriculture/Potato.jpg",
+                    Icon = "https://fucoamssimages.blob.core.windows.net/amssclient/Potato.jpg",
                     Name = "Potato Crop 2",
                     Cycle = "Annual",
                     Edible = true,
@@ -611,7 +612,7 @@ namespace AMSS.Data
                 new Crop
                 {
                     Id = 7,
-                    Icon = "https://amssimages.blob.core.windows.net/agriculture/Tomato.jpg",
+                    Icon = "https://fucoamssimages.blob.core.windows.net/amssclient/Tomato.jpg",
                     Name = "Tomato Crop 1",
                     Cycle = "Annual",
                     Edible = true,
@@ -635,7 +636,7 @@ namespace AMSS.Data
                 new Crop
                 {
                     Id = 8,
-                    Icon = "https://amssimages.blob.core.windows.net/agriculture/Tomato.jpg",
+                    Icon = "https://fucoamssimages.blob.core.windows.net/amssclient/Tomato.jpg",
                     Name = "Tomato Crop 2",
                     Cycle = "Annual",
                     Edible = true,
@@ -659,7 +660,7 @@ namespace AMSS.Data
                 new Crop
                 {
                     Id = 9,
-                    Icon = "https://amssimages.blob.core.windows.net/agriculture/Apple.jpg",
+                    Icon = "https://fucoamssimages.blob.core.windows.net/amssclient/Apple.jpg",
                     Name = "Apple Crop 1",
                     Cycle = "Perennial",
                     Edible = true,
@@ -683,7 +684,7 @@ namespace AMSS.Data
                 new Crop
                 {
                     Id = 10,
-                    Icon = "https://amssimages.blob.core.windows.net/agriculture/Apple.jpg",
+                    Icon = "https://fucoamssimages.blob.core.windows.net/amssclient/Apple.jpg",
                     Name = "Apple Crop 2",
                     Cycle = "Perennial",
                     Edible = true,
@@ -707,7 +708,7 @@ namespace AMSS.Data
                 new Crop
                 {
                     Id = 11,
-                    Icon = "https://amssimages.blob.core.windows.net/agriculture/Banana.jpg",
+                    Icon = "https://fucoamssimages.blob.core.windows.net/amssclient/Banana.jpg",
                     Name = "Banana Crop 1",
                     Cycle = "Perennial",
                     Edible = true,
@@ -731,7 +732,7 @@ namespace AMSS.Data
                 new Crop
                 {
                     Id = 12,
-                    Icon = "https://amssimages.blob.core.windows.net/agriculture/Banana.jpg",
+                    Icon = "https://fucoamssimages.blob.core.windows.net/amssclient/Banana.jpg",
                     Name = "Banana Crop 2",
                     Cycle = "Perennial",
                     Edible = true,
@@ -755,7 +756,7 @@ namespace AMSS.Data
                 new Crop
                 {
                     Id = 13,
-                    Icon = "https://amssimages.blob.core.windows.net/agriculture/Orange.jpg",
+                    Icon = "https://fucoamssimages.blob.core.windows.net/amssclient/Orange.jpg",
                     Name = "Orange Crop 1",
                     Cycle = "Perennial",
                     Edible = true,
@@ -779,7 +780,7 @@ namespace AMSS.Data
                 new Crop
                 {
                     Id = 14,
-                    Icon = "https://amssimages.blob.core.windows.net/agriculture/Orange.jpg",
+                    Icon = "https://fucoamssimages.blob.core.windows.net/amssclient/Orange.jpg",
                     Name = "Orange Crop 2",
                     Cycle = "Perennial",
                     Edible = true,
@@ -803,7 +804,7 @@ namespace AMSS.Data
                 new Crop
                 {
                     Id = 15,
-                    Icon = "https://amssimages.blob.core.windows.net/agriculture/Grape.jpg",
+                    Icon = "https://fucoamssimages.blob.core.windows.net/amssclient/Grape.jpg",
                     Name = "Grapes Crop 1",
                     Cycle = "Annual",
                     Edible = true,
@@ -827,7 +828,7 @@ namespace AMSS.Data
                 new Crop
                 {
                     Id = 16,
-                    Icon = "https://amssimages.blob.core.windows.net/agriculture/Grape.jpg",
+                    Icon = "https://fucoamssimages.blob.core.windows.net/amssclient/Grape.jpg",
                     Name = "Grapes Crop 2",
                     Cycle = "Annual",
                     Edible = true,
@@ -851,7 +852,7 @@ namespace AMSS.Data
                 new Crop
                 {
                     Id = 17,
-                    Icon = "https://amssimages.blob.core.windows.net/agriculture/Pineapple.jpg",
+                    Icon = "https://fucoamssimages.blob.core.windows.net/amssclient/Pineapple.jpg",
                     Name = "Pineapple Crop 1",
                     Cycle = "Annual",
                     Edible = true,
@@ -875,7 +876,7 @@ namespace AMSS.Data
                 new Crop
                 {
                     Id = 18,
-                    Icon = "https://amssimages.blob.core.windows.net/agriculture/Pineapple.jpg",
+                    Icon = "https://fucoamssimages.blob.core.windows.net/amssclient/Pineapple.jpg",
                     Name = "Pineapple Crop 2",
                     Cycle = "Annual",
                     Edible = true,
@@ -899,7 +900,7 @@ namespace AMSS.Data
                 new Crop
                 {
                     Id = 19,
-                    Icon = "https://amssimages.blob.core.windows.net/agriculture/Strawberry.jpg",
+                    Icon = "https://fucoamssimages.blob.core.windows.net/amssclient/Strawberry.jpg",
                     Name = "Strawberry Crop 1",
                     Cycle = "Annual",
                     Edible = true,
@@ -923,7 +924,7 @@ namespace AMSS.Data
                 new Crop
                 {
                     Id = 20,
-                    Icon = "https://amssimages.blob.core.windows.net/agriculture/Strawberry.jpg",
+                    Icon = "https://fucoamssimages.blob.core.windows.net/amssclient/Strawberry.jpg",
                     Name = "Strawberry Crop 2",
                     Cycle = "Annual",
                     Edible = true,
@@ -947,7 +948,7 @@ namespace AMSS.Data
                 new Crop
                 {
                     Id = 21,
-                    Icon = "https://amssimages.blob.core.windows.net/agriculture/Coffee.jpg",
+                    Icon = "https://fucoamssimages.blob.core.windows.net/amssclient/Coffee.jpg",
                     Name = "Coffee Crop 1",
                     Cycle = "Annual",
                     Edible = true,
@@ -971,7 +972,7 @@ namespace AMSS.Data
                 new Crop
                 {
                     Id = 22,
-                    Icon = "https://amssimages.blob.core.windows.net/agriculture/Coffee.jpg",
+                    Icon = "https://fucoamssimages.blob.core.windows.net/amssclient/Coffee.jpg",
                     Name = "Coffee Crop 2",
                     Cycle = "Annual",
                     Edible = true,
@@ -995,7 +996,7 @@ namespace AMSS.Data
                 new Crop
                 {
                     Id = 23,
-                    Icon = "https://amssimages.blob.core.windows.net/agriculture/Cocoa.jpg",
+                    Icon = "https://fucoamssimages.blob.core.windows.net/amssclient/Cocoa.jpg",
                     Name = "Cocoa Crop 1",
                     Cycle = "Annual",
                     Edible = true,
@@ -1019,7 +1020,7 @@ namespace AMSS.Data
                 new Crop
                 {
                     Id = 24,
-                    Icon = "https://amssimages.blob.core.windows.net/agriculture/Cocoa.jpg",
+                    Icon = "https://fucoamssimages.blob.core.windows.net/amssclient/Cocoa.jpg",
                     Name = "Cocoa Crop 2",
                     Cycle = "Annual",
                     Edible = true,
@@ -1043,7 +1044,7 @@ namespace AMSS.Data
                 new Crop
                 {
                     Id = 25,
-                    Icon = "https://amssimages.blob.core.windows.net/agriculture/Peanut.jpg",
+                    Icon = "https://fucoamssimages.blob.core.windows.net/amssclient/Peanut.jpg",
                     Name = "Peanut Crop 1",
                     Cycle = "Annual",
                     Edible = true,
@@ -1067,7 +1068,7 @@ namespace AMSS.Data
                 new Crop
                 {
                     Id = 26,
-                    Icon = "https://amssimages.blob.core.windows.net/agriculture/Peanut.jpg",
+                    Icon = "https://fucoamssimages.blob.core.windows.net/amssclient/Peanut.jpg",
                     Name = "Peanut Crop 2",
                     Cycle = "Annual",
                     Edible = true,
@@ -1091,7 +1092,7 @@ namespace AMSS.Data
                 new Crop
                 {
                     Id = 27,
-                    Icon = "https://amssimages.blob.core.windows.net/agriculture/Carrot.jpg",
+                    Icon = "https://fucoamssimages.blob.core.windows.net/amssclient/Carrot.jpg",
                     Name = "Carrot Crop 1",
                     Cycle = "Annual",
                     Edible = true,
@@ -1115,7 +1116,7 @@ namespace AMSS.Data
                 new Crop
                 {
                     Id = 28,
-                    Icon = "https://amssimages.blob.core.windows.net/agriculture/Carrot.jpg",
+                    Icon = "https://fucoamssimages.blob.core.windows.net/amssclient/Carrot.jpg",
                     Name = "Carrot Crop 2",
                     Cycle = "Annual",
                     Edible = true,
@@ -1139,7 +1140,7 @@ namespace AMSS.Data
                 new Crop
                 {
                     Id = 29,
-                    Icon = "https://amssimages.blob.core.windows.net/agriculture/Brocolli.jpg",
+                    Icon = "https://fucoamssimages.blob.core.windows.net/amssclient/Brocolli.jpg",
                     Name = "Broccoli Crop 1",
                     Cycle = "Annual",
                     Edible = true,
@@ -1163,7 +1164,7 @@ namespace AMSS.Data
                 new Crop
                 {
                     Id = 30,
-                    Icon = "https://amssimages.blob.core.windows.net/agriculture/Brocolli.jpg",
+                    Icon = "https://fucoamssimages.blob.core.windows.net/amssclient/Brocolli.jpg",
                     Name = "Broccoli Crop 2",
                     Cycle = "Annual",
                     Edible = true,

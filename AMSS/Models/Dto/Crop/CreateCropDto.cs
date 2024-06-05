@@ -8,11 +8,28 @@ namespace AMSS.Models.Dto.Crop
 {
     public class CreateCropDto
     {
-        [StringLength(500)]
-        public string? Icon { get; set; }
-
         [Required]
         public string Name { get; set; }
+
+        public string? Cycle { get; set; }
+
+        public bool? Edible { get; set; }
+
+        public string? Soil { get; set; }
+
+        public string? Watering { get; set; }
+
+        public string? Maintenance { get; set; }
+
+        public int? HardinessZone { get; set; }
+
+        public bool? Indoor { get; set; }
+
+        public string? Propogation { get; set; }
+
+        public string? CareLevel { get; set; }
+
+        public string? GrowthRate { get; set; }
 
         public string? Description { get; set; }
 
@@ -25,12 +42,7 @@ namespace AMSS.Models.Dto.Crop
 
         public int Quantity { get; set; }
 
-        public int? FieldId { get; set; }
-        public virtual FieldDto Field { get; set; }
-
-
         public int? CropTypeId { get; set; }
-        public virtual CropTypeDto CropType { get; set; }
 
         public IFormFile File { get; set; }
     }

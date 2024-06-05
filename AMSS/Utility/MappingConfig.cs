@@ -43,6 +43,7 @@ namespace AMSS.Utility
 
                 // CropType
                 config.CreateMap<CropType, CropTypeDto>().ReverseMap();
+                config.CreateMap<CropType, CreateCropTypeDto>().ReverseMap();
 
                 // Polygon 
                 config.CreateMap<PolygonApp, PolygonDto>().ReverseMap();
